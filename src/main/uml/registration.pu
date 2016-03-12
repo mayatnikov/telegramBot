@@ -1,0 +1,29 @@
+@startuml
+
+title Регистрация CHAT в ЛК
+Client -> CHAT.BOT: Запрос на регистрацию
+activate LC
+CHAT.BOT --> LC : Запрос на генерацию кода доступа
+LC --> LC : генерация кода доступа
+deactivate LC
+
+activate Client
+ Client --> LC : получение кода доступа из Личного кабинета
+  activate LC
+   LC --> Client : Код доступа на регистрацию CHAT
+  deactivate LC
+
+activate CHAT.BOT
+   Client --> CHAT.BOT : Подтверждение регистрации
+   CHAT.BOT --> LC : Подтверждение регистрации
+   activate LC
+       LC --> LC : регистарция CHAT в Личном кабинете
+       LC --> CHAT.BOT: результат регистрации
+   deactivate LC
+   CHAT.BOT --> CHAT.BOT :фиксация статуса CHAT'а
+   CHAT.BOT --> Client: результат регистрации
+deactivate CHAT.BOT
+
+deactivate Client
+@enduml
+

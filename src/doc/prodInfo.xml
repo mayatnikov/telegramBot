@@ -1,0 +1,1757 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Body>
+        <NS1:getProductInfoResponse xmlns:NS1="http://toi.ru/model/productinfo/servicemessage">
+            <NS1:Header>
+                <integrationID>1405201400033</integrationID>
+                <resultInfo>
+                    <status>OK</status>
+                </resultInfo>
+            </NS1:Header>
+            <NS1:ProductInfo xmlns="http://toi.ru/model/productinfo">
+                <Name>PartnerTravelV2Box</Name>
+                <ProductType>TRAVEL_V2</ProductType>
+                <ShortDescription>Краткое описание продукта TravelV2</ShortDescription>
+                <FullDescription>Полное описание продукта TravelV2</FullDescription>
+                <Option>
+                    <Name>Запрос котировки</Name>
+                    <Code>QuoteRequest</Code>
+                    <MinOccurs>1</MinOccurs>
+                    <MaxOccurs>1</MaxOccurs>
+                    <ValueInfo>
+                        <Name>Регион</Name>
+                        <Code>Area</Code>
+                        <Type>LIST</Type>
+                        <IsNullable>true</IsNullable>
+                        <AvailableValue>
+                            <Value>asia</Value>
+                            <Display>Asia</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>russia_cis</Value>
+                            <Display>Russia and CIS</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>shengen</Value>
+                            <Display>Shengen</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>worldwide_ex_us_jp_oc</Value>
+                            <Display>Worldwide excepting America Japan and Oceania</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>worldwide</Value>
+                            <Display>Весь мир</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>europe</Value>
+                            <Display>Вся европа</Display>
+                        </AvailableValue>
+                    </ValueInfo>
+                    <ValueInfo>
+                        <Name>Уровень поддержки</Name>
+                        <Code>AssistanceLevel</Code>
+                        <Type>LIST</Type>
+                        <AvailableValue>
+                            <Value>Basic</Value>
+                            <Display>Basic</Display>
+                        </AvailableValue>
+                    </ValueInfo>
+                    <ValueInfo>
+                        <Name>Количество застрахованных в возрасте 0-12</Name>
+                        <Code>QuantityChildren</Code>
+                        <Type>LIST</Type>
+                        <AvailableValue>
+                            <Value>0</Value>
+                            <Display>0</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>1</Value>
+                            <Display>1</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>2</Value>
+                            <Display>2</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>3</Value>
+                            <Display>3</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>4</Value>
+                            <Display>4</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>5</Value>
+                            <Display>5</Display>
+                        </AvailableValue>
+                    </ValueInfo>
+                    <ValueInfo>
+                        <Name>Количество застрахованных в возрасте 13-60</Name>
+                        <Code>QuantityAdults</Code>
+                        <Type>LIST</Type>
+                        <AvailableValue>
+                            <Value>0</Value>
+                            <Display>0</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>1</Value>
+                            <Display>1</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>2</Value>
+                            <Display>2</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>3</Value>
+                            <Display>3</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>4</Value>
+                            <Display>4</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>5</Value>
+                            <Display>5</Display>
+                        </AvailableValue>
+                    </ValueInfo>
+                    <ValueInfo>
+                        <Name>Количество застрахованных старше 60 лет</Name>
+                        <Code>QuantitySeniors</Code>
+                        <Type>LIST</Type>
+                        <AvailableValue>
+                            <Value>0</Value>
+                            <Display>0</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>1</Value>
+                            <Display>1</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>2</Value>
+                            <Display>2</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>3</Value>
+                            <Display>3</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>4</Value>
+                            <Display>4</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>5</Value>
+                            <Display>5</Display>
+                        </AvailableValue>
+                    </ValueInfo>
+                    <ValueInfo>
+                        <Name>Валюта страхования</Name>
+                        <Code>Currency</Code>
+                        <Type>LIST</Type>
+                        <AvailableValue>
+                            <Value>eur</Value>
+                            <Display>eur</Display>
+                        </AvailableValue>
+                        <AvailableValue>
+                            <Value>usd</Value>
+                            <Display>usd</Display>
+                        </AvailableValue>
+                    </ValueInfo>
+                    <Option>
+                        <Name>Страна</Name>
+                        <Code>Country</Code>
+                        <MinOccurs>0</MinOccurs>
+                        <MaxOccurs>-1</MaxOccurs>
+                        <ValueInfo>
+                            <Name>Страна</Name>
+                            <Code>Country</Code>
+                            <Type>LIST</Type>
+                            <AvailableValue>
+                                <Value>RU</Value>
+                                <Display>РОССИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BY</Value>
+                                <Display>БЕЛАРУСЬ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>KZ</Value>
+                                <Display>КАЗАХСТАН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>UA</Value>
+                                <Display>УКРАИНА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AN</Value>
+                                <Display>Netherlands Antilles</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AB</Value>
+                                <Display>АБХАЗИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AU</Value>
+                                <Display>АВСТРАЛИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AT</Value>
+                                <Display>АВСТРИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AZ</Value>
+                                <Display>АЗЕРБАЙДЖАН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AL</Value>
+                                <Display>АЛБАНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>DZ</Value>
+                                <Display>АЛЖИР</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AS</Value>
+                                <Display>АМЕРИКАНСКОЕ САМОА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AI</Value>
+                                <Display>АНГИЛЬЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AO</Value>
+                                <Display>АНГОЛА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AD</Value>
+                                <Display>АНДОРРА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AQ</Value>
+                                <Display>АНТАРКТИДА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AG</Value>
+                                <Display>АНТИГУА И БАРБУДА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AR</Value>
+                                <Display>АРГЕНТИНА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AM</Value>
+                                <Display>АРМЕНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AW</Value>
+                                <Display>АРУБА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AF</Value>
+                                <Display>АФГАНИСТАН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BS</Value>
+                                <Display>БАГАМЫ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BD</Value>
+                                <Display>БАНГЛАДЕШ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BB</Value>
+                                <Display>БАРБАДОС</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BH</Value>
+                                <Display>БАХРЕЙН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BZ</Value>
+                                <Display>БЕЛИЗ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BE</Value>
+                                <Display>БЕЛЬГИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BJ</Value>
+                                <Display>БЕНИН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BM</Value>
+                                <Display>БЕРМУДЫ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BG</Value>
+                                <Display>БОЛГАРИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BO</Value>
+                                <Display>БОЛИВИЯ, МНОГОНАЦИОНАЛЬНОЕ ГОСУДАРСТВО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BQ</Value>
+                                <Display>БОНЭЙР, СИНТ-ЭСТАТИУС И САБА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BA</Value>
+                                <Display>БОСНИЯ И ГЕРЦЕГОВИНА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BW</Value>
+                                <Display>БОТСВАНА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BR</Value>
+                                <Display>БРАЗИЛИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>IO</Value>
+                                <Display>БРИТАНСКАЯ ТЕРРИТОРИЯ В ИНДИЙСКОМ ОКЕАНЕ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BN</Value>
+                                <Display>БРУНЕЙ-ДАРУССАЛАМ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BF</Value>
+                                <Display>БУРКИНА-ФАСО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BI</Value>
+                                <Display>БУРУНДИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BT</Value>
+                                <Display>БУТАН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>VU</Value>
+                                <Display>ВАНУАТУ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>HU</Value>
+                                <Display>ВЕНГРИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>VE</Value>
+                                <Display>ВЕНЕСУЭЛА БОЛИВАРИАНСКАЯ РЕСПУБЛИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>VG</Value>
+                                <Display>ВИРГИНСКИЕ ОСТРОВА, БРИТАНСКИЕ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>VI</Value>
+                                <Display>ВИРГИНСКИЕ ОСТРОВА, США</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>VN</Value>
+                                <Display>ВЬЕТНАМ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GA</Value>
+                                <Display>ГАБОН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>HT</Value>
+                                <Display>ГАИТИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GY</Value>
+                                <Display>ГАЙАНА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GM</Value>
+                                <Display>ГАМБИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GH</Value>
+                                <Display>ГАНА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GP</Value>
+                                <Display>ГВАДЕЛУПА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GT</Value>
+                                <Display>ГВАТЕМАЛА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GN</Value>
+                                <Display>ГВИНЕЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GW</Value>
+                                <Display>ГВИНЕЯ-БИСАУ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>DE</Value>
+                                <Display>ГЕРМАНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GG</Value>
+                                <Display>ГЕРНСИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GI</Value>
+                                <Display>ГИБРАЛТАР</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>HN</Value>
+                                <Display>ГОНДУРАС</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>HK</Value>
+                                <Display>ГОНКОНГ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GD</Value>
+                                <Display>ГРЕНАДА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GL</Value>
+                                <Display>ГРЕНЛАНДИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GR</Value>
+                                <Display>ГРЕЦИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GE</Value>
+                                <Display>ГРУЗИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GU</Value>
+                                <Display>ГУАМ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>DK</Value>
+                                <Display>ДАНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>JE</Value>
+                                <Display>ДЖЕРСИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>DJ</Value>
+                                <Display>ДЖИБУТИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>DM</Value>
+                                <Display>ДОМИНИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>DO</Value>
+                                <Display>ДОМИНИКАНСКАЯ РЕСПУБЛИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>EG</Value>
+                                <Display>ЕГИПЕТ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>ZM</Value>
+                                <Display>ЗАМБИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>EH</Value>
+                                <Display>ЗАПАДНАЯ САХАРА Росстандарта от 14.12.2011 N 1514-ст
+                                </Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>ZW</Value>
+                                <Display>ЗИМБАБВЕ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>IL</Value>
+                                <Display>ИЗРАИЛЬ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>IN</Value>
+                                <Display>ИНДИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>ID</Value>
+                                <Display>ИНДОНЕЗИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>JO</Value>
+                                <Display>ИОРДАНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>IQ</Value>
+                                <Display>ИРАК</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>IR</Value>
+                                <Display>ИРАН, ИСЛАМСКАЯ РЕСПУБЛИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>IE</Value>
+                                <Display>ИРЛАНДИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>IS</Value>
+                                <Display>ИСЛАНДИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>ES</Value>
+                                <Display>ИСПАНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>IT</Value>
+                                <Display>ИТАЛИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>YE</Value>
+                                <Display>ЙЕМЕН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CV</Value>
+                                <Display>КАБО-ВЕРДЕ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>KH</Value>
+                                <Display>КАМБОДЖА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CM</Value>
+                                <Display>КАМЕРУН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CA</Value>
+                                <Display>КАНАДА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>QA</Value>
+                                <Display>КАТАР</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>KE</Value>
+                                <Display>КЕНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CY</Value>
+                                <Display>КИПР</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>KG</Value>
+                                <Display>КИРГИЗИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>KI</Value>
+                                <Display>КИРИБАТИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CN</Value>
+                                <Display>КИТАЙ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CC</Value>
+                                <Display>КОКОСОВЫЕ (КИЛИНГ) ОСТРОВА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CO</Value>
+                                <Display>КОЛУМБИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>KM</Value>
+                                <Display>КОМОРЫ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CG</Value>
+                                <Display>КОНГО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CD</Value>
+                                <Display>КОНГО, ДЕМОКРАТИЧЕСКАЯ РЕСПУБЛИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>KP</Value>
+                                <Display>КОРЕЯ, НАРОДНО-ДЕМОКРАТИЧЕСКАЯ РЕСПУБЛИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>KR</Value>
+                                <Display>КОРЕЯ, РЕСПУБЛИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CR</Value>
+                                <Display>КОСТА-РИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CI</Value>
+                                <Display>КОТ Д'ИВУАР</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CU</Value>
+                                <Display>КУБА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>KW</Value>
+                                <Display>КУВЕЙТ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CW</Value>
+                                <Display>КЮРАСАО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>LA</Value>
+                                <Display>ЛАОССКАЯ НАРОДНО-ДЕМОКРАТИЧЕСКАЯ РЕСПУБЛИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>LV</Value>
+                                <Display>ЛАТВИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>LS</Value>
+                                <Display>ЛЕСОТО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>LR</Value>
+                                <Display>ЛИБЕРИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>LB</Value>
+                                <Display>ЛИВАН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>LY</Value>
+                                <Display>ЛИВИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>LT</Value>
+                                <Display>ЛИТВА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>LI</Value>
+                                <Display>ЛИХТЕНШТЕЙН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>LU</Value>
+                                <Display>ЛЮКСЕМБУРГ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MU</Value>
+                                <Display>МАВРИКИЙ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MR</Value>
+                                <Display>МАВРИТАНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MG</Value>
+                                <Display>МАДАГАСКАР</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>YT</Value>
+                                <Display>МАЙОТТА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MO</Value>
+                                <Display>МАКАО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MW</Value>
+                                <Display>МАЛАВИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MY</Value>
+                                <Display>МАЛАЙЗИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>ML</Value>
+                                <Display>МАЛИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>UM</Value>
+                                <Display>МАЛЫЕ ТИХООКЕАНСКИЕ ОТДАЛЕННЫЕ ОСТРОВА СОЕДИНЕННЫХ ШТАТОВ
+                                </Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MV</Value>
+                                <Display>МАЛЬДИВЫ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MT</Value>
+                                <Display>МАЛЬТА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MA</Value>
+                                <Display>МАРОККО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MQ</Value>
+                                <Display>МАРТИНИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MH</Value>
+                                <Display>МАРШАЛЛОВЫ ОСТРОВА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MX</Value>
+                                <Display>МЕКСИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>FM</Value>
+                                <Display>МИКРОНЕЗИЯ, ФЕДЕРАТИВНЫЕ ШТАТЫ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MZ</Value>
+                                <Display>МОЗАМБИК</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MD</Value>
+                                <Display>МОЛДОВА, РЕСПУБЛИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MC</Value>
+                                <Display>МОНАКО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MN</Value>
+                                <Display>МОНГОЛИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MS</Value>
+                                <Display>МОНТСЕРРАТ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MM</Value>
+                                <Display>МЬЯНМА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>NA</Value>
+                                <Display>НАМИБИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>NR</Value>
+                                <Display>НАУРУ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>NP</Value>
+                                <Display>НЕПАЛ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>NE</Value>
+                                <Display>НИГЕР</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>NG</Value>
+                                <Display>НИГЕРИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>NL</Value>
+                                <Display>НИДЕРЛАНДЫ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>NI</Value>
+                                <Display>НИКАРАГУА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>NU</Value>
+                                <Display>НИУЭ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>NZ</Value>
+                                <Display>НОВАЯ ЗЕЛАНДИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>NC</Value>
+                                <Display>НОВАЯ КАЛЕДОНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>NO</Value>
+                                <Display>НОРВЕГИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AE</Value>
+                                <Display>ОБЪЕДИНЕННЫЕ АРАБСКИЕ ЭМИРАТЫ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>OM</Value>
+                                <Display>ОМАН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>KY</Value>
+                                <Display>ОСТРОВА КАЙМАН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CK</Value>
+                                <Display>ОСТРОВА КУКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TC</Value>
+                                <Display>ОСТРОВА ТЕРКС И КАЙКОС</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BV</Value>
+                                <Display>ОСТРОВ БУВЕ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>IM</Value>
+                                <Display>ОСТРОВ МЭН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>NF</Value>
+                                <Display>ОСТРОВ НОРФОЛК</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CX</Value>
+                                <Display>ОСТРОВ РОЖДЕСТВА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>HM</Value>
+                                <Display>ОСТРОВ ХЕРД И ОСТРОВА МАКДОНАЛЬД</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PK</Value>
+                                <Display>ПАКИСТАН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PW</Value>
+                                <Display>ПАЛАУ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PS</Value>
+                                <Display>ПАЛЕСТИНСКАЯ ТЕРРИТОРИЯ, ОККУПИРОВАННАЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PA</Value>
+                                <Display>ПАНАМА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>VA</Value>
+                                <Display>ПАПСКИЙ ПРЕСТОЛ (ГОСУДАРСТВО - ГОРОД ВАТИКАН)</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PG</Value>
+                                <Display>ПАПУА-НОВАЯ ГВИНЕЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PY</Value>
+                                <Display>ПАРАГВАЙ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PE</Value>
+                                <Display>ПЕРУ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PN</Value>
+                                <Display>ПИТКЕРН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PL</Value>
+                                <Display>ПОЛЬША</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PT</Value>
+                                <Display>ПОРТУГАЛИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PR</Value>
+                                <Display>ПУЭРТО-РИКО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MK</Value>
+                                <Display>РЕСПУБЛИКА МАКЕДОНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>RE</Value>
+                                <Display>РЕЮНЬОН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>RW</Value>
+                                <Display>РУАНДА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>RO</Value>
+                                <Display>РУМЫНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>WS</Value>
+                                <Display>САМОА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SM</Value>
+                                <Display>САН-МАРИНО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>ST</Value>
+                                <Display>САН-ТОМЕ И ПРИНСИПИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SA</Value>
+                                <Display>САУДОВСКАЯ АРАВИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SZ</Value>
+                                <Display>СВАЗИЛЕНД</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MP</Value>
+                                <Display>СЕВЕРНЫЕ МАРИАНСКИЕ ОСТРОВА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SC</Value>
+                                <Display>СЕЙШЕЛЫ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>BL</Value>
+                                <Display>СЕН-БАРТЕЛЕМИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SN</Value>
+                                <Display>СЕНЕГАЛ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>MF</Value>
+                                <Display>СЕН-МАРТЕН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SX</Value>
+                                <Display>СЕН-МАРТЕН (нидерландская часть)</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PM</Value>
+                                <Display>СЕН-ПЬЕР И МИКЕЛОН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>VC</Value>
+                                <Display>СЕНТ-ВИНСЕНТ И ГРЕНАДИНЫ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>KN</Value>
+                                <Display>СЕНТ-КИТС И НЕВИС</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>LC</Value>
+                                <Display>СЕНТ-ЛЮСИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>RS</Value>
+                                <Display>СЕРБИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SG</Value>
+                                <Display>СИНГАПУР</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SY</Value>
+                                <Display>СИРИЙСКАЯ АРАБСКАЯ РЕСПУБЛИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SK</Value>
+                                <Display>СЛОВАКИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SI</Value>
+                                <Display>СЛОВЕНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GB</Value>
+                                <Display>СОЕДИНЕННОЕ КОРОЛЕВСТВО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>US</Value>
+                                <Display>СОЕДИНЕННЫЕ ШТАТЫ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SB</Value>
+                                <Display>СОЛОМОНОВЫ ОСТРОВА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SO</Value>
+                                <Display>СОМАЛИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SD</Value>
+                                <Display>СУДАН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SR</Value>
+                                <Display>СУРИНАМ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SL</Value>
+                                <Display>СЬЕРРА-ЛЕОНЕ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TJ</Value>
+                                <Display>ТАДЖИКИСТАН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TH</Value>
+                                <Display>ТАИЛАНД</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TW</Value>
+                                <Display>ТАЙВАНЬ (КИТАЙ)</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TZ</Value>
+                                <Display>ТАНЗАНИЯ, ОБЪЕДИНЕННАЯ РЕСПУБЛИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TL</Value>
+                                <Display>ТИМОР-ЛЕСТЕ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TG</Value>
+                                <Display>ТОГО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TK</Value>
+                                <Display>ТОКЕЛАУ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TO</Value>
+                                <Display>ТОНГА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TT</Value>
+                                <Display>ТРИНИДАД И ТОБАГО</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TV</Value>
+                                <Display>ТУВАЛУ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TN</Value>
+                                <Display>ТУНИС</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TM</Value>
+                                <Display>ТУРКМЕНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TR</Value>
+                                <Display>ТУРЦИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>UG</Value>
+                                <Display>УГАНДА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>UZ</Value>
+                                <Display>УЗБЕКИСТАН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>WF</Value>
+                                <Display>УОЛЛИС И ФУТУНА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>UY</Value>
+                                <Display>УРУГВАЙ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>FO</Value>
+                                <Display>ФАРЕРСКИЕ ОСТРОВА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>FJ</Value>
+                                <Display>ФИДЖИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PH</Value>
+                                <Display>ФИЛИППИНЫ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>FI</Value>
+                                <Display>ФИНЛЯНДИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>FK</Value>
+                                <Display>ФОЛКЛЕНДСКИЕ ОСТРОВА (МАЛЬВИНСКИЕ)</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>FR</Value>
+                                <Display>ФРАНЦИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GF</Value>
+                                <Display>ФРАНЦУЗСКАЯ ГВИАНА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>PF</Value>
+                                <Display>ФРАНЦУЗСКАЯ ПОЛИНЕЗИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TF</Value>
+                                <Display>ФРАНЦУЗСКИЕ ЮЖНЫЕ ТЕРРИТОРИИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>HR</Value>
+                                <Display>ХОРВАТИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CF</Value>
+                                <Display>ЦЕНТРАЛЬНО-АФРИКАНСКАЯ РЕСПУБЛИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>TD</Value>
+                                <Display>ЧАД</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>ME</Value>
+                                <Display>ЧЕРНОГОРИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CZ</Value>
+                                <Display>ЧЕШСКАЯ РЕСПУБЛИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CL</Value>
+                                <Display>ЧИЛИ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>CH</Value>
+                                <Display>ШВЕЙЦАРИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SE</Value>
+                                <Display>ШВЕЦИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SJ</Value>
+                                <Display>ШПИЦБЕРГЕН И ЯН МАЙЕН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>LK</Value>
+                                <Display>ШРИ-ЛАНКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>EC</Value>
+                                <Display>ЭКВАДОР</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GQ</Value>
+                                <Display>ЭКВАТОРИАЛЬНАЯ ГВИНЕЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>AX</Value>
+                                <Display>ЭЛАНДСКИЕ ОСТРОВА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SV</Value>
+                                <Display>ЭЛЬ-САЛЬВАДОР</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>ER</Value>
+                                <Display>ЭРИТРЕЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>EE</Value>
+                                <Display>ЭСТОНИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>ET</Value>
+                                <Display>ЭФИОПИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>ZA</Value>
+                                <Display>ЮЖНАЯ АФРИКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>GS</Value>
+                                <Display>ЮЖНАЯ ДЖОРДЖИЯ И ЮЖНЫЕ САНДВИЧЕВЫ ОСТРОВА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>OS</Value>
+                                <Display>ЮЖНАЯ ОСЕТИЯ</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>SS</Value>
+                                <Display>ЮЖНЫЙ СУДАН</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>JM</Value>
+                                <Display>ЯМАЙКА</Display>
+                            </AvailableValue>
+                            <AvailableValue>
+                                <Value>JP</Value>
+                                <Display>ЯПОНИЯ</Display>
+                            </AvailableValue>
+                        </ValueInfo>
+                    </Option>
+                    <Option>
+                        <Name>Страховые риски</Name>
+                        <Code>Coverages</Code>
+                        <MinOccurs>1</MinOccurs>
+                        <MaxOccurs>1</MaxOccurs>
+                        <Option>
+                            <Name>Медицина в путешествии</Name>
+                            <Code>TravelMedicine</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                            <ValueInfo>
+                                <Name>Страховой лимит</Name>
+                                <Code>TravelMedicineLimit</Code>
+                                <Type>LIST</Type>
+                                <AvailableValue>
+                                    <Value>15000</Value>
+                                    <Display>15 000</Display>
+                                </AvailableValue>
+                                <AvailableValue>
+                                    <Value>30000</Value>
+                                    <Display>30 000</Display>
+                                </AvailableValue>
+                                <AvailableValue>
+                                    <Value>50000</Value>
+                                    <Display>50 000</Display>
+                                </AvailableValue>
+                                <AvailableValue>
+                                    <Value>75000</Value>
+                                    <Display>75 000</Display>
+                                </AvailableValue>
+                                <AvailableValue>
+                                    <Value>100000</Value>
+                                    <Display>100 000</Display>
+                                </AvailableValue>
+                            </ValueInfo>
+                            <ValueInfo>
+                                <Name>Размер франшизы (в валюте страхования)</Name>
+                                <Code>DeductibleAmount</Code>
+                                <Type>LIST</Type>
+                                <IsNullable>true</IsNullable>
+                                <AvailableValue>
+                                    <Value>30</Value>
+                                    <Display>30</Display>
+                                </AvailableValue>
+                                <AvailableValue>
+                                    <Value>50</Value>
+                                    <Display>50</Display>
+                                </AvailableValue>
+                                <AvailableValue>
+                                    <Value>100</Value>
+                                    <Display>100</Display>
+                                </AvailableValue>
+                                <AvailableValue>
+                                    <Value>500</Value>
+                                    <Display>500</Display>
+                                </AvailableValue>
+                            </ValueInfo>
+                        </Option>
+                        <Option>
+                            <Name>Отмена поездки</Name>
+                            <Code>TripOptions</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                        </Option>
+                        <Option>
+                            <Name>Досрочное возвращение из поездки</Name>
+                            <Code>TripOptionsRet</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                        </Option>
+                        <Option>
+                            <Name>Юридическое/административное сопровождение</Name>
+                            <Code>JuridicalHelp</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                        </Option>
+                        <Option>
+                            <Name>Утрата документов</Name>
+                            <Code>DocumentsLoss</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                        </Option>
+                        <Option>
+                            <Name>Страхование от несчастных случаев</Name>
+                            <Code>PersonalAccident</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                            <ValueInfo>
+                                <Name>Лимит</Name>
+                                <Code>PersonalAccidentLimit</Code>
+                                <Type>DECIMAL</Type>
+                                <MinValue>5000</MinValue>
+                                <MaxValue>50000</MaxValue>
+                            </ValueInfo>
+                        </Option>
+                        <Option>
+                            <Name>Гражданская ответственность [Причинение вреда третьим лиц во время поездки]</Name>
+                            <Code>CivilLiability</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                            <ValueInfo>
+                                <Name>Лимит</Name>
+                                <Code>CivilLiabilityLimit</Code>
+                                <Type>DECIMAL</Type>
+                                <MinValue>1000</MinValue>
+                                <MaxValue>5000</MaxValue>
+                            </ValueInfo>
+                        </Option>
+                        <Option>
+                            <Name>Расходы при повреждении/утрате багажа</Name>
+                            <Code>Luggage</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                        </Option>
+                        <Option>
+                            <Name>Кража имущества на территории страхования</Name>
+                            <Code>TheftProperty</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                        </Option>
+                        <Option>
+                            <Name>Фото, видео техника</Name>
+                            <Code>PhotoVideo</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                        </Option>
+                        <Option>
+                            <Name>Спортивное оборудование</Name>
+                            <Code>SportEquipment</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                        </Option>
+                        <Option>
+                            <Name>Страхование недвижимости на время поездки</Name>
+                            <Code>Property</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                            <ValueInfo>
+                                <Name>Лимит</Name>
+                                <Code>PropertyLimit</Code>
+                                <Type>DECIMAL</Type>
+                                <MinValue>5000</MinValue>
+                                <MaxValue>50000</MaxValue>
+                            </ValueInfo>
+                            <ValueInfo>
+                                <Name>Адрес квартиры</Name>
+                                <Code>PropertyAddress</Code>
+                                <Type>STRING</Type>
+                            </ValueInfo>
+                        </Option>
+                    </Option>
+                    <Option>
+                        <Name>Тип отдыха</Name>
+                        <Code>LeisureType</Code>
+                        <MinOccurs>1</MinOccurs>
+                        <MaxOccurs>1</MaxOccurs>
+                        <Option>
+                            <Name>Активный отдых</Name>
+                            <Code>ActiveLeisure</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                            <ValueInfo>
+                                <Name>Экстремальные виды спорта</Name>
+                                <Code>IsExtremeSport</Code>
+                                <Type>BOOLEAN</Type>
+                                <IsNullable>true</IsNullable>
+                            </ValueInfo>
+                            <ValueInfo>
+                                <Name>Профессиональный спорт</Name>
+                                <Code>IsProfessionalSport</Code>
+                                <Type>BOOLEAN</Type>
+                                <IsNullable>true</IsNullable>
+                            </ValueInfo>
+                        </Option>
+                    </Option>
+                    <Option>
+                        <Name>Длительность поездки</Name>
+                        <Code>TripDuration</Code>
+                        <MinOccurs>1</MinOccurs>
+                        <MaxOccurs>1</MaxOccurs>
+                        <Option>
+                            <Name>Разовая поездка</Name>
+                            <Code>SingleTrip</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                            <ValueInfo>
+                                <Name>Дата начала поездки</Name>
+                                <Code>TripStartDate</Code>
+                                <Type>DATETIME</Type>
+                            </ValueInfo>
+                            <ValueInfo>
+                                <Name>Дата окончания поездки</Name>
+                                <Code>TripEndDate</Code>
+                                <Type>DATETIME</Type>
+                            </ValueInfo>
+                        </Option>
+                        <Option>
+                            <Name>Годовой полис</Name>
+                            <Code>AnnualTrip</Code>
+                            <MinOccurs>0</MinOccurs>
+                            <MaxOccurs>1</MaxOccurs>
+                            <ValueInfo>
+                                <Name>Дата начала поездки</Name>
+                                <Code>TripStartDate</Code>
+                                <Type>DATETIME</Type>
+                            </ValueInfo>
+                            <ValueInfo>
+                                <Name>Количество дней в поездке</Name>
+                                <Code>TripDayCount</Code>
+                                <Type>INT</Type>
+                                <MinValue>15</MinValue>
+                                <MaxValue>90</MaxValue>
+                            </ValueInfo>
+                        </Option>
+                    </Option>
+                </Option>
+            </NS1:ProductInfo>
+        </NS1:getProductInfoResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+        Value><Display>СЬЕРРА-ЛЕОНЕ</Display></AvailableValue><AvailableValue>
+<Value>TJ</Value>
+<Display>ТАДЖИКИСТАН</Display>
+</AvailableValue><AvailableValue>
+<Value>TH</Value>
+<Display>ТАИЛАНД</Display>
+</AvailableValue><AvailableValue>
+<Value>TW</Value>
+<Display>ТАЙВАНЬ (КИТАЙ)</Display>
+</AvailableValue><AvailableValue>
+<Value>TZ</Value>
+<Display>ТАНЗАНИЯ, ОБЪЕДИНЕННАЯ РЕСПУБЛИКА</Display>
+</AvailableValue><AvailableValue>
+<Value>TL</Value>
+<Display>ТИМОР-ЛЕСТЕ</Display>
+</AvailableValue><AvailableValue>
+<Value>TG</Value>
+<Display>ТОГО</Display>
+</AvailableValue><AvailableValue>
+<Value>TK</Value>
+<Display>ТОКЕЛАУ</Display>
+</AvailableValue><AvailableValue>
+<Value>TO</Value>
+<Display>ТОНГА</Display>
+</AvailableValue><AvailableValue>
+<Value>TT</Value>
+<Display>ТРИНИДАД И ТОБАГО</Display>
+</AvailableValue><AvailableValue>
+<Value>TV</Value>
+<Display>ТУВАЛУ</Display>
+</AvailableValue><AvailableValue>
+<Value>TN</Value>
+<Display>ТУНИС</Display>
+</AvailableValue><AvailableValue>
+<Value>TM</Value>
+<Display>ТУРКМЕНИЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>TR</Value>
+<Display>ТУРЦИЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>UG</Value>
+<Display>УГАНДА</Display>
+</AvailableValue><AvailableValue>
+<Value>UZ</Value>
+<Display>УЗБЕКИСТАН</Display>
+</AvailableValue><AvailableValue>
+<Value>WF</Value>
+<Display>УОЛЛИС И ФУТУНА</Display>
+</AvailableValue><AvailableValue>
+<Value>UY</Value>
+<Display>УРУГВАЙ</Display>
+</AvailableValue><AvailableValue>
+<Value>FO</Value>
+<Display>ФАРЕРСКИЕ ОСТРОВА</Display>
+</AvailableValue><AvailableValue>
+<Value>FJ</Value>
+<Display>ФИДЖИ</Display>
+</AvailableValue><AvailableValue>
+<Value>PH</Value>
+<Display>ФИЛИППИНЫ</Display>
+</AvailableValue><AvailableValue>
+<Value>FI</Value>
+<Display>ФИНЛЯНДИЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>FK</Value>
+<Display>ФОЛКЛЕНДСКИЕ ОСТРОВА (МАЛЬВИНСКИЕ)</Display>
+</AvailableValue><AvailableValue>
+<Value>FR</Value>
+<Display>ФРАНЦИЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>GF</Value>
+<Display>ФРАНЦУЗСКАЯ ГВИАНА</Display>
+</AvailableValue><AvailableValue>
+<Value>PF</Value>
+<Display>ФРАНЦУЗСКАЯ ПОЛИНЕЗИЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>TF</Value>
+<Display>ФРАНЦУЗСКИЕ ЮЖНЫЕ ТЕРРИТОРИИ</Display>
+</AvailableValue><AvailableValue>
+<Value>HR</Value>
+<Display>ХОРВАТИЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>CF</Value>
+<Display>ЦЕНТРАЛЬНО-АФРИКАНСКАЯ РЕСПУБЛИКА</Display>
+</AvailableValue><AvailableValue>
+<Value>TD</Value>
+<Display>ЧАД</Display>
+</AvailableValue><AvailableValue>
+<Value>ME</Value>
+<Display>ЧЕРНОГОРИЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>CZ</Value>
+<Display>ЧЕШСКАЯ РЕСПУБЛИКА</Display>
+</AvailableValue><AvailableValue>
+<Value>CL</Value>
+<Display>ЧИЛИ</Display>
+</AvailableValue><AvailableValue>
+<Value>CH</Value>
+<Display>ШВЕЙЦАРИЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>SE</Value>
+<Display>ШВЕЦИЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>SJ</Value>
+<Display>ШПИЦБЕРГЕН И ЯН МАЙЕН</Display>
+</AvailableValue><AvailableValue>
+<Value>LK</Value>
+<Display>ШРИ-ЛАНКА</Display>
+</AvailableValue><AvailableValue>
+<Value>EC</Value>
+<Display>ЭКВАДОР</Display>
+</AvailableValue><AvailableValue>
+<Value>GQ</Value>
+<Display>ЭКВАТОРИАЛЬНАЯ ГВИНЕЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>AX</Value>
+<Display>ЭЛАНДСКИЕ ОСТРОВА</Display>
+</AvailableValue><AvailableValue>
+<Value>SV</Value>
+<Display>ЭЛЬ-САЛЬВАДОР</Display>
+</AvailableValue><AvailableValue>
+<Value>ER</Value>
+<Display>ЭРИТРЕЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>EE</Value>
+<Display>ЭСТОНИЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>ET</Value>
+<Display>ЭФИОПИЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>ZA</Value>
+<Display>ЮЖНАЯ АФРИКА</Display>
+</AvailableValue><AvailableValue>
+<Value>GS</Value>
+<Display>ЮЖНАЯ ДЖОРДЖИЯ И ЮЖНЫЕ САНДВИЧЕВЫ ОСТРОВА</Display>
+</AvailableValue><AvailableValue>
+<Value>OS</Value>
+<Display>ЮЖНАЯ ОСЕТИЯ</Display>
+</AvailableValue><AvailableValue>
+<Value>SS</Value>
+<Display>ЮЖНЫЙ СУДАН</Display>
+</AvailableValue><AvailableValue>
+<Value>JM</Value>
+<Display>ЯМАЙКА</Display>
+</AvailableValue><AvailableValue>
+<Value>JP</Value>
+<Display>ЯПОНИЯ</Display>
+</AvailableValue></ValueInfo></Option><Option>
+<Name>Страховые риски</Name>
+<Code>Coverages</Code>
+<MinOccurs>1</MinOccurs>
+<MaxOccurs>1</MaxOccurs>
+<Option>
+    <Name>Медицина в путешествии</Name>
+    <Code>TravelMedicine</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+    <ValueInfo>
+        <Name>Страховой лимит</Name>
+        <Code>TravelMedicineLimit</Code>
+        <Type>LIST</Type>
+        <AvailableValue>
+            <Value>15000</Value>
+            <Display>15 000</Display>
+        </AvailableValue>
+        <AvailableValue>
+            <Value>30000</Value>
+            <Display>30 000</Display>
+        </AvailableValue>
+        <AvailableValue>
+            <Value>50000</Value>
+            <Display>50 000</Display>
+        </AvailableValue>
+        <AvailableValue>
+            <Value>75000</Value>
+            <Display>75 000</Display>
+        </AvailableValue>
+        <AvailableValue>
+            <Value>100000</Value>
+            <Display>100 000</Display>
+        </AvailableValue>
+    </ValueInfo>
+    <ValueInfo>
+        <Name>Размер франшизы (в валюте страхования)</Name>
+        <Code>DeductibleAmount</Code>
+        <Type>LIST</Type>
+        <IsNullable>true</IsNullable>
+        <AvailableValue>
+            <Value>30</Value>
+            <Display>30</Display>
+        </AvailableValue>
+        <AvailableValue>
+            <Value>50</Value>
+            <Display>50</Display>
+        </AvailableValue>
+        <AvailableValue>
+            <Value>100</Value>
+            <Display>100</Display>
+        </AvailableValue>
+        <AvailableValue>
+            <Value>500</Value>
+            <Display>500</Display>
+        </AvailableValue>
+    </ValueInfo>
+</Option>
+<Option>
+    <Name>Отмена поездки</Name>
+    <Code>TripOptions</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+</Option>
+<Option>
+    <Name>Досрочное возвращение из поездки</Name>
+    <Code>TripOptionsRet</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+</Option>
+<Option>
+    <Name>Юридическое/административное сопровождение</Name>
+    <Code>JuridicalHelp</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+</Option>
+<Option>
+    <Name>Утрата документов</Name>
+    <Code>DocumentsLoss</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+</Option>
+<Option>
+    <Name>Страхование от несчастных случаев</Name>
+    <Code>PersonalAccident</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+    <ValueInfo>
+        <Name>Лимит</Name>
+        <Code>PersonalAccidentLimit</Code>
+        <Type>DECIMAL</Type>
+        <MinValue>5000</MinValue>
+        <MaxValue>50000</MaxValue>
+    </ValueInfo>
+</Option>
+<Option>
+    <Name>Гражданская ответственность [Причинение вреда третьим лиц во время поездки]</Name>
+    <Code>CivilLiability</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+    <ValueInfo>
+        <Name>Лимит</Name>
+        <Code>CivilLiabilityLimit</Code>
+        <Type>DECIMAL</Type>
+        <MinValue>1000</MinValue>
+        <MaxValue>5000</MaxValue>
+    </ValueInfo>
+</Option>
+<Option>
+    <Name>Расходы при повреждении/утрате багажа</Name>
+    <Code>Luggage</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+</Option>
+<Option>
+    <Name>Кража имущества на территории страхования</Name>
+    <Code>TheftProperty</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+</Option>
+<Option>
+    <Name>Фото, видео техника</Name>
+    <Code>PhotoVideo</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+</Option>
+<Option>
+    <Name>Спортивное оборудование</Name>
+    <Code>SportEquipment</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+</Option>
+<Option>
+    <Name>Страхование недвижимости на время поездки</Name>
+    <Code>Property</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+    <ValueInfo>
+        <Name>Лимит</Name>
+        <Code>PropertyLimit</Code>
+        <Type>DECIMAL</Type>
+        <MinValue>5000</MinValue>
+        <MaxValue>50000</MaxValue>
+    </ValueInfo>
+    <ValueInfo>
+        <Name>Адрес квартиры</Name>
+        <Code>PropertyAddress</Code>
+        <Type>STRING</Type>
+    </ValueInfo>
+</Option>
+</Option><Option>
+<Name>Тип отдыха</Name>
+<Code>LeisureType</Code>
+<MinOccurs>1</MinOccurs>
+<MaxOccurs>1</MaxOccurs>
+<Option>
+    <Name>Активный отдых</Name>
+    <Code>ActiveLeisure</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+    <ValueInfo>
+        <Name>Экстремальные виды спорта</Name>
+        <Code>IsExtremeSport</Code>
+        <Type>BOOLEAN</Type>
+        <IsNullable>true</IsNullable>
+    </ValueInfo>
+    <ValueInfo>
+        <Name>Профессиональный спорт</Name>
+        <Code>IsProfessionalSport</Code>
+        <Type>BOOLEAN</Type>
+        <IsNullable>true</IsNullable>
+    </ValueInfo>
+</Option>
+</Option><Option>
+<Name>Длительность поездки</Name>
+<Code>TripDuration</Code>
+<MinOccurs>1</MinOccurs>
+<MaxOccurs>1</MaxOccurs>
+<Option>
+    <Name>Разовая поездка</Name>
+    <Code>SingleTrip</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+    <ValueInfo>
+        <Name>Дата начала поездки</Name>
+        <Code>TripStartDate</Code>
+        <Type>DATETIME</Type>
+    </ValueInfo>
+    <ValueInfo>
+        <Name>Дата окончания поездки</Name>
+        <Code>TripEndDate</Code>
+        <Type>DATETIME</Type>
+    </ValueInfo>
+</Option>
+<Option>
+    <Name>Годовой полис</Name>
+    <Code>AnnualTrip</Code>
+    <MinOccurs>0</MinOccurs>
+    <MaxOccurs>1</MaxOccurs>
+    <ValueInfo>
+        <Name>Дата начала поездки</Name>
+        <Code>TripStartDate</Code>
+        <Type>DATETIME</Type>
+    </ValueInfo>
+    <ValueInfo>
+        <Name>Количество дней в поездке</Name>
+        <Code>TripDayCount</Code>
+        <Type>INT</Type>
+        <MinValue>15</MinValue>
+        <MaxValue>90</MaxValue>
+    </ValueInfo>
+</Option>
+</Option></Option>
+        </NS1:ProductInfo></NS1:getProductInfoResponse></soapenv:Body></soapenv:Envelope>

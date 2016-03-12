@@ -1,0 +1,41 @@
+
+Австрия, Финляндия, Аргентина, Мамбу-Тамбу
+
+10/07/2016
+23072016
+15082016
+IVANOV IVAN 25.11.1954 954854785
+SIDOROV PETR 11-11-2014 5658475236
+BORODIN LEV 18/03/1972 66946743
+GORELOV ANTON 24/05/1995 87944
+HLESTO PROHOR 30/09/1972 987978798456
+
+TOTO HUMOR 27/092000 777878767676
+BONY HELLO 15/04/2002 79989079879
+REESTR POTERB  22072001 98967654
+
+Маятников Виталий Николаевич
+Кулакова 27-5, Москва, Россия, 123592
+12/01/1955
+
+mongoexport  -d trip1 -c user -o trip1.json  - Экспорт данных в JSON формате
+mongoimport -d trip1 -c user < file_name
+
+
+scp -P 9022 build/libs/TelegramBot-0.0.3.jar vitaly@mayatnikov.ru:/usr/local/telegram/tinkoff/
+
+
+>>>>>>>>>>>>> работа с Mongo <<<<<<<<<<<<<<<
+use trip1
+ db.user.find({"_id" : "t113724846"}).pretty()
+
+db.user.remove( { "_id" : "t113724846hist1456229514078" } )
+
+
+
+>>>>>>>>>>>>>>>>>> импорт сертификата сервера <<<<<<<<<<<<<<<<<<<
+su (БЕЗ МИНУСА) !
+ls -al $JAVA_HOME/jre/lib/security/cacerts
+keytool -importcert -trustcacerts -file TOI_Test_RP.pem -alias tgbot -keystore $JAVA_HOME/jre/lib/security/cacerts
+password: changeit
+

@@ -1,0 +1,140 @@
+package mvn.tgBot.processControll;
+
+import mvn.tgBot.db.EnsuredType;
+import mvn.tgBot.db.User;
+import mvn.tgBot.tgObjects.Result;
+import mvn.tgBot.utils.CheckDates;
+import mvn.tgBot.utils.Regexp;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.text.ParseException;
+import java.util.HashMap;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: vitaly
+ * Date: 17/02/16
+ * Time: 22:46
+ * Stage: ввод данных тех кто застрахован по полису
+ */
+@Component
+public class S1_24a extends StageMaster implements StageInt {
+
+    @Autowired
+    Regexp regexp;
+
+    private Log log = LogFactory.getLog(S1_24a.class);
+
+    public S1_24a() {
+        name = "s1-24a";
+        nextStageName = "s1-24";
+        msg = "Введите имя и фамилию на латинице, дату рождения, номер паспорта \nв таком формате:\n IVAN IVANOV 25.05.1985 745865452\n";
+        descr = "данные застрахованных";
+    }
+
+    @Override
+    public void process(User user, Result r) throws StageNotFoundException {
+        String txt = r.getMessage().getText();
+//        Long chatId = user.getChatId();
+        String key = user.getEnsuredCurrentKey();
+        if (key != null) key = regexp.filterReplaseDot(key);
+        else {
+            log.error("unknown key for HashMap<key,Ensured>");
+            key = "1_0";
+        }
+        log.debug("key=" + key);
+        if (user.getEnsured() == null) user.setEnsured(new HashMap());
+        String[] men = regexp.filterUserData(txt);
+        String birthday="";
+        String passport="";
+        StringBuffer msgOut = new StringBuffer();
+        boolean isError=false;
+
+        if(men.length!=4) {
+            msgOut.append("Ошибка при вводе количество слов <4" );
+            isError=true;
+        }
+        else {
+            birthday = (men[2] != null) ? regexp.filterDate(men[2]) : "?";
+            passport = (men[3] != null) ? regexp.filterPassport(men[3]) : "?";
+
+            if (!isCorrectClient(men)) {
+                msgOut.append("Ошибка при вводе Фамилии Имени(лат):" + men[0] + "|" + men[1]);
+                isError = true;
+            }
+            try {
+                if (!isCorrectBirthday(key, birthday)) {
+                    msgOut.append("\nОшибка\n при вводе Дня рождения, учтите возрастную группу, получено:" + birthday);
+                    isError = true;
+                }
+            } catch (ParseException e) {
+                msgOut.append("\nНе возможно сформировать дату из:" + birthday);
+                isError = true;
+            }
+            if (!isCorrectPassport(passport)) {
+                msgOut.append("\nОшибка при вводе номера паспорта:" + passport + "\n");
+                isError = true;
+            }
+        }
+        if (isError) {
+            msgOut.append("\nВвод таком формате:\n IVAN IVANOV 25/05/1985 745865452");
+            tgbot.sendText(user.getChatId(), msgOut.toString());
+        }
+        else {  // все проверки пройдены
+            String [] clientOut = {men[0],men[1],birthday,passport};
+            user.getEnsured().put(key, new EnsuredType(clientOut, key));
+            StageInt next = stageList.getStage(nextStageName);
+            next.sendMessage(user, r);     // отправить сообщение от следующей стадии обработки
+            user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
+            db.save(user);
+        }
+    }
+
+    //
+    private boolean isCorrectClient(String[] men) {
+        return (men[0]!=null && men[1]!=null && men[0].length()>1 && men[1].length()>1 );
+    }
+
+    /**
+     * Проверка возраста при заданной возрастной группе
+     * @param key
+     * @param birthday
+     * @return
+     * @throws ParseException
+     */
+    private boolean isCorrectBirthday(String key, String birthday) throws ParseException {
+        boolean ok=false;
+        int age = CheckDates.getAge(Regexp.filterDate(birthday));
+        if(key.startsWith("1")){
+            ok = ( age >=12 && age<= 60);
+        }
+        else if(key.startsWith("2")) {
+            ok = (age>60 && age < 75);
+        }
+        else if(key.startsWith("3")) {
+            ok = (age<12 && age>0);
+        }
+        return ok;
+    }
+
+    private boolean isCorrectPassport(String passport) {
+        return(passport.length()>=9);
+    }
+
+
+    //        отправить сообщение клиенту
+//        используется из стадии предыдущей этой
+    @Override
+    public void sendMessage(User user, Result r) {
+        Long chatId = user.getChatId();
+        String note="";
+        if(user.getEnsuredCurrentKey().startsWith("1")) note =" возраст от 12 до 60";
+        else if(user.getEnsuredCurrentKey().startsWith("2")) note =" возраст от 61 до 74";
+        else if(user.getEnsuredCurrentKey().startsWith("3")) note =" возраст до 12";
+
+        tgbot.sendMenuOff(chatId, msg + "участник=" + user.getEnsuredCurrentKey()+note);
+    }
+}

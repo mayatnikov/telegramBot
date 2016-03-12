@@ -1,0 +1,23 @@
+<soapenv:Envelope
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:ser="http://toi.ru/esb/model/serviceMessagesExt">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ser:getPaymentLinkRequest>
+            <ser:Header>
+                <user>telegram</user>
+                <password>qIQqu873KE</password>
+            </ser:Header>
+            <ser:PolicyNumber>7172301359</ser:PolicyNumber>
+            <ser:TotalPremium>10567.00</ser:TotalPremium>
+            <ser:ClientIP>127.0.0.1</ser:ClientIP>
+            <ser:ClientPhone>79165894332</ser:ClientPhone>
+        </ser:getPaymentLinkRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
+<!--
+        Полис для оплаты создан
+        Счет: 7099199088
+        Номер полиса: 7172301359
+        Стоимость: 10567.00
+-->

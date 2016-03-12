@@ -1,0 +1,63 @@
+@startuml
+
+state Message_Banking {
+SwitchOp : ожидание ввода кода операции
+PrintHelp:отобразить список команд
+Payment: OP=payment
+Transfer:OP=transfer
+MyselfPayment: пополнение своего тел.
+PrintBalance : отобразить баланс моих счетов
+ReqBlockChat: запрос блокировка канала
+ClearStatus:Сброс состояния chat в начальное
+PrintMenu: вывод меню (список команд)
+ChoiceSource :выбору \n источника
+ChoiceTarget:ожидание назначения платежа
+ChangeChatStatus: Блокировка CHAT
+EnterAmount: ввод суммы операции
+Error: Обработка ошибок ввода
+ReqBlockChat: Предупреждение о \nблокировке CHAT
+AcceptBlocking: обработка ответа на блокировку
+MakePayment:Оплата
+Exit : сброс состояние CHAT ожидание кода операции
+[*] --> SwitchOp : данные\n от messanger'а
+SwitchOp --> PrintHelp : help
+SwitchOp --> ClearStatus : cancel
+SwitchOp --> Payment :payment
+SwitchOp --> Transfer : transfer
+SwitchOp --> MyselfPayment : topup
+SwitchOp --> PrintBalance : balance
+SwitchOp --> ReqBlockChat : block
+PrintHelp --> Exit
+ClearStatus --> PrintMenu
+PrintMenu --> Exit
+Payment --> ChoiceTarget
+ChoiceTarget --> ChoiceSource : target найден
+ChoiceTarget --> Error: получатель не найден
+ChoiceSource --> EnterAmount
+EnterAmount --> AcceptPayment : корректные данные
+EnterAmount --> Error : не корректная сумма
+Error --> EnterAmount
+EnterAmount --> Exit : Cancel
+Error --> Exit :Cancel
+AcceptPayment --> Exit : отказ
+AcceptPayment --> MakePayment : YES
+MakePayment --> Exit
+MyselfPayment --> ChoiceSource : source найден
+Transfer --> ChoiceTarget
+PrintBalance --> Exit
+ReqBlockChat --> AcceptBlocking
+AcceptBlocking --> ChangeChatStatus
+AcceptBlocking -> Exit: отказ от блокировки
+ChangeChatStatus --> Exit
+Exit --> [*]
+
+
+
+
+note top of SwitchOp
+выбор вида операции
+end note
+
+
+}
+@enduml

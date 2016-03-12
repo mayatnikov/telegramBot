@@ -1,0 +1,19 @@
+﻿tg:
+    url: https://api.telegram.org
+    bot: bot190795679
+    token: AAGM93Ud17V7NaHY_AXMQMrgH_bteLsVD9o
+    cron: '*/3 * * * * *'
+db:
+    create: false
+    name: trip1
+soap:
+    user: telegram
+    password: qIQqu873KE
+    wsdl: ./config/tinkoffSoapService.wsdl
+    prodName: PartnerTravelV2Box
+spring:
+ data:
+  mongodb:
+   uri: mongodb://localhost:27017/trip1
+vitaly: 113724846
+configName: External-Config

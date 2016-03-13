@@ -54,12 +54,6 @@ public class PhotoProcessor extends StageMaster {
 //
 //
 //        if( resp.
-//
-//
-//
-//
-//
-//
 
     }
 

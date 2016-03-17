@@ -56,7 +56,7 @@ public class S1_14a extends StageMaster implements StageInt {
         else {
             err=true;
             log.error("stage:"+name+" ошибка ввода:"+txt);
-            tgbot.sendText(chatId, "stage:"+descr+" cmd:"+txt+" - неправильная команда!");
+            tgbot.sendMistake(chatId);
         }
         if(!err) {
             StageInt next=stageList.getStage(user.getWait4Stage());

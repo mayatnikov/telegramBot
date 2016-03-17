@@ -39,7 +39,7 @@ public class TgCalcQuote {
     private static String tgMessage1="Страховка для спокойного отдыха без занятий спортом за %.2f рублей";
     private static String tgMessage2="Страховка для активного отдыха (например, с велопрогулками) за %.2f рублей";
     private static String tgMessage3="Страховка для активного отдыха включая опасные виды спорта (например, горные лыжи или дайвинг) за %.2f рублей";
-    private static String tgMessage = "Стоимость полиса %.2f рублей";
+    private static String tgMessage = "Итоговая стоимость полиса %.2f рублей";
 
 
     @Autowired
@@ -78,13 +78,15 @@ public class TgCalcQuote {
             req = createRequest(user,holidayType);
 
 // ЗАПРОС
-            if(log.isTraceEnabled()) {  dumpRequest(req);   }
-            log.debug("SOAP request, wait response...id:"+req.getHeader().getIntegrationID());
-            CalcQuoteResponseType hndl = ss.getPort().calcQuote(req);           // запрос к серверу
-            log.debug("SOAP response id:"+hndl.getHeader().getIntegrationID() +" Status:"+hndl.getHeader().getResultInfo().getStatus());
-            if(log.isTraceEnabled()) { dumpResponse(hndl); }
-
-
+               if (log.isTraceEnabled()) {
+                   dumpRequest(req);
+               }
+               log.debug("SOAP request, wait response...id:" + req.getHeader().getIntegrationID());
+               CalcQuoteResponseType hndl = ss.getPort().calcQuote(req);           // запрос к серверу
+               log.debug("SOAP response id:" + hndl.getHeader().getIntegrationID() + " Status:" + hndl.getHeader().getResultInfo().getStatus());
+               if (log.isTraceEnabled()) {
+                   dumpResponse(hndl);
+               }
 
 // формирование сообщения со стоимостью
         CheckDates checkDates = new CheckDates();
@@ -124,6 +126,7 @@ public class TgCalcQuote {
             e.printStackTrace();
         }
         log.debug("end request");
+
         return new AsyncResult<QuoteType>(quoteAnswer);
     }
 

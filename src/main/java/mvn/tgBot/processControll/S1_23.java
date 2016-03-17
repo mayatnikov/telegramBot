@@ -1,6 +1,5 @@
 package mvn.tgBot.processControll;
 
-import mvn.tgBot.db.EnsuredType;
 import mvn.tgBot.db.User;
 import mvn.tgBot.tgObjects.Result;
 import mvn.tgBot.utils.Regexp;
@@ -8,8 +7,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,7 +26,7 @@ public class S1_23 extends StageMaster implements StageInt {
     public S1_23() {
         name = "s1-23";
         nextStageName = "s1-24";
-        msg = "Введите адрес проживания или нажмите кнопку";
+        msg = "Адрес проживания?";
         descr="адр. прописки";
 
     }
@@ -45,19 +42,18 @@ public class S1_23 extends StageMaster implements StageInt {
             user.setAddress2(txt);                     // !!!!!!
         }
         StageInt next = stageList.getStage(nextStageName);
-        //TODO сделать обработку response
-        //        rs.getStatusCode().getReasonPhrase();
         user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
 
         // внести пользователя в список страхуемых первым  если его там еще нет
-        HashMap<String, EnsuredType> hm = user.getEnsured();
-        if(hm == null) hm = new HashMap();
-        if(hm.get("1_0") == null ) hm.put("1_0",new EnsuredType(user.getFirstNameEng(), user.getLastNameEng(), user.getBirthday(),user.getPassport(),"1_0"));
-        else {
-            for(String key : hm.keySet()) {
-                log.trace(key+" "+ hm.get(key) );
-            }
-        }
+//        HashMap<String, EnsuredType> hm = user.getEnsured();
+//        if(hm == null) hm = new HashMap();
+//        if(hm.get("1_0") == null ) hm.put("1_0",new EnsuredType(user.getFirstNameEng(), user.getLastNameEng(), user.getBirthday(),user.getPassport(),"1_0"));
+//        else {
+//            for(String key : hm.keySet()) {
+//                log.trace(key+" "+ hm.get(key) );
+//            }
+//        }
+
         next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
         db.save(user);
     }

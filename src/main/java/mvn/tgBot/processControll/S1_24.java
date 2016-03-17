@@ -3,6 +3,7 @@ package mvn.tgBot.processControll;
 import mvn.tgBot.db.EnsuredType;
 import mvn.tgBot.db.User;
 import mvn.tgBot.tgObjects.Result;
+import mvn.tgBot.utils.Age;
 import mvn.tgBot.utils.Regexp;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,27 +34,39 @@ public class S1_24 extends StageMaster implements StageInt {
         name = "s1-24";
         nextStageName = "s1-24a";
         msg = "Замечательно, самое сложное прошли, осталось немного - указать данные тех, кто будет застрахован по этому полису:\n" +
-                "замечание: 1_*)-взрослые 2_*)-пожилые 3_*)-дети ";
+                "Примечание:\n" +
+                ""+Age.get[0]+" - взрослые\n" +
+                ""+Age.get[1]+" - пожилые\n" +
+                " "+Age.get[2]+" - дети";
         descr = "данные застрахованных";
     }
 
     String msg2 = "Для каждого укажите \nимя и фамилию на латинице, дату рождения, номер паспорта \nв таком формате:\n IVAN IVANOV 25.05.1985 745865452\n";
 
-
     @Override
     public void process(User user, Result r) throws StageNotFoundException {
-        String txt = r.getMessage().getText().toUpperCase();
+        String txt = r.getMessage().getText();
         Long chatId = user.getChatId();
         String nStage = nextStageName;
-        if (txt.contains("ЗАПОЛНИЛ")) {
-            if(user.getEnsured().get("1_0")!=null ) user.setPassport(user.getEnsured().get("1_0").getPasport());  // запомнить номер паспорта
+        if (txt.toUpperCase().contains("ЗАПОЛНИЛ")) {
+            String root = "0:"+ Age.get[0]+":";
+
+//            if(false )  { // user.getEnsured().get(root)!=null ) {
+            if( user.getEnsured().get(root)!=null ) {
+                log.debug("root user was found");
+                user.setFirstNameEng(user.getEnsured().get(root).getFirstName());  // запомнить англ фио
+                user.setLastNameEng(user.getEnsured().get(root).getLastName());  // запомнить англ фио
+                user.setPassport(user.getEnsured().get(root).getPasport());  // запомнить номер паспорта
+// сохранить всех заполенных в массиве для последующего использования
+                saveAllEnsured(user);
+            }
             nStage = "s1-25";
         }
         else {
-            // в запросе по нажатой кнопке должен быть индекс участника вида 1.2) .....
-            // выделим его и сформируем key = i1_i2
+            // в запросе по нажатой кнопке должен быть индекс участника вида 1:necktie: .....
+            // выделим его и сформируем key = i1_[возраст]
             String[] data = regexp.filterIndexCol(txt);
-            user.setEnsuredCurrentKey(data[0] + "_" + data[1]);  // сохр текущий индекс в профиле клиента
+            user.setEnsuredCurrentKey(data[0] + ":" + data[1]+":");  // сохр текущий индекс в профиле клиента
             nStage = "s1-24a";
         }
         StageInt next = stageList.getStage(nStage);
@@ -62,8 +75,18 @@ public class S1_24 extends StageMaster implements StageInt {
         db.save(user);
     }
 
-    //        отправить сообщение клиенту
-//        используется из стадии предыдущей этой
+// добавить всех страхемых в исторический массив EnsuredAll
+    private void saveAllEnsured(User user) {
+        HashMap<String, EnsuredType> all = user.getEnsuredAll();
+        if(all== null) all = new <String, EnsuredType>HashMap();   // создать если его еще нет
+        HashMap<String, EnsuredType> lst = user.getEnsured();
+        for(String key : lst.keySet()) {
+            EnsuredType us1 = lst.get(key);
+            all.put(us1.getFirstName()+":"+us1.getLastName(),us1);
+        }
+        user.setEnsuredAll(all);
+    }
+
     @Override
     public void sendMessage(User user, Result r) {
 
@@ -98,32 +121,32 @@ public class S1_24 extends StageMaster implements StageInt {
                 for (String key : hm.keySet()) {
                     EnsuredType human = hm.get(key);
                     if (human != null) {
-                        String age = (human.getAge() == null) ? "1_0" : human.getAge();
+                        String age = (human.getAge() == null) ? "1:"+Age.get[0]+":" : human.getAge();
                         String fname = (human.getFirstName() == null) ? "_____" : human.getFirstName();
                         String lname = (human.getLastName() == null) ? "____" : human.getLastName();
                         String bd = (human.getBirthday() == null) ? "____" : human.getBirthday();
                         String doc = (human.getPasport() == null) ? "____" : human.getPasport();
-                        String stmp = age + ") "+lname+" "+fname+" "+bd+" "+doc;
+                        String stmp = age + " "+lname+" "+fname+" "+bd+" "+doc;
                         log.trace("item for menu=" + stmp);
                         boolean canAdd = false;
-                        if (age.startsWith("1")) {
+                        if (age.contains(":"+Age.get[0]+":")) {
                             l1.add(stmp);
-                        } else if (age.startsWith("2")) {
+                        } else if (age.contains(":"+Age.get[1]+":")) {
                             l2.add(stmp);
-                        } else if (age.startsWith("3")) {
+                        } else if (age.contains(":"+Age.get[2]+":")) {
                             l3.add(stmp);
                         }
                     }
                 }
             // -- end if
 // заполнить строки меню
-            String tail = ") не заполнено";
+            String tail = " Не заполнено";
             {
                 log.trace("id=" + id + " n1=" + n1);
                 Iterator<String> it = l1.iterator();
                 for (int tik = 0; tik < n1; tik++) {
                     if (it.hasNext()) cmenu[id++][0] = it.next();
-                    else cmenu[id++][0] = "1_" + tik + tail;
+                    else cmenu[id++][0] = "" + tik + ":"+Age.get[0]+": " + tail;
                     log.trace(cmenu[id - 1][0]);
                 }
             }
@@ -132,7 +155,7 @@ public class S1_24 extends StageMaster implements StageInt {
                 Iterator<String> it = l2.iterator();
                 for (int tik = 0; tik < n2; tik++) {
                     if (it.hasNext()) cmenu[id++][0] = it.next();
-                    else cmenu[id++][0] = "2_" + tik + tail;
+                    else cmenu[id++][0] = "" + tik+ ":"+Age.get[1]+": " + tail;
                     log.trace(cmenu[id - 1][0]);
                 }
             }
@@ -141,7 +164,7 @@ public class S1_24 extends StageMaster implements StageInt {
                 Iterator<String> it = l3.iterator();
                 for (int tik = 0; tik < n3; tik++) {
                     if (it.hasNext()) cmenu[id++][0] = it.next();
-                    else cmenu[id++][0] = "3_" + tik + tail;
+                    else cmenu[id++][0] = "" + tik  + ":"+Age.get[2]+": " + tail;
                     log.trace(cmenu[id - 1][0]);
                 }
             }

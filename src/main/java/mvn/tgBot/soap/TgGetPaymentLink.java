@@ -30,6 +30,10 @@ public class TgGetPaymentLink {
         log.debug("service created");
     }
 
+    String[][] menu = {
+            {"оплатил"}
+    };
+
     /**
      * Получить ссылку на оплату сервиса
      * @param tgbot
@@ -55,8 +59,8 @@ public class TgGetPaymentLink {
         String status = response.getHeader().getResultInfo().getStatus();
         if(status.equals("OK")) {
             String url = response.getPaymentLink();
-            tgbot.sendText(user.getChatId(),"Для оплаты полиса перейдите по ссылке: "+url);
-            tgbot.sendHtml(user.getChatId(),"Получен ответ:\n <a href='"+url+"'>[ЭТО ССЫЛКА ДЛЯ ОПЛАТЫ ПОЛИСА]</a> ");
+            tgbot.sendMenuON(user.getChatId(),"Для оплаты полиса перейдите по ссылке: "+url,menu);
+//            tgbot.sendHtml(user.getChatId(),"Получен ответ:\n <a href='"+url+"'>[ЭТО ССЫЛКА ДЛЯ ОПЛАТЫ ПОЛИСА]</a> ");
 
         }
         else {

@@ -25,7 +25,7 @@ public class S1_17 extends StageMaster implements StageInt {
     public S1_17() {
         name = "s1-17";
         nextStageName="s1-18";
-        msg =  "*Ваш номер телефона?* \nПо номеру телефона вы получите доступ к Личному кабинету на http://Tinkoffinsurance.ru";
+        msg =  "Ваш номер телефона?\nПо номеру телефона вы получите доступ к Личному кабинету на tinkoffinsurance.ru";
         descr="Номер тел.";
     }
 

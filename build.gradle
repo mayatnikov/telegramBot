@@ -16,7 +16,7 @@ apply plugin: 'spring-boot'
 
 jar {
     baseName = 'TelegramBot'
-    version =  '0.0.6rc'
+    version =  '0.1.0rc'
 }
 
 

@@ -25,7 +25,7 @@ public class S1_18 extends StageMaster implements StageInt {
     public S1_18() {
         name = "s1-18";
         nextStageName="s1-19";
-        msg =  "Ваш e-mail? На него мы отправим готовый полис";
+        msg =  "Ваш e-mail?\nНа него мы отправим готовый полис";
         descr="email";
     }
 
@@ -37,20 +37,14 @@ public class S1_18 extends StageMaster implements StageInt {
             user.setEmail(txt);
             StageInt next = stageList.getStage(nextStageName);
             next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
-            //TODO сделать обработку response
-            //        rs.getStatusCode().getReasonPhrase();
             user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
         }
         else {
-            tgbot.sendText(chatId, "не менее 5 символов");
+            tgbot.sendMistake(chatId,"ошибка в адресе почты");
         }
         db.save(user);
     }
 
-/*
-    отправить сообщение клиенту
-    используется из стадии предыдущей этой
-     */
     @Override
     public void sendMessage(User user, Result r) {
         String[][] menu = {

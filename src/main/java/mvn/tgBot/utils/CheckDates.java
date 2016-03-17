@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 
 @Component
@@ -17,6 +18,23 @@ public class CheckDates {
     public static long diffDays(Date dstart, Date dend) {
         return (dend.getTime() - dstart.getTime()) / (24 * 60 * 60 * 1000);
     }
+
+    public static String addDays(String date, int duration) throws ParseException {
+        Date dt= format.parse(date);
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE, duration);
+        dt = c.getTime();
+        String answ = format.format(dt);
+        return answ;
+    }
+
+
+
+    public static Date getDate(String dt) throws ParseException {
+         return format.parse(dt);
+    }
+
 
     public static int getAge(LocalDate birthday) {
         LocalDate today = LocalDate.now();
@@ -29,9 +47,7 @@ public class CheckDates {
     }
 
     public static long diffDays(String dstart, String dend) throws ParseException {
-        Date d1 = format.parse(dstart);
-        Date d2 = format.parse(dend);
-        return diffDays(d1, d2);
+        return diffDays(getDate(dstart), getDate(dend));
     }
 
     public static Date string2Date(String dt) throws ParseException {
@@ -45,23 +61,46 @@ public class CheckDates {
     }
 
     // Дата начала не должна быть позднее чем через год
-    public static boolean checkDateStart(String dateStart) throws ParseException {
+
+    /**
+     *
+     * @param dateStart
+     * @return 0=все хорошо | 1=не верный формат даты | 2= > позже года от текущей даты | 3-раньше текущей
+     * @throws ParseException
+     */
+    public static int checkDateStart(String dateStart)  {
+
         Date now = new Date();
-        Long diff = diffDays(now, dateStart);
-        boolean res = true;
+        Long diff;
+        try {
+            diff = diffDays(now, dateStart);
+        } catch (ParseException e) {
+            return 1;
+        }
         if (diff < 0) {
-            res = false;
+            return 3;
         }
         if (diff > 365) {
-            res = false;
+            return 2;
         }
-        return res;
+        return 0;
     }
 
-    // Дата конца не позднее чем через 90 дней от начала страховки
-    public static boolean checkDateStop(String dateStart, String dateStop) throws ParseException {
-        Long diff = diffDays(dateStart, dateStop);
-        return (diff > 90) ? false : true;
+    /**
+     *
+     * @param dateStart
+     * @param dateStop
+     * @return  0=все хорошо | 1=format error | 2=Дата конца не позднее чем через 90 дней от начала страховки
+     */
+    public static int checkDateStop(String dateStart, String dateStop) {
+        Long diff = null;
+        try {
+            diff = diffDays(dateStart, dateStop);
+            if( diff <90 && diff>0) return 0;
+            else return 2;
+        } catch (ParseException e) {
+           return 1;
+        }
     }
 
     public static String getUnixTimeStamp(String dt) throws ParseException {
@@ -74,10 +113,19 @@ public class CheckDates {
 
 }
 /*
+    public static void main(String[] args) {
+        try {
+            long duration = CheckDates.diffDays("05/04/2016","25/04/2016")+15;
+            System.out.println(duration);
+            System.out.println( CheckDates.addDays("05/04/2016", (int)duration) );
+        } catch (ParseException e) {
+            System.out.println("error format");
+            e.printStackTrace();
+        }
+    }
+
 
     public static void main(String[] args) {
-
-
         CheckDates chdt = new CheckDates();
         try {
             chdt.tests();
@@ -85,7 +133,6 @@ public class CheckDates {
             System.out.println("error format");
             e.printStackTrace();
         }
-
     }
 
     private void tests() throws ParseException {
@@ -119,8 +166,6 @@ public class CheckDates {
         System.out.println("Date stop ="+checkDateStop(s1,s2) );
         System.out.println("Долительность="+ diffDays(s1,s2 ) );
         }
-
-
 }
 
 /*
@@ -147,7 +192,6 @@ public class CheckDates {
 
 
         //HH convcheckDateserts hour in 24 hours format (0-23), day calculation
-
 
         Date d1 = null;
         Date d2 = null;

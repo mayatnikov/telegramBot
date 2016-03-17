@@ -57,6 +57,10 @@ public class Regexp {
         String res = "?";
         String regexp = "^(\\d+)[\\s-/](\\d+)[\\s-/](\\d+)*";
         String [] ss = in.split("[\\s-/\\.]");
+
+//         String [] ss = in.split("[\\s-/\\.]");
+
+
         LocalDate now = LocalDate.now();
         int yearNow = now.getYear();
         int monthNow = now.getMonthValue();
@@ -81,26 +85,11 @@ public class Regexp {
         }
         return res;
     }
-    public static void main (String ... args ) {
-        Regexp re = new Regexp();
-        String in1[] = {"11-11-96","6-1-1998","06.01.1998","06-01","12/08/1999","14 06 2017","12/05/16","14 06 2015","0304","1201","7", "21","121"};
-        for(int tik=0;tik< in1.length;tik++) {
-            System.out.println(">>>>> "+in1[tik]);
-            try {
-                String res = re.filterDate(in1[tik]);
-                System.out.println("<<<<<< "+res);
-                System.out.println();
-            } catch ( java.time.DateTimeException e) {
-                System.out.println("=====>"+ e.getMessage());
-            }
-        }
-    }
-
 
     // выделение от начала чисел разделенных точкой
-    public String[] filterIndexCol(String in) {
+    public static String[] filterIndexCol(String in) {
         log.debug("Index>>>"+in);
-        String regexp= "^(\\d{1})[\\._](\\d+)\\)(.*)";
+        String regexp= "^(\\d{1})[:](.*)[:](.*)$";
         String [] ret = new String[3];
         ret[0] = in.replaceAll(regexp, "$1");
         ret[1] = in.replaceAll(regexp, "$2");
@@ -111,14 +100,29 @@ public class Regexp {
     }
 
     // выделение первых 4-х слов из: IVAN IVANOV 25.05.1985 745865452
-    public String[] filterUserData(String in) {
-        log.trace("in>>>"+in);
+    public static String[] filterUserData(String in) {
+        log.debug("in>>>"+in);
 
         String regexp= "\\s+";
         String[] r = in.split(regexp);
-        log.trace("ret size="+r.length);
+        log.debug("ret size="+r.length);
         return (r);
     }
+
+    public static boolean isLatin(String in ) {
+        return in.matches("[A-Za-z\\-]+");
+    }
+
+    public static void main (String ... args ) {
+        String[] in = {"Petrov",
+                "Sid/orov","Sid;orov","Sid_orov","Sid=orov","Lev-ham","Ort-петров",
+                "петров"};
+        for(int tik=0;tik<in.length;tik++) {
+            System.out.println(in[tik]+ ">>>" + Regexp.isLatin(in[tik])  );
+        }
+    }
+
+
     public String[] parseWorlds(String in) {  // просто синоним
         return filterUserData(in);
     }
@@ -157,6 +161,8 @@ public class Regexp {
     }
 }
 
+
+
 /*
     public static void main (String ... args ) {
         Regexp re = new Regexp();
@@ -167,24 +173,21 @@ public class Regexp {
         }
     }
 
-
-
-
     public static void main (String ... args ) {
         Regexp re = new Regexp();
-        String in1[] = {"6-1-1998","06.01.1998","06-01","12/08/1999","12/05/16","14 06 2015","0304","1201","7", "21","121"};
+        String in1[] = {"11-11-96","6-1-1998","06.01.1998","06-01","12/08/1999","14 06 2017","12/05/16","14 06 2015","0304","1201","7", "21","121"};
         for(int tik=0;tik< in1.length;tik++) {
             System.out.println(">>>>> "+in1[tik]);
-         try {
-             String res = re.filterDate(in1[tik]);
-             System.out.println("<<<<<< "+res);
-             System.out.println();
-         } catch ( java.time.DateTimeException e) {
-             System.out.println("=====>"+ e.getMessage());
-         }
+            try {
+                String res = re.filterDate(in1[tik]);
+                System.out.println("<<<<<< "+res);
+                System.out.println();
+            } catch ( java.time.DateTimeException e) {
+                System.out.println("=====>"+ e.getMessage());
+            }
         }
-
     }
+
 
     public static void main (String ... args ) {
 

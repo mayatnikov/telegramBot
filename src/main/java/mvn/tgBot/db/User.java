@@ -43,7 +43,8 @@ public class User {
     String dateFrom;            // даты для документов начало
     String dateTo;              // конец
     String dateReg;             // подачи в посольство
-    String dateDuration;        // продолжительность (без учета +15 дней для Шенген)
+    String datePolicyEnd;           // дата окончания полиса +15 дней для Шенген
+    String dateDuration;        // продолжительность (с учетом +15 дней для Шенген)
     String phone;
     String email;
     SexType sex;
@@ -57,6 +58,7 @@ public class User {
     HashMap<String,EnsuredType> ensuredOld;      // список застрахованных старики
     HashMap<String,EnsuredType> ensuredChild;      // список застрахованных дети
     String ensuredCurrentKey; // текущий ключ для стадии ввода страхуемого
+    HashMap<String,EnsuredType> ensuredAll;       // все ранее введеные ключ = FN + ":" +LN
     Long opDate;
     boolean correctMode;  // режим корректировки историю не сбрасывать!
 
@@ -68,6 +70,16 @@ public class User {
         this.wait4Stage = wait4Stage;
     }
 
+    public HashMap<String, EnsuredType> getEnsuredAll() {
+        return ensuredAll;
+    }
+
+    public void setEnsuredAll(HashMap<String, EnsuredType> ensuredAll) {
+        this.ensuredAll = ensuredAll;
+    }
+
+    public String getDatePolicyEnd() {   return datePolicyEnd;  }
+    public void setDatePolicyEnd(String datePolicyEnd) {    this.datePolicyEnd = datePolicyEnd;   }
     public String getPassport() {   return passport;  }
     public void setPassport(String passport) { this.passport = passport;  }
     public String getFirstNameEng() {    return firstNameEng;  }

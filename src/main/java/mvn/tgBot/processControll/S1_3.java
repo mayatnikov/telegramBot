@@ -56,7 +56,7 @@ public class S1_3 extends StageMaster implements StageInt {
         }
         else {
             log.error("stage:"+name+" ошибка ввода:"+txt);
-            tgbot.sendText(chatId, "stage:"+descr+" cmd:"+txt+" - неправильная команда!");
+            tgbot.sendMistake(chatId);
             err=true;
         }
 

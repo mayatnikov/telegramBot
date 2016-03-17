@@ -9,8 +9,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-
 /**
  * Created with IntelliJ IDEA.
  * User: vitaly
@@ -46,23 +44,22 @@ public class S1_8 extends StageMaster implements StageInt {
         log.trace("input text="+txt);
         Long chatId = user.getChatId();
         String dateReg = regexp.filterDate(txt);
-        try {
-            if( checkDates.checkDateStart(dateReg) ) {
-                user.setDateReg(dateReg);                        // !!!!!!
+        switch (CheckDates.checkDateStart(txt)) {
+            case 0: // ok
+                user.setDateFrom(txt);
                 StageInt next = stageList.getStage(nextStageName);
                 next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
-                //TODO сделать обработку response
-                //        rs.getStatusCode().getReasonPhrase();
                 user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
-            }
-            else {
-                log.error("stage:"+name+" ошибка ввода:"+txt);
-                tgbot.sendText(chatId, errMessage);
-            }
-        } catch (ParseException e) {
-            log.error(e.getMessage());
-        }  catch (java.util.IllegalFormatConversionException e) {
-            log.error(e.getMessage());
+                break;
+            case 1:  // format error
+            case 3:  // < dateNow()
+                log.error("stage:"+name+" date format error:"+txt);
+                tgbot.sendMistake(chatId, "Некорректная дата");
+                break;
+            case 2:  // > 365
+                log.error("stage:"+name+" date > 365 error:"+txt);
+                tgbot.sendMistake(chatId, "Мы не можем застраховать поездку, если до ее начала больше года");
+                break;
         }
         db.save(user);
     }

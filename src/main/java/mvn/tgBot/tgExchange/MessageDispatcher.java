@@ -75,6 +75,7 @@ public class MessageDispatcher  implements CommandLineRunner {
         ResponseEntity<Updates> resp = tgbot.getAllMessage(currentUpdateId);
         Updates updates = resp.getBody();
         List<Result> results = new ArrayList();
+        Long chatID=0L;
         try {
             results = updates.getResult();      // список сообщений от абонетов
             if(results.size()>0) log.debug("Incoming message-packet size=" + results.size() + " start from update_id=" + currentUpdateId);
@@ -84,18 +85,19 @@ public class MessageDispatcher  implements CommandLineRunner {
 // --------------- !!!!!!!!!!!!!!!
                 log.trace("Update current message id=" + currentUpdateId);
 
-                Long chatID = r.getMessage().getFrom().getId();
+                chatID = r.getMessage().getFrom().getId();
                 User user = checkNewUser.proc(chatID, r);
 
 // ========================   обработка не текстовых сообщений
                 if(r.getMessage().getContact()!=null) { contactProcessor.sendMessage(user,r); continue;}
-                if(r.getMessage().getPhoto()!=null) { photoProcessor.sendMessage(user,r);  continue; }
+                if(r.getMessage().getPhoto()!=null) { photoProcessor.process(user,r);  continue; }
                 if(r.getMessage().getLocation()!=null) { locationProcessor.sendMessage(user,r); continue; }
 
 // ==================== проверка текстовых сообщений
                 String msg = r.getMessage().getText().toUpperCase();
                 log.debug("Message chatId:[" + r.getMessage().getChat().getId() + "]from:[" + r.getMessage().getFrom().getUsername()+" /isNew="+ user.isNewUser() + "] text=" + msg);
                 if (r.getMessage().getText() == null) continue; // пустое сообщение
+// ============ CANCEL ============
                 else if(msg.startsWith("CANCEL") || msg.startsWith("/CANCEL") ) {
                     log.debug("clear stage for:"+user.getFirstName());
                     clearStage4ThisUser(user,r);
@@ -112,6 +114,29 @@ public class MessageDispatcher  implements CommandLineRunner {
                     }
                 }
 // =========================================================
+
+                else if(msg.startsWith("RETRY") || msg.startsWith("/RETRY") ) { // в режиме коррекции ошибок
+                    String nextStage="s1-2";
+                    user.setWait4Stage(nextStage);
+                    user.setCorrectMode(true);
+                    db.save(user);
+                    StageInt ws = stageList.getStage(nextStage);
+                    ws.sendMessage(user,r);
+                }
+// =========================================================
+                else if(msg.startsWith("START") || msg.startsWith("/START") ) { // в режиме коррекции ошибок
+                    String nextStage="s1-1";
+                    user.setWait4Stage(nextStage);
+                    user.setCorrectMode(false);
+                    user.setEnsuranceOpt1(null);
+                    user.setEnsuranceOpt2(null);
+                    user.setEnsuranceOpt3(null);
+                    user.setEnsuranceOpt4(null);
+                    db.save(user);
+                    StageInt ws = stageList.getStage(nextStage);
+                    ws.sendMessage(user,r);
+                }
+
 
                 else if(msg.startsWith("HELP") || msg.startsWith("/HELP") ) {
                     log.debug("disolay help");
@@ -144,8 +169,10 @@ public class MessageDispatcher  implements CommandLineRunner {
             }  // end of for each results
         }  catch (StageNotFoundException e) {
             log.error("error in stage sequence, stage not found. Process is break");
+            tgbot.sendMistake(chatID,"Ошибка в сценарии робота");
             e.printStackTrace();
         }  catch (java.lang.NullPointerException e) {
+            tgbot.sendMistake(chatID,"Ошибка в данных (null pointer ex-n)");
             log.error("Processed message with update_id=" + currentUpdateId + " ===> SKIPPED ! error:" + e.getMessage());
         }  catch (org.springframework.web.client.HttpClientErrorException e) {
             log.error("Bad request to TELEGRAM update_id=" + currentUpdateId + " ===> SKIPPED ! error:" + e.getMessage());
@@ -154,9 +181,11 @@ public class MessageDispatcher  implements CommandLineRunner {
         }  catch (org.springframework.web.client.HttpServerErrorException e) {
             log.error("Http error!!!!!. update_id=" + currentUpdateId + " ===> SKIPPED ! error:" + e.getMessage());
         } catch (java.lang.NumberFormatException e) {
-            log.error("Http error!!!!!. update_id=" + currentUpdateId + " ===> SKIPPED ! input date/number error:" + e.getMessage());
+            tgbot.sendMistake(chatID,"ошибка при вводе числа");
+            log.error("Number format error update_id=" + currentUpdateId + " ===> SKIPPED ! input date/number error:" + e.getMessage());
         } catch (java.time.DateTimeException e) {
-            log.error("Http error!!!!!. update_id=" + currentUpdateId + " ===> SKIPPED ! input date error:" + e.getMessage());
+            tgbot.sendMistake(chatID,"Некорректная дата");
+            log.error("Date time format error. update_id=" + currentUpdateId + " ===> SKIPPED ! input date error:" + e.getMessage());
         }
 
 
@@ -186,9 +215,10 @@ public class MessageDispatcher  implements CommandLineRunner {
 
     // сбросить текущий статус пользователя
     private void clearStage4ThisUser(User user, Result r) {
-        tgbot.sendMenuOff(user.getChatId(),"Процесс сброшен");
+//        tgbot.sendMenuOff(user.getChatId(),"Процесс сброшен");
 
-        user.setWait4Stage("s1-1");
+        String nst = "s1-0";
+        user.setWait4Stage(nst);
         user.setLastErr(false);
         user.setEnsuranceOpt1(null);
         user.setEnsuranceOpt2(null);
@@ -198,22 +228,24 @@ public class MessageDispatcher  implements CommandLineRunner {
 
         try {
             StageInt next = null;
-            next = stageList.getStage("s1-1");
+            next = stageList.getStage(nst);
             next.sendMessage(user, r);     // отправить сообщение от следующей стадии обработки
         } catch (StageNotFoundException e) {
             log.error("сброс процесса переход не возможен");
         }
 
-
         db.save(user);
+        log.debug("reset user history");
     }
     
     private void displayHelp(long chatId) {
         String txt="основные команды: " +
                 "/help - подсказка по командам\n" +
-                "/cancel - спрос процесса в начало\n" +
+                "/cancel - сброс процесса в начало\n" +
                 "/info - о состоянии процесса\n" +
-                "/refresh - обнвить сообшение и меню\n";
+                "/refresh - обнвить сообшение и меню\n" +
+                "/start - начало и сброс данных\n" +
+                "/retry - в начало без сброса данных";
         tgbot.sendText(chatId,txt);
     }
 
@@ -222,9 +254,21 @@ public class MessageDispatcher  implements CommandLineRunner {
                 "/help " +
                 "/cancel " +
                 "/info " +
-                "/refresh ";
+                "/refresh /start /retry";
         tgbot.sendText(chatId,txt);
     }
 
 }
+
+/*
+команды для BOT-а:
+
+start - в начало не запоминать данные
+retry - в начало сохранить ввод данных
+refresh - обновить сообщение и меню
+cancel - сброс процесса и отключение меню
+info - отобразить состояние процесса и мои основные данные
+help - этот список команд
+
+ */
 

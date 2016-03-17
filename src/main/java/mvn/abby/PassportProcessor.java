@@ -2,18 +2,23 @@ package mvn.abby;
 
 import com.abbyy.ocrsdk.Client;
 import com.abbyy.ocrsdk.Task;
+import mvn.tgBot.db.EnsuredType;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+
 public class PassportProcessor {
+    private Log log = LogFactory.getLog(PassportProcessor.class);
 
     Client restClient;
 
     public static void main(String[] args) throws Exception {
 
-        System.out.println("Process documents telegram-->AbbyOCR.\n");
+        System.out.println("Process documents telegram-->AbbyOCR");
         PassportProcessor mrz = new PassportProcessor();
 
 //        mrz.performMrzRecognition("../../INFO/MRZ/passport.jpg", "result.xml");
@@ -21,11 +26,10 @@ public class PassportProcessor {
 //        mrz.performMrzRecognition("../../INFO/MRZ/passport.jpg");
 
         int sz = 144092;
-        String surl="https://api.telegram.org/file/bot110712323:AAFopijizY0vAkYvze-LwHLMgNWzdx_ekRg/photo/file_5.jpg";
+//        String surl="https://api.telegram.org/file/bot110712323:AAFopijizY0vAkYvze-LwHLMgNWzdx_ekRg/photo/file_10.jpg";
+        String surl="https://api.telegram.org/file/bot190795679:AAGM93Ud17V7NaHY_AXMQMrgH_bteLsVD9o/photo/file_19.jpg";
 
-        /*
-                     https://api.telegram.org/file/bot110712323:AAFopijizY0vAkYvze-LwHLMgNWzdx_ekRg/photo/file_7.jpg
-         */
+//        bot190795679:AAGM93Ud17V7NaHY_AXMQMrgH_bteLsVD9o
         URL url = new URL(surl);
         mrz.performMrzRecognition(sz,url);
     }
@@ -39,49 +43,42 @@ public class PassportProcessor {
         restClient.password = "HIgPzV0l0e6UJ9kLW9qayrS+";
     }
 
-    private void performMrzRecognition(int imageSize, URL url) throws Exception {
+    public void setAccess(String appId, String passwd) {
+        restClient.applicationId = appId;
+        restClient.password = passwd;
+    }
+
+    public EnsuredType performMrzRecognition(int imageSize, URL url) throws Exception {
 
         Task task = restClient.processMrz(imageSize,  url );
-        System.out.println("waitForCompletion");
+        log.debug("waitForCompletion");
         task = waitForCompletion(task);   //  ЖДЕМ
+        EnsuredType men = new EnsuredType();
 
         if (task.Status == Task.TaskStatus.Completed) {
             ResultFields res = new ResultFields(getInput(task));
-            System.out.println(res.getFieldByType("LastName"));
-            System.out.println(res.getFieldByType("GivenName"));
-            System.out.println(res.getFieldByType("BirthDate"));
-            System.out.println(res.getFieldByType("DocumentNumber"));
-
-
-        } else if (task.Status == Task.TaskStatus.NotEnoughCredits) {
-            System.out.println("Not enough credits to process document. Please add more pages to your application's account.");
-        } else {
-            System.out.println("Task failed");
-        }
-    }
-
-    private void performMrzRecognition(String fileName)
-            throws Exception {
-
-        Task task = restClient.processMrz( fileName );
-        System.out.println("waitForCompletion");
-        task = waitForCompletion(task);
-
-        if (task.Status == Task.TaskStatus.Completed) {
-            ResultFields res = new ResultFields(getInput(task));
-            System.out.println(res.getFieldByType("LastName"));
-            System.out.println(res.getFieldByType("GivenName"));
-            System.out.println(res.getFieldByType("BirthDate"));
-            System.out.println(res.getFieldByType("DocumentNumber"));
+            String verified = res.getFieldByType("DocumentNumberVerified");
+            if(verified.equals("true")) {
+                log.trace("LN:" + res.getFieldByType("LastName"));
+                men.setLastName(res.getFieldByType("LastName"));
+                log.debug("FN:" + res.getFieldByType("GivenName"));
+                men.setFirstName(res.getFieldByType("GivenName"));
+                log.debug("BD:" + res.getFieldByType("BirthDate"));
+                men.setBirthday(res.getFieldByType("BirthDate"));
+                log.debug("DOC:" + res.getFieldByType("DocumentNumber"));
+                men.setPasport(res.getFieldByType("DocumentNumber"));
+            }
+            else throw new Exception("ошибка распознавания данных паспорта");
 
         } else if (task.Status == Task.TaskStatus.NotEnoughCredits) {
-            System.out.println("Not enough credits to process document. "
-                    + "Please add more pages to your application's account.");
+            log.error("Not enough credits to process document. Please add more pages to your application's account.");
+            throw new Exception("Not enough credits to process document. Please add more pages to your application's account.");
         } else {
-            System.out.println("Task failed");
+            log.error("performMrzRecognition Task failed");
+            throw new Exception("performMrzRecognition Task failed");
         }
+        return men;
     }
-
 
     /**
      * Wait until task processing finishes
@@ -90,7 +87,7 @@ public class PassportProcessor {
 
         while (task.isTaskActive()) {
            Thread.sleep(5000);
-            System.out.println("Waiting..");
+            log.debug("Waiting..");
             task = restClient.getTaskStatus(task.Id);
         }
         return task;
@@ -102,17 +99,13 @@ public class PassportProcessor {
         }
 
         if (task.DownloadUrl == null) {
-            throw new IllegalArgumentException(
-                    "Cannot download result without url");
+            throw new IllegalArgumentException( "Cannot download result without url");
         }
 
-        System.out.println("download URL:"+task.DownloadUrl);
+        log.debug("download URL:"+task.DownloadUrl);
         URL url = new URL(task.DownloadUrl);
         URLConnection connection = url.openConnection();
-        // do not use
-        // authenticated
-        // connection
-
-             return   connection.getInputStream();
+        // !!!!! do not use  authenticated  connection
+       return   connection.getInputStream();
     }
 }

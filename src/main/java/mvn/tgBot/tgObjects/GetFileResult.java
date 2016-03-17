@@ -1,7 +1,5 @@
 package mvn.tgBot.tgObjects;
 
-import java.util.List;
-
 /**
  * Created with IntelliJ IDEA.
  * User: vitaly
@@ -10,7 +8,7 @@ import java.util.List;
  */
 public class GetFileResult {
     boolean ok;
-    List<Result> result;
+    Result result;
 
     public boolean isOk() {
         return ok;
@@ -20,11 +18,11 @@ public class GetFileResult {
         this.ok = ok;
     }
 
-    public List<Result> getResult() {
+    public Result getResult() {
         return result;
     }
 
-    public void setResult(List<Result> result) {
+    public void setResult(Result result) {
         this.result = result;
     }
 }

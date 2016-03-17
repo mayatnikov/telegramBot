@@ -53,7 +53,7 @@ public class TgProductOptions {
 // PersonalAccident
         if (us.getEnsuranceOpt2() != null) {
             (new Pot(coverages,"PersonalAccident"))
-                    .addValInfo("PersonalAccidentLimit", "17000");
+                    .addValInfo("PersonalAccidentLimit", "5000");              // 17000 5000 замечание
         }
         if (us.getEnsuranceOpt3() != null) {
             new Pot(coverages,"Luggage");

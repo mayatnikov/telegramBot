@@ -2,14 +2,13 @@ package mvn.tgBot.processControll;
 
 import mvn.tgBot.db.User;
 import mvn.tgBot.tgObjects.Result;
+import mvn.tgBot.utils.Age;
 import mvn.tgBot.utils.CheckDates;
 import mvn.tgBot.utils.Regexp;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.text.ParseException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,12 +30,10 @@ public class S1_10 extends StageMaster implements StageInt {
     public S1_10() {
         name = "s1-10";
         nextStageName = "s1-12";
-        msg = "Срок страхования с %s по %s " +
-                "и составит %s дней. \nОбращаю внимание, " +
-                "что срок действия полиса увеличен на 15 дней " +
-                "в соответствии с Визовым Кодексом стран Шенгенской зоны. " +
+        msg="Срок страхования с %s по %s. Количество дней поездки %s дней.\n" +
+                "Обращаю внимание, что срок действия полиса увеличен на 15 дней в соответствии с Визовым Кодексом стран Шенгенской зоны. " +
                 "Стоимость полиса не увеличится! Продолжаем.\n" +
-                "*Сколько человек от 12 до 60 лет едет?*";
+                "Сколько человек "+ Age.get[0]+" от 12 до 60 лет едет?";
         descr="число взрослых Шенген";
     }
 
@@ -61,7 +58,7 @@ public class S1_10 extends StageMaster implements StageInt {
         }
         else {
             log.error("stage:"+name+" ошибка ввода:"+txt);
-            tgbot.sendText(chatId, "stage:"+descr+" cmd:"+txt+" - неправильная команда!");
+            tgbot.sendMistake(chatId);
         }
         db.save(user);
     }
@@ -74,15 +71,15 @@ public class S1_10 extends StageMaster implements StageInt {
         Long chatId = user.getChatId();
         Long diff = null;
         String outMessage;
-        try {
-            diff = checkDates.diffDays(user.getDateFrom(),user.getDateTo());
-            outMessage = String.format(msg,user.getDateFrom(),user.getDateTo(),""+(diff+15L));
-        } catch (ParseException e) {
-            outMessage = err;
-        } catch (java.util.IllegalFormatConversionException e) {
-            outMessage = err;
-        }
-        outMessage = String.format(msg,user.getDateFrom(),user.getDateTo(),""+(diff+15L));
+//        try {
+ //           diff = checkDates.diffDays(user.getDateFrom(),user.getDateTo());
+            outMessage = String.format(msg,user.getDateFrom(),user.getDatePolicyEnd(),user.getDateDuration());
+//        } catch (ParseException e) {
+//            outMessage = err;
+//        } catch (java.util.IllegalFormatConversionException e) {
+//            outMessage = err;
+//        }
+//        outMessage = String.format(msg,user.getDateFrom(),user.getDateTo(),""+(diff+15L));
  //       tg.sendMenuOff(chatId,outMessage);
         tgbot.sendMenuON(chatId,outMessage,menu);
     }

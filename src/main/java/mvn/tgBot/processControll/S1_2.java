@@ -44,13 +44,14 @@ public class S1_2 extends StageMaster implements StageInt {
             user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
         }
         else if(txt.contains("ГОДОВ")) {
-            user.setWait4Stage("s1-1");     // запомнить след шаг для данного ChatID
-            StageInt next = stageList.getStage("s1-1");
-            next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
+            user.setWait4Stage("s1-0");     // запомнить след шаг для данного ChatID
+            StageInt next = stageList.getStage("s1-0");
+            tgbot.sendMenuOff(chatId,"Годовую страховку Вы можете оформить сейчас на сайте http://www.tinkoffinsurance.ru/calculator/newvzr");
+            next.sendMessage(user, r);     // отправить сообщение от следующей стадии обработки
         }
         else {
             log.error("stage:"+name+" ошибка ввода:"+txt);
-            tgbot.sendText(chatId, "stage:"+descr+" cmd:"+txt+" - неправильная команда!");
+            tgbot.sendMistake(chatId);
         }
         db.save(user);
     }

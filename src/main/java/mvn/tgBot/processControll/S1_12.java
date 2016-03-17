@@ -2,6 +2,7 @@ package mvn.tgBot.processControll;
 
 import mvn.tgBot.db.User;
 import mvn.tgBot.tgObjects.Result;
+import mvn.tgBot.utils.Age;
 import mvn.tgBot.utils.Regexp;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,7 +27,7 @@ public class S1_12 extends StageMaster implements StageInt {
     public S1_12() {
         name = "s1-12";
         nextStageName = "s1-13";
-        msg = "А старше – в возрасте от 61 до 74?";
+        msg = "А старше "+ Age.get[1] +" – в возрасте от 61 до 74?";
         descr="число пожилых";
 
     }
@@ -51,7 +52,7 @@ public class S1_12 extends StageMaster implements StageInt {
         }
         else {
             log.error("stage:"+name+" ошибка ввода:"+txt);
-            tgbot.sendText(chatId, "stage:"+descr+" cmd:"+txt+" - неверные данные или больше допустимого значения=2");
+            tgbot.sendMistake(chatId, " Неверные данные или больше допустимого значения=2");
         }
         db.save(user);
     }

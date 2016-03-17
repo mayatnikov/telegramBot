@@ -15,5 +15,11 @@ spring:
  data:
   mongodb:
    uri: mongodb://localhost:27017/trip1
+
+abbyy:
+    applicationId: TelegramBot
+    password: HIgPzV0l0e6UJ9kLW9qayrS
+
+
 vitaly: 113724846
 configName: InternalConfig

@@ -24,7 +24,7 @@ public class S1_21 extends StageMaster implements StageInt {
     public S1_21() {
         name = "s1-21";
         nextStageName="s1-22";
-        msg =  "День рождения (ДД/ММ/ГГГГ)";
+        msg =  "Дата рождения (ДД/ММ/ГГГГ)";
         descr="ДР";
     }
 
@@ -48,7 +48,7 @@ public class S1_21 extends StageMaster implements StageInt {
             }
         } catch (ParseException e) {
             log.error("Error birthday input:"+txt);
-            tgbot.sendText(chatId,"Ошибка: неправильный формат даты ДР");
+            tgbot.sendMistake(chatId,"Некорректная дата");
         }
         db.save(user);
     }

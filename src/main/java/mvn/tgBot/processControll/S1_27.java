@@ -65,11 +65,9 @@ public class S1_27 extends StageMaster implements StageInt {
 
     @Override
     public void sendMessage(User user, Result r) {
-        // @TODO получить ссылку на оплату и вывести ее клиенту
         Long chatId = user.getChatId();
         tgbot.sendText(chatId,msg);
         tgbot.sendMenuON(chatId,paymentUrl,menu);
     }
-
 }
 

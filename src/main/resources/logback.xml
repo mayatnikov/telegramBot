@@ -4,7 +4,7 @@
     <!--<property name="LOG_HOME" value="/H/workspace/TelegramBot/log" />-->
     <appender name="FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_HOME}/debug.log</file>
+        <file>${LOG_HOME}/tnbot.log</file>
 
 
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -47,6 +47,12 @@
         <appender-ref ref="FILE" />
     </logger>
 
+    <logger name="mvn.tgBot.soap" additivity="false">
+        <level value="TRACE" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </logger>
+
     <logger name="mvn.tgBot.tgControl" additivity="false">
         <level value="TRACE" />
         <appender-ref ref="CONSOLE" />
@@ -65,6 +71,13 @@
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="FILE" />
     </logger>
+
+    <logger name="mvn.abby" additivity="false">
+        <level value="TRACE" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </logger>
+
 
     <root>
         <level value="WARN" />

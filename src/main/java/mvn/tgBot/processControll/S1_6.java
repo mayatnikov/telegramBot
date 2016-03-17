@@ -9,8 +9,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-
 /**
  * Created with IntelliJ IDEA.
  * User: vitaly
@@ -35,6 +33,7 @@ public class S1_6 extends StageMaster implements StageInt {
         descr = "дата отъезда";
     }
 
+
     String errMessage="Ошибка в формате даты, необходимо вводит ДД ММ ГГГГ, дата не может быть меньше текущего дня и позднее 1 года от текущего времени";
 
     @Override
@@ -42,21 +41,22 @@ public class S1_6 extends StageMaster implements StageInt {
         String txt = r.getMessage().getText().toUpperCase();
         Long chatId = user.getChatId();
         String input = regexp.filterDate(txt);
-        try {
-            if(checkDates.checkDateStart(input) ) {
-                user.setDateFrom(input);                        // !!!!!!
+        switch (CheckDates.checkDateStart(input)) {
+            case 0: // ok
+                user.setDateFrom(input);
                 StageInt next = stageList.getStage(nextStageName);
                 next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
-                //TODO сделать обработку response
-                //        rs.getStatusCode().getReasonPhrase();
                 user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
-            }
-            else {
-                log.error("stage:"+name+" ошибка ввода:"+txt);
-                tgbot.sendText(chatId, errMessage);
-            }
-        } catch (ParseException e) {
-            tgbot.sendText(chatId, errMessage);
+                break;
+            case 1:  // format error
+            case 3:  // < dateNow()
+                log.error("stage:"+name+" date format error:"+txt);
+                tgbot.sendMistake(chatId, "Некорректная дата");
+                break;
+            case 2:  // > 365
+                log.error("stage:"+name+" date > 365 error:"+txt);
+                tgbot.sendMistake(chatId, "Мы не можем застраховать поездку, если до ее начала больше года");
+                break;
         }
         db.save(user);
     }
@@ -65,11 +65,17 @@ public class S1_6 extends StageMaster implements StageInt {
 //        используется из стадии предыдущей этой
     @Override
     public void sendMessage(User user, Result r) {
+        String[][] menu = {
+                {"?"}
+        };
         Long chatId = user.getChatId();
-        tgbot.sendMenuOff(chatId,msg);
-        //TODO сделать обработку response
-        //        rs.getStatusCode().getReasonPhrase();
-
+        if(user.isCorrectMode()) {
+            menu[0][0]=user.getDateFrom();
+            tgbot.sendMenuON(chatId,msg,menu);
+        }
+        else {
+            tgbot.sendMenuOff(chatId, msg);
+        }
     }
 }
 

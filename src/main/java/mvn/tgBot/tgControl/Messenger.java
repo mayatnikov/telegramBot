@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import mvn.tgBot.tgExchange.Header;
 import mvn.tgBot.tgExchange.ResponseToSend;
+import mvn.tgBot.tgObjects.GetFileResult;
 import mvn.tgBot.tgObjects.Updates;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -74,6 +75,22 @@ public class Messenger {
         return (sendMessage(mbody));
     }
 
+ /*
+
+"\ud83d\ude25" - disappointed_relieved
+  */
+
+    static String emErr = "\ud83d\ude25 ";
+    public ResponseEntity sendMistake(Long chatId, String s) {
+           return  sendText(chatId,emErr + s );
+    }
+
+    public ResponseEntity sendMistake(Long chatId) {
+        String msg =  emErr + "Не понял команду, выберите из доступных вариантов";
+        return  sendText(chatId,msg);
+    }
+
+
     public ResponseEntity  sendMardown(Long id, String markdown) {
         MessageBody m = new MessageBody();
         m.setChat_id(id);
@@ -117,6 +134,21 @@ public class Messenger {
         String mbody = pojo2Json(m);
         return (sendMessage(mbody));
     }
+
+
+    public String getFileLink(String fileId) {
+
+        String body="{\"file_id\":\"" + fileId +"\"}";
+        log.trace("get photo-name from Telegram-cloud, file_id:"+fileId);
+        HttpEntity<String> request = new HttpEntity<String>(body, header);
+        ResponseEntity resp=null;
+        resp = rest.exchange(httpAddress + "getFile", HttpMethod.POST, request, GetFileResult.class);
+        GetFileResult getFileResult = (GetFileResult) resp.getBody();
+        String fileLink = getFileResult.getResult().getFile_path();
+        log.debug("File link:"+fileLink);
+        return fileLink;
+    }
+
 
     private ResponseEntity  sendMessage(String msgBody) {
         String command="sendMessage";

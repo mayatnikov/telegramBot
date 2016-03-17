@@ -3,6 +3,7 @@ package mvn.tgBot.processControll;
 import mvn.tgBot.db.EnsuredType;
 import mvn.tgBot.db.User;
 import mvn.tgBot.tgObjects.Result;
+import mvn.tgBot.utils.Age;
 import mvn.tgBot.utils.CheckDates;
 import mvn.tgBot.utils.Regexp;
 import org.apache.commons.logging.Log;
@@ -40,10 +41,10 @@ public class S1_24a extends StageMaster implements StageInt {
         String txt = r.getMessage().getText();
 //        Long chatId = user.getChatId();
         String key = user.getEnsuredCurrentKey();
-        if (key != null) key = regexp.filterReplaseDot(key);
-        else {
+//        if (key != null) key = regexp.filterReplaseDot(key);
+        if(key==null) {
             log.error("unknown key for HashMap<key,Ensured>");
-            key = "1_0";
+            key = "1:necktie:";
         }
         log.debug("key=" + key);
         if (user.getEnsured() == null) user.setEnsured(new HashMap());
@@ -62,7 +63,7 @@ public class S1_24a extends StageMaster implements StageInt {
             passport = (men[3] != null) ? regexp.filterPassport(men[3]) : "?";
 
             if (!isCorrectClient(men)) {
-                msgOut.append("Ошибка при вводе Фамилии Имени(лат):" + men[0] + "|" + men[1]);
+                msgOut.append("Недопустимые символы в фамилии и имени:" + men[0] + "|" + men[1]);
                 isError = true;
             }
             try {
@@ -81,7 +82,7 @@ public class S1_24a extends StageMaster implements StageInt {
         }
         if (isError) {
             msgOut.append("\nВвод таком формате:\n IVAN IVANOV 25/05/1985 745865452");
-            tgbot.sendText(user.getChatId(), msgOut.toString());
+            tgbot.sendMistake(user.getChatId(), msgOut.toString());
         }
         else {  // все проверки пройдены
             String [] clientOut = {men[0],men[1],birthday,passport};
@@ -95,7 +96,13 @@ public class S1_24a extends StageMaster implements StageInt {
 
     //
     private boolean isCorrectClient(String[] men) {
-        return (men[0]!=null && men[1]!=null && men[0].length()>1 && men[1].length()>1 );
+        return (men[0]!=null
+                && men[1]!=null
+                && men[0].length()>1
+                && men[1].length()>1
+                &&  Regexp.isLatin(men[0])
+                &&  Regexp.isLatin(men[1])
+        );
     }
 
     /**
@@ -107,14 +114,15 @@ public class S1_24a extends StageMaster implements StageInt {
      */
     private boolean isCorrectBirthday(String key, String birthday) throws ParseException {
         boolean ok=false;
+        log.trace("Check date for key="+key);
         int age = CheckDates.getAge(Regexp.filterDate(birthday));
-        if(key.startsWith("1")){
+        if(key.contains(Age.get[0])){
             ok = ( age >=12 && age<= 60);
         }
-        else if(key.startsWith("2")) {
+        else if(key.contains(Age.get[1])) {
             ok = (age>60 && age < 75);
         }
-        else if(key.startsWith("3")) {
+        else if(key.contains(Age.get[2])) {
             ok = (age<12 && age>0);
         }
         return ok;
@@ -131,10 +139,28 @@ public class S1_24a extends StageMaster implements StageInt {
     public void sendMessage(User user, Result r) {
         Long chatId = user.getChatId();
         String note="";
-        if(user.getEnsuredCurrentKey().startsWith("1")) note =" возраст от 12 до 60";
-        else if(user.getEnsuredCurrentKey().startsWith("2")) note =" возраст от 61 до 74";
-        else if(user.getEnsuredCurrentKey().startsWith("3")) note =" возраст до 12";
+        if(user.getEnsuredCurrentKey().contains(Age.get[0])) note =" возраст от 12 до 60";
+        else if(user.getEnsuredCurrentKey().contains(Age.get[1])) note =" возраст от 61 до 74";
+        else if(user.getEnsuredCurrentKey().contains(Age.get[2])) note =" возраст до 12";
 
-        tgbot.sendMenuOff(chatId, msg + "участник=" + user.getEnsuredCurrentKey()+note);
+        String[][] usersMenu =  getAllUserMenu(user);
+        String mmm =   msg + "участник=" + user.getEnsuredCurrentKey()+note;
+        if(usersMenu==null)   tgbot.sendMenuOff(chatId,mmm);
+        else tgbot.sendMenuON(chatId, mmm,usersMenu );
     }
+
+    private String[][] getAllUserMenu (User us) {
+        HashMap<String, EnsuredType> all = us.getEnsuredAll();
+        if(all==null) return null;
+        int sz=all.size();
+
+        String[][] ret = new String[sz][1];
+        int tik=0;
+        for( String key : all.keySet()    ) {
+            EnsuredType ens = all.get(key);
+            ret[tik++][0] = ens.getFirstName()+" "+ens.getLastName()+" "+ens.getBirthday()+" "+ens.getPasport();
+        }
+        return ret;
+    }
+
 }

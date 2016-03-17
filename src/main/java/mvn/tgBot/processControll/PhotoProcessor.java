@@ -1,17 +1,24 @@
 package mvn.tgBot.processControll;
 
+import mvn.abby.PassportProcessor;
+import mvn.tgBot.db.EnsuredType;
 import mvn.tgBot.db.User;
-import mvn.tgBot.tgExchange.Header;
+import mvn.tgBot.tgControl.Messenger;
 import mvn.tgBot.tgObjects.Photo;
 import mvn.tgBot.tgObjects.Result;
+import mvn.tgBot.utils.Regexp;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
+import org.springframework.stereotype.Service;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,52 +26,76 @@ import java.util.List;
  * Date: 07/03/16
  * Time: 09:05
  */
-@Component
-public class PhotoProcessor extends StageMaster {
+@Service
+public class PhotoProcessor  {
 
- @Autowired
- Header header;
+    @Autowired
+    Messenger tgbot;
 
-    @Value("${tg.url}/${tg.bot}:${tg.token}/")
+
+    @Value("${tg.url}/file/${tg.bot}:${tg.token}/")
     String httpAddress;
 
-    RestTemplate rest = new RestTemplate();
+    @Value("${abbyy.applicationId}")
+    String applicationId;
+    @Value("${abbyy.password}")
+    String abbyPassword;
+
+//    https://api.telegram.org/file/bot<token>/<file_path>
 
     private Log log = LogFactory.getLog(PhotoProcessor.class);
 
-//    String[][] menu = {
-//            {"1","2"},
-//            {"4","3"}
-//    };
-    String msg="Скоро фото паспорта будет обрабатываться для получения паспортных данных";
 
-    @Override
-    public void process(User user, Result r) {
-//
-//        ResponseEntity resp=null;
-//
-//        String fileId = findBiggestImage(r.getMessage().getPhoto());
-//        String body="{\"file_id\":\"" + fileId +"\"}";
-//        log.trace("get photo-name from Telegram-cloud, file_id:"+fileId);
-//        HttpEntity<String> request = new HttpEntity<String>(body, header);
-//
-//        resp = rest.exchange(httpAddress + "getFile", HttpMethod.POST, request, GetFileResult.class);
-//        ResponseEntity<Updates> resp = tgbot.getAllMessage(currentUpdateId);
-//        Updates updates = resp.getBody();
-//
-//
-//        if( resp.
+ @Async
+ public Future<String> process(User user, Result r) {
 
-    }
-
-    @Override
-    public void sendMessage(User user, Result r) {
         Long chatId = user.getChatId();
-        tgbot.sendText(chatId,msg);
-//        tgbot.sendMenuON(chatId,msg,menu);
+        tgbot.sendText(chatId,"старт сканирования...");
+        String wait4Stage = user.getWait4Stage();
+        log.debug("Photo request from stage:"+ wait4Stage);
+        if (!wait4Stage.equals("s1-24a")) {
+            tgbot.sendText(user.getChatId(),"фото обрабатываются только на стадии ввода данных тех кто будет застрахован!");
+            return new AsyncResult<String>("bad");
+        }
+
+// ----------------- обработка фото
+        FileInfo fileInfo = findBiggestImage(r.getMessage().getPhoto());
+        log.debug("File id:" + fileInfo.nm );
+
+        String fileLink =  tgbot.getFileLink(fileInfo.nm);
+        log.debug("fileLink:"+fileLink);
+
+     PassportProcessor passportProcessor = new PassportProcessor();
+//     passportProcessor.setAccess(applicationId, abbyPassword);
+     String UrlStr = httpAddress + fileLink;
+        try {
+            URL url = new URL(UrlStr);
+            long fsz = fileInfo.sz;
+            int fszi = (int) fsz;
+            EnsuredType men = passportProcessor.performMrzRecognition(fszi, url);
+            String year=  men.getBirthday().substring(0,2);
+            String mon=  men.getBirthday().substring(2,4);
+            String day=  men.getBirthday().substring(4,6);
+            String birthday = Regexp.filterDate(day+"/"+mon+"/"+year);
+            String[][] menu = new String[1][1];
+            menu[0][0] = men.getFirstName()+" "+men.getLastName()+" "+birthday+" "+men.getPasport();
+
+            tgbot.sendMenuON(user.getChatId(), "скан паспорта",menu );
+
+        } catch (MalformedURLException e) {
+            log.error(e.getMessage());
+            tgbot.sendText(chatId,"Ошибка обмена с сервером обработки изображений");
+        } catch (NullPointerException e) {
+            log.error(e.getMessage());
+            tgbot.sendText(chatId,"Ошибка при распознавании изображения");
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            tgbot.sendText(chatId,"Ошибка обмена с сервером обработки изображений");
+        }
+     return new AsyncResult<String>("ok");
     }
 
-   private String findBiggestImage(List<Photo> photos) {
+   private FileInfo findBiggestImage(List<Photo> photos) {
 
        String fileId="";
        Long sz=0L;
@@ -75,8 +106,19 @@ public class PhotoProcessor extends StageMaster {
                fileId =  photo.getFile_id();
            }
        }
-       return fileId;
+       return new FileInfo(fileId,sz);
    }
+
+  class FileInfo {
+      public String nm;
+      public Long sz;
+
+      public FileInfo(String nm,Long sz) {
+          this.nm =nm;
+          this.sz= sz;
+      }
+
+  }
 
 
 }

@@ -42,42 +42,64 @@ public class S1_7 extends StageMaster implements StageInt {
         Long chatId = user.getChatId();
         String dateStart = user.getDateFrom();
         String dateStop = regexp.filterDate(txt);
-
         try {
-            if( checkDates.checkDateStop(dateStart,dateStop) ) {
-                String stg;
-                user.setDateTo(dateStop);                        // !!!!!!
+            switch (checkDates.checkDateStop(dateStart, dateStop)) {
+                case 0:
+// ---------
+                    String stg;
+                    user.setDateTo(dateStop);                        // !!!!!!
 
-    // Определение следующего stage по региону и стране
+                    // Определение следующего stage и дат по региону и стране
+                    if (user.getRegionType() != null && user.getRegionType().equals(RegionType.SHENGEN)) {
+                        long duration = checkDates.diffDays(dateStart,dateStop)+15;
+                        user.setDateDuration("" + duration);
+                        user.setDatePolicyEnd(CheckDates.addDays(dateStart, (int)duration));
+                        stg = "s1-10"; // на ввод число взрослых при финляндии и шенген
+                    } else if (user.getCountryName() != null && user.getCountryName().toUpperCase().contains("ФИНЛЯН"))
+                        stg = "s1-8"; // <----ввод даты по Финляндии
+                    else {          // при НЕ финляндии и НЕ шенген
+                        user.setDatePolicyEnd(dateStop);
+                        long duration = checkDates.diffDays(dateStart,dateStop);
+                        user.setDateDuration("" + duration);
+                        stg = "s1-11";     // на ввод число взрослых
+                    }
+                    StageInt next = stageList.getStage(stg);
+                    next.sendMessage(user, r);     // отправить сообщение от следующей стадии обработки
+                    user.setWait4Stage(stg);     // на ввод даты для посольства Финляндии
+                    break;
 
-                if(user.getRegionType()!= null && user.getRegionType().equals(RegionType.SHENGEN))
-                    stg= "s1-10"; // на ввод число взрослых при финляндии и шенген
-                else if(user.getCountryName()!= null && user.getCountryName().toUpperCase().contains("ФИНЛЯН"))
-                    stg="s1-8"; // <----ввод даты по Финляндии
-                else
-                    stg = "s1-11";     // на ввод число взрослых при НЕ финляндии и НЕ шенген
-
-                StageInt next = stageList.getStage(stg);
-                next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
-                user.setWait4Stage(stg);     // на ввод даты для посольства Финляндии
-            }
-            else {
-                log.error("stage:"+name+" ошибка ввода:"+txt);
-                tgbot.sendText(chatId, "stage:"+descr+" cmd:"+txt+" - ошибка в формате или превышение допустимого периода 90 дней!");
+// ---------  end case 0
+                case 1:  // format error
+                case 3:  // < dateNow()
+                    log.error("stage:" + name + " date format error:" + txt);
+                    tgbot.sendMistake(chatId, "Некорректная дата");
+                    break;
+                case 2:
+                    log.error("stage:" + name + "diff dates > 90  error:" + txt);
+                    tgbot.sendMistake(chatId, "Количество дней страхования не может превышать 90 дней");
+                    break;
             }
         } catch (ParseException e) {
-            // сообщение о ошибке ввода
-            e.printStackTrace();
+            log.error("stage:" + name + "exception date format:" + txt);
+            tgbot.sendMistake(chatId, "Некорректная дата");
         }
         db.save(user);
     }
 
-    //        отправить сообщение клиенту
-//        используется из стадии предыдущей этой
+
     @Override
-    public void sendMessage(User user, Result r) {
-        Long chatId = user.getChatId();
-        tgbot.sendMenuOff(chatId,msg);
+        public void sendMessage(User user, Result r) {
+            String[][] menu = {
+                    {"?"}
+            };
+            Long chatId = user.getChatId();
+            if(user.isCorrectMode()) {
+                menu[0][0]=user.getDateTo();
+                tgbot.sendMenuON(chatId,msg,menu);
+            }
+            else {
+                tgbot.sendMenuOff(chatId, msg);
+            }
+        }
     }
-}
 

@@ -3,6 +3,7 @@ package mvn.tgBot.soap;
 import mvn.tgBot.db.HolidayType;
 import mvn.tgBot.db.User;
 import mvn.tgBot.tgControl.Messenger;
+import mvn.tgBot.utils.Age;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.example.paymentcommon.PaymentMethodType;
@@ -47,10 +48,15 @@ public class TgCreatePolicy {
     @Autowired
     TgSoapService ss;
 
-    String msg = "Полис для оплаты создан \n Счет: %s \n Номер полиса: %s\n Стоимость: %.2f \n ждите получения ссылки на оплату ...";
-
+    String msg = "Полис No%s готов.\n" +
+            "Стоимость: %.2f\n" +
+            "Сразу после оплаты полис придет Вам на e-mail." ;
+/*
+ String msg = "Полис для оплаты создан \n
+ Счет: %s \n Номер полиса: %s\n Стоимость: %.2f \n
+ ждите получения ссылки на оплату ...";
+*/
     public TgCreatePolicy() {
-//        ss = new TgSoapService();
         log.debug("web-service created");
     }
 
@@ -85,7 +91,7 @@ public class TgCreatePolicy {
                 String accountNumber = resp.getAccountNumber();
                 String policyNumber = resp.getPolicyNumber();
                 BigDecimal totalPremium = resp.getTotalPremium();
-                tgbot.sendText(user.getChatId(), String.format(msg, accountNumber, policyNumber, totalPremium));
+                tgbot.sendText(user.getChatId(), String.format(msg, policyNumber, totalPremium));
                 Future<GetPaymentLinkResponseType> answer = tgGetPaymentLink.getResponse(tgbot, user, policyNumber, totalPremium);
             } else {
                 String status = resp.getHeader().getResultInfo().getStatus();
@@ -124,15 +130,15 @@ public class TgCreatePolicy {
         req.setProductOptions(po.getProductOptions(user, holidayType));
 
         for (String key : user.getEnsured().keySet()) {
-            if (key.startsWith("1")) {
+            if (key.contains(Age.get[0])) {
                 ClientInfoType cli = TgClientInfo.getAdultInfo(user, user.getEnsured().get(key));
                 log.trace("add client ADULT:" + cli.getLastNameEng());
                 req.getClientInfo().add(cli);
-            } else if (key.startsWith("2")) {    // senior
+            } else if (key.contains(Age.get[1])) {    // senior
                 ClientInfoType cli = TgClientInfo.getSeniorInfo(user.getEnsured().get(key));
                 log.trace("add client SENIOR:" + cli.getLastNameEng());
                 req.getClientInfo().add(cli);
-            } else if (key.startsWith("3")) {    //child
+            } else if (key.contains(Age.get[2])) {    //child
                 ClientInfoType cli = TgClientInfo.getChildInfo(user.getEnsured().get(key));
                 log.trace("add client CHILD:" + cli.getLastNameEng());
                 req.getClientInfo().add(cli);

@@ -34,5 +34,6 @@ public class CheckTelegram implements CommandLineRunner {
 
         String hello = "Bot:" + fname + " start o restart\n *Привет!*\n я запустился!";
         messanger.sendMardown(chatId, hello);
+        messanger.sendText(chatId," | "+ Age.get[0] + " | "+ Age.get[1] + " | "+ Age.get[2] + " | ");
     }
 }

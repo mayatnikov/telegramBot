@@ -21,7 +21,7 @@ public class S1_22 extends StageMaster implements StageInt {
     public S1_22() {
         name = "s1-22";
         nextStageName="s1-23";
-        msg =  "Адрес регистрации";
+        msg =  "Адрес регистрации?";
         descr="адрес прож-я";
     }
 
@@ -37,7 +37,7 @@ public class S1_22 extends StageMaster implements StageInt {
         }
         else {
             log.error("stage:"+name+" ошибка ввода:"+txt);
-            tgbot.sendText(chatId, "stage:"+descr+" cmd:"+txt+" - Ошибка ввода адреса должен быть более 10 символов");
+            tgbot.sendMistake(chatId, "слишком короткий адрес");
         }
         db.save(user);
     }

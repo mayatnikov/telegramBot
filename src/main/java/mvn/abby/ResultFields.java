@@ -1,7 +1,7 @@
 package mvn.abby;
 
-import com.abbyy.result.DocumentType;
-import com.abbyy.result.FieldType;
+import abby.result.DocumentType;
+import abby.result.FieldType;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

@@ -38,13 +38,12 @@ public class S1_26 extends StageMaster implements StageInt {
         name = "s1-26";
         nextStageName = "s1-1";
    //     msg = "Супер! Полис мы уже подготовили, для оплаты перейдите по ссылке или оплатить полис можно из Личного кабинета на tinkoffinsurance.ru (вход по смс-коду на указанный вами телефон)";
-        msg = "Отправлен запрос на создание полиса, ждите сообщений о создании и сообщения с сылками на оплату, если что то пойдет не так можно выдать команду /refresh \n ожидание ответа ...";
+        msg = "Отправлен запрос на создание полиса.\n" +
+                "Пожалуйста ожидайте сообщения о создании полиса и ссылки на оплату.\n" +
+                "Если что то пойдет не так введите /refresh";
         descr="пошли платить";
     }
 
-    String[][] menu = {
-            {"оплатил"}
-    };
 
     @Override
     public void process(User user, Result r) throws StageNotFoundException {
@@ -58,11 +57,8 @@ public class S1_26 extends StageMaster implements StageInt {
         db.save(user);
     }
 
-//        отправить сообщение клиенту
-//        используется из стадии предыдущей этой
     @Override
     public void sendMessage(User user, Result r) {
-        // @TODO получить ссылку на оплату и вывести ее клиенту
         Long chatId = user.getChatId();
 
         /*
@@ -73,9 +69,7 @@ public class S1_26 extends StageMaster implements StageInt {
         Future<CreatePolicyResponseType> resp = tgCreatePolicy.getResponse(tgbot,user,user.getHolidayType());
 
 
-        tgbot.sendMenuON(chatId,msg,menu);
-        //TODO сделать обработку response
-        //        rs.getStatusCode().getReasonPhrase();
+        tgbot.sendMenuOff(chatId,msg);
 
     }
 }

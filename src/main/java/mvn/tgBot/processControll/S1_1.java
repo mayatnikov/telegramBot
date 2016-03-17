@@ -31,7 +31,6 @@ public class S1_1 extends StageMaster implements StageInt {
 
     @Override
     public void process(User user, Result r) throws StageNotFoundException {
-        // @TODO присвоение уникального номера процессу
        log.debug("start stage for user:"+user.getUserName()+" request:"+r.getMessage().getText());
         String txt = r.getMessage().getText().toUpperCase();
         Long chatId = user.getChatId();
@@ -40,28 +39,22 @@ public class S1_1 extends StageMaster implements StageInt {
             StageInt next = stageList.getStage(nextStageName);
             log.debug("next stage:"+next);
             next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
-            //TODO сделать обработку response
-            //        rs.getStatusCode().getReasonPhrase();
             user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
         }
         else {
-            this.sendMessage(user,r);
+            StageInt next = stageList.getStage("s1-0");
+            log.debug("next stage:"+next);
+            next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
+            user.setWait4Stage("s1=0");     // запомнить след шаг для данного ChatID
         }
         db.save(user);
     }
 
-/*
-    отправить сообщение клиенту
-    используется из стадии предыдущей этой
-     */
     @Override
     public void sendMessage(User user, Result r) {
         Long chatId = user.getChatId();
 //        ResponseEntity rs = tg.sendMenuOff(chatId,msg);
 //        menuControl.menuON(chatId,msg,menu);
           tgbot.sendMenuON(chatId,msg,menu);
-//TODO сделать обработку response
-//        rs.getStatusCode().getReasonPhrase();
-
     }
 }

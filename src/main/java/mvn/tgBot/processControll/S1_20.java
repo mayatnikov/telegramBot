@@ -44,21 +44,17 @@ public class S1_20 extends StageMaster implements StageInt {
             user.setSex(SexType.MEN);                      // !!!!!!
             StageInt next = stageList.getStage(nextStageName);
             next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
-            //TODO сделать обработку response
-            //        rs.getStatusCode().getReasonPhrase();
             user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
         }
         else if(txt.startsWith("ЖЕН") ) {
             user.setSex(SexType.WOMEN);                      // !!!!!!
             StageInt next = stageList.getStage(nextStageName);
             next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
-            //TODO сделать обработку response
-            //        rs.getStatusCode().getReasonPhrase();
             user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
         }
         else {
             log.error("stage:"+name+" ошибка ввода:"+txt);
-            tgbot.sendText(chatId, "stage:"+descr+" cmd:"+txt+" - неправильно введен пол!");
+            tgbot.sendMistake(chatId);
         }
         db.save(user);
     }

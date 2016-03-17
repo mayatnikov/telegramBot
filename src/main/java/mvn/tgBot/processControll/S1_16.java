@@ -1,6 +1,5 @@
 package mvn.tgBot.processControll;
 
-import mvn.tgBot.db.EnsuredType;
 import mvn.tgBot.db.User;
 import mvn.tgBot.tgObjects.Result;
 import mvn.tgBot.utils.Regexp;
@@ -8,8 +7,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -58,10 +55,10 @@ public class S1_16 extends StageMaster implements StageInt {
             // внести пользователя в список страхуемых первым  если его там еще нет
             // !!! ТОЖЕ САМОЕ ЕСТЬ НА ШАГЕ 1-23
             // --- !!! ----
-            HashMap<String, EnsuredType> hm = user.getEnsured();
-            if(hm == null) hm = new HashMap();
-            if(hm.get("1_0") == null ) hm.put("1_0",new EnsuredType(user.getFirstNameEng(), user.getLastNameEng(), user.getBirthday(),user.getPassport(),"1_0"));
-            user.setEnsured(hm);
+//            HashMap<String, EnsuredType> hm = user.getEnsured();
+//            if(hm == null) hm = new HashMap();
+//            if(hm.get("1_0") == null ) hm.put("1_0",new EnsuredType(user.getFirstNameEng(), user.getLastNameEng(), user.getBirthday(),user.getPassport(),"1_0"));
+//            user.setEnsured(hm);
 
             StageInt next = stageList.getStage("s1-24");
             next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
@@ -70,18 +67,16 @@ public class S1_16 extends StageMaster implements StageInt {
         else {
             log.trace("ОТКАЗ");
             user.setWait4Stage("s1-1");
-            tgbot.sendMenuOff(chatId, "Отказ от оформления, вы можете возобновить работу, введенные данные сохранились");
+            tgbot.sendMenuOff(chatId, "Вы всегда можете оформить страховку на сайте http://www.tinkoffinsurance.ru");
         }
         db.save(user);
     }
 
-    //        отправить сообщение клиенту
-//        используется из стадии предыдущей этой
     @Override
     public void sendMessage(User user, Result r) {
         String msgOut;
         String [][] mm;
-        if(user.isValid()) {
+        if(false)  {  //  user.isValid()) {  ---------> вывод перс данных отключил !
             msgOut = "Проверьте перс. данные:"+
                     "\nФамилия: "+user.getLastName()+
                     "\nИмя:     "+user.getFirstName()+

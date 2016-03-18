@@ -48,26 +48,35 @@ public class S1_24 extends StageMaster implements StageInt {
         String txt = r.getMessage().getText();
         Long chatId = user.getChatId();
         String nStage = nextStageName;
-        if (txt.toUpperCase().contains("ЗАПОЛНИЛ")) {
-            String root = "0:"+ Age.get[0]+":";
 
-//            if(false )  { // user.getEnsured().get(root)!=null ) {
-            if( user.getEnsured().get(root)!=null ) {
-                log.debug("root user was found");
-                user.setFirstNameEng(user.getEnsured().get(root).getFirstName());  // запомнить англ фио
-                user.setLastNameEng(user.getEnsured().get(root).getLastName());  // запомнить англ фио
-                user.setPassport(user.getEnsured().get(root).getPasport());  // запомнить номер паспорта
-// сохранить всех заполенных в массиве для последующего использования
-                saveAllEnsured(user);
+        if (txt.toUpperCase().contains("ЗАПОЛНИЛ")) {
+            int ensuredQuant = user.getChildNumber()+ user.getOldNumber()+ user.getEnsuredNumber();
+            int ensuredSize = user.getEnsured().size();
+            if(ensuredQuant != ensuredSize) {
+                tgbot.sendMistake(chatId, "Не указаны данные застрахованных.");
+                nStage=name;  // никуда не переходим пока всех не заполнит
             }
-            nStage = "s1-25";
+            else {
+                String root = "0:" + Age.get[0] + ":";
+//                  if(false )  { // user.getEnsured().get(root)!=null ) {
+                if (user.getEnsured().get(root) != null) {
+                    log.debug("root user was found");
+                    user.setFirstNameEng(user.getEnsured().get(root).getFirstName());  // запомнить англ фио
+                    user.setLastNameEng(user.getEnsured().get(root).getLastName());  // запомнить англ фио
+                    user.setPassport(user.getEnsured().get(root).getPasport());  // запомнить номер паспорта
+                    // сохранить всех заполенных в массиве для последующего использования
+                    saveAllEnsured(user);
+                }
+                nStage = "s1-25";
+            }
         }
-        else {
+        else  {
             // в запросе по нажатой кнопке должен быть индекс участника вида 1:necktie: .....
             // выделим его и сформируем key = i1_[возраст]
             String[] data = regexp.filterIndexCol(txt);
             user.setEnsuredCurrentKey(data[0] + ":" + data[1]+":");  // сохр текущий индекс в профиле клиента
-            nStage = "s1-24a";
+            if(data[0].matches("[0-9]")) nStage = "s1-24a";
+            else { nStage = name; tgbot.sendMistake(user.getChatId()); }
         }
         StageInt next = stageList.getStage(nStage);
         user.setWait4Stage(nStage);     // запомнить след шаг для данного ChatID
@@ -144,7 +153,7 @@ public class S1_24 extends StageMaster implements StageInt {
             {
                 log.trace("id=" + id + " n1=" + n1);
                 Iterator<String> it = l1.iterator();
-                for (int tik = 0; tik < n1; tik++) {
+                for (int tik = 1; tik < n1+1; tik++) {
                     if (it.hasNext()) cmenu[id++][0] = it.next();
                     else cmenu[id++][0] = "" + tik + ":"+Age.get[0]+": " + tail;
                     log.trace(cmenu[id - 1][0]);
@@ -153,7 +162,7 @@ public class S1_24 extends StageMaster implements StageInt {
             {
                 log.trace("id=" + id + " n2=" + n2);
                 Iterator<String> it = l2.iterator();
-                for (int tik = 0; tik < n2; tik++) {
+                for (int tik = 1; tik < n2+1; tik++) {
                     if (it.hasNext()) cmenu[id++][0] = it.next();
                     else cmenu[id++][0] = "" + tik+ ":"+Age.get[1]+": " + tail;
                     log.trace(cmenu[id - 1][0]);
@@ -162,7 +171,7 @@ public class S1_24 extends StageMaster implements StageInt {
             {
                 log.trace("id=" + id + " n3=" + n3);
                 Iterator<String> it = l3.iterator();
-                for (int tik = 0; tik < n3; tik++) {
+                for (int tik = 1; tik < n3+1; tik++) {
                     if (it.hasNext()) cmenu[id++][0] = it.next();
                     else cmenu[id++][0] = "" + tik  + ":"+Age.get[2]+": " + tail;
                     log.trace(cmenu[id - 1][0]);

@@ -63,12 +63,12 @@ public class S1_25 extends StageMaster implements StageInt {
         }
         else if(txt.contains("ОШИБ") ) {
             user.setCorrectMode(true);
-            nextStageVar="s1-3";                     // !!!!!!
+            nextStageVar="s1-2";                     // !!!!!!
             user.setWait4Stage(nextStageVar);
         }
         else {
                 log.error("stage:"+name+" ошибка ввода:"+txt);
-                tgbot.sendText(chatId, "stage:"+descr+" cmd:"+txt+" - ошибка в команде");
+                tgbot.sendMistake(chatId);
         }
 
         StageInt next = stageList.getStage(nextStageVar);

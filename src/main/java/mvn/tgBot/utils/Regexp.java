@@ -56,7 +56,7 @@ public class Regexp {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String res = "?";
         String regexp = "^(\\d+)[\\s-/](\\d+)[\\s-/](\\d+)*";
-        String [] ss = in.split("[\\s-/\\.]");
+        String [] ss = in.split("[\\s-/\\.,]");
 
 //         String [] ss = in.split("[\\s-/\\.]");
 
@@ -101,25 +101,24 @@ public class Regexp {
 
     // выделение первых 4-х слов из: IVAN IVANOV 25.05.1985 745865452
     public static String[] filterUserData(String in) {
-        log.debug("in>>>"+in);
-
-        String regexp= "\\s+";
-        String[] r = in.split(regexp);
-        log.debug("ret size="+r.length);
-        return (r);
+        String regexp= "[,;:!?\\s]+";
+        String[] r = in.trim().split(regexp);
+        if(r.length!=5)  return r;
+        else  {  // видимо паспорт ввели с разделителем
+           String [] ret = new String[4];
+            ret[0] = r[0];
+            ret[1]= r[1];
+            ret[2]=r[2];
+            ret[3]= r[3]+r[4];
+            return ret;
+        }
     }
 
     public static boolean isLatin(String in ) {
         return in.matches("[A-Za-z\\-]+");
     }
-
-    public static void main (String ... args ) {
-        String[] in = {"Petrov",
-                "Sid/orov","Sid;orov","Sid_orov","Sid=orov","Lev-ham","Ort-петров",
-                "петров"};
-        for(int tik=0;tik<in.length;tik++) {
-            System.out.println(in[tik]+ ">>>" + Regexp.isLatin(in[tik])  );
-        }
+    public static boolean isDigital(String in ) {
+        return in.matches("[0-9]+");
     }
 
 
@@ -128,16 +127,16 @@ public class Regexp {
     }
 
 
-    public String filterDigital(String in) {
+    public static String filterDigital(String in) {
         Pattern p = Pattern.compile("[^0-9]+");
         return filter(in,p,"");
     }
-    public String filterPassport(String in) {
+    public static String filterPassport(String in) {
 //@TODO сделать доп проверки ПАСПОРТА
         return filterDigital(in);
     }
 
-    private String filter(String in, Pattern p, String replaceto) {
+    private static String filter(String in, Pattern p, String replaceto) {
 
         Matcher m = p.matcher(in);
         StringBuffer sb = new StringBuffer();
@@ -164,6 +163,23 @@ public class Regexp {
 
 
 /*
+
+    public static void main (String ... args ) {
+        String[] in = {
+                "PETROV PETR 12/12/12 987876567",
+                "  PETROV PETR 12/12/12 987876567",
+                "    PETROV      PETR 12/12/12 987876567",
+                "    PETROV PETR 12/12/12 987876567",
+                "  PETROV       PETR            12/12/12            987876567",
+                "         PETROV        PETR         12/12/12             987876567",};
+        for(int tik=0;tik<in.length;tik++) {
+            String[] men = Regexp.filterUserData(in[tik]);
+            System.out.println(tik+">>>" +men.length + "] [" + men[0] +"] [" +  men[1] +"] [" +  men[2] +"] [" +  men[3] +"]" );
+        }
+    }
+
+
+
     public static void main (String ... args ) {
         Regexp re = new Regexp();
         String[] in = {"79165894332","89143456655","+7(916)7776655"};

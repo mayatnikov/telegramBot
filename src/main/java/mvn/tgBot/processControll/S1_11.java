@@ -2,6 +2,7 @@ package mvn.tgBot.processControll;
 
 import mvn.tgBot.db.User;
 import mvn.tgBot.tgObjects.Result;
+import mvn.tgBot.utils.Age;
 import mvn.tgBot.utils.CheckDates;
 import mvn.tgBot.utils.Regexp;
 import org.apache.commons.logging.Log;
@@ -31,8 +32,8 @@ public class S1_11 extends StageMaster implements StageInt {
     public S1_11() {
         name = "s1-11";
         nextStageName = "s1-12";
-        msg = "Срок страхования с %s по %s и составит %d дней.\n" +
-                "*Сколько человек от 12 до 60 лет едет?*";
+        msg = "Срок страхования с %s по %s. Количество дней поездки %d \n" +
+                "Сколько человек "+  Age.get[0] +" от 12 до 60 лет едет?";
         descr="число взрослых не Шенген";
 
     }
@@ -54,7 +55,7 @@ public class S1_11 extends StageMaster implements StageInt {
         }
         else {
             log.error("stage:"+name+" ошибка ввода:"+txt);
-            tgbot.sendText(chatId, "stage:"+descr+" cmd:"+txt+" - неверные данные или больше допустимого значения=5");
+            tgbot.sendMistake(chatId, "Неверные данные");
         }
         user.setEnsured(null);     // СБРОС
         user.setEnsuredCurrentKey(null);

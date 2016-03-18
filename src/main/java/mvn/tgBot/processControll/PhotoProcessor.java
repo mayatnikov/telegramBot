@@ -65,8 +65,8 @@ public class PhotoProcessor  {
         String fileLink =  tgbot.getFileLink(fileInfo.nm);
         log.debug("fileLink:"+fileLink);
 
-     PassportProcessor passportProcessor = new PassportProcessor();
-//     passportProcessor.setAccess(applicationId, abbyPassword);
+//     PassportProcessor passportProcessor = new PassportProcessor();
+     PassportProcessor passportProcessor = new PassportProcessor(applicationId, abbyPassword);
      String UrlStr = httpAddress + fileLink;
         try {
             URL url = new URL(UrlStr);
@@ -84,13 +84,13 @@ public class PhotoProcessor  {
 
         } catch (MalformedURLException e) {
             log.error(e.getMessage());
-            tgbot.sendText(chatId,"Ошибка обмена с сервером обработки изображений");
+            tgbot.sendText(chatId,"Ошибка обмена с сервером обработки изображений - Сервер обработки изображений временно не доступен. Повторите попытку позднее или воспользуйтесь ручным вводо");
         } catch (NullPointerException e) {
             log.error(e.getMessage());
-            tgbot.sendText(chatId,"Ошибка при распознавании изображения");
+            tgbot.sendText(chatId,"Ошибка при распознавании изображения - Не удалось распознать изображение. Попробуйте использовать другую фотографию.");
         } catch (Exception e) {
             log.error(e.getMessage());
-            tgbot.sendText(chatId,"Ошибка обмена с сервером обработки изображений");
+            tgbot.sendText(chatId,"Ошибка ообработки изображения");
         }
      return new AsyncResult<String>("ok");
     }

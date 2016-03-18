@@ -51,8 +51,15 @@ public class S1_26 extends StageMaster implements StageInt {
 
         StageInt next = stageList.getStage("s1-1");
         next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
-        //TODO сделать обработку response
-        //        rs.getStatusCode().getReasonPhrase();
+
+        // очистить опции в конце процесса
+        user.setLastErr(false);
+        user.setEnsuranceOpt1(null);
+        user.setEnsuranceOpt2(null);
+        user.setEnsuranceOpt3(null);
+        user.setEnsuranceOpt4(null);
+        user.setCorrectMode(false);
+
         user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
         db.save(user);
     }
@@ -67,7 +74,6 @@ public class S1_26 extends StageMaster implements StageInt {
 
          */
         Future<CreatePolicyResponseType> resp = tgCreatePolicy.getResponse(tgbot,user,user.getHolidayType());
-
 
         tgbot.sendMenuOff(chatId,msg);
 

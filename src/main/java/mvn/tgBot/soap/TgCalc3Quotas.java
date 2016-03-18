@@ -33,6 +33,22 @@ public class TgCalc3Quotas {
             {"\ud83c\udfc2"+" Опасные виды спорта"}
     };
 
+    public String getHolydayMessage(HolidayType ht) {
+        int id=0;
+        switch (ht) {
+            case CALM:
+                id=0;
+                break;
+            case ACTIVE:
+                id=1;
+                break;
+            case DANGEROUS:
+                id=2;
+                break;
+        }
+        return (menu[id][0]);
+    }
+
     @Async
     public Future<String> waitResponse(User user) throws InterruptedException {
 
@@ -43,14 +59,14 @@ public class TgCalc3Quotas {
 
         // Wait until they are all done
         while (!(quote1.isDone() && quote2.isDone() && quote3.isDone())) {
-            Thread.sleep(200); // 200-millisecond pause between each check
+            Thread.sleep(500); // 200-millisecond pause between each check
             log.trace("Wait...");
         }
         log.trace("quote1 status canceled:"+quote1.isCancelled() +">"+ quote1.getClass());
         log.trace("quote2 status canceled:"+quote2.isCancelled() +">"+ quote1.getClass());
         log.trace("quote3 status canceled:"+quote3.isCancelled() +">"+ quote1.getClass());
 
-        tgbot.sendMenuON(user.getChatId(), "\ud83d\ude0a" ,menu);
+        tgbot.sendMenuON(user.getChatId(), "Выберите подходящий вариант:" ,menu);
         return new AsyncResult<String>("ok");
     }
 }

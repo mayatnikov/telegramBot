@@ -43,10 +43,14 @@ public class PassportProcessor {
         restClient.password = "HIgPzV0l0e6UJ9kLW9qayrS+";
     }
 
-    public void setAccess(String appId, String passwd) {
+    public PassportProcessor(String appId,String passwd) {
+        restClient = new Client();
+        // replace with 'https://cloud.ocrsdk.com' to enable secure connection
+        restClient.serverUrl = "http://cloud.ocrsdk.com";
         restClient.applicationId = appId;
         restClient.password = passwd;
     }
+
 
     public EnsuredType performMrzRecognition(int imageSize, URL url) throws Exception {
 
@@ -68,7 +72,7 @@ public class PassportProcessor {
                 log.debug("DOC:" + res.getFieldByType("DocumentNumber"));
                 men.setPasport(res.getFieldByType("DocumentNumber"));
             }
-            else throw new Exception("ошибка распознавания данных паспорта");
+            else throw new Exception("Ошибка при распознавании изображения - Не удалось распознать изображение. Попробуйте использовать другую фотографию.");
 
         } else if (task.Status == Task.TaskStatus.NotEnoughCredits) {
             log.error("Not enough credits to process document. Please add more pages to your application's account.");
@@ -79,7 +83,11 @@ public class PassportProcessor {
         }
         return men;
     }
+ /*
 
+"Ошибка обмена с сервером обработки изображений" - "Сервер обработки изображений временно не доступен. Повторите попытку позднее или воспользуйтесь ручным вводо"
+"Ошибка при распознавании изображения" - "Не удалось распознать изображение. Попробуйте использовать другую фотографию."
+  */
     /**
      * Wait until task processing finishes
      */

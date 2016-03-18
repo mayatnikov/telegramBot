@@ -23,6 +23,9 @@ public class WaitPolicy {
     @Autowired
     TgCalcQuote tgCalcQuote;
 
+    @Autowired
+    TgCalc3Quotas tgCalc3Quotas;   // это олько  что бы сообщение забрать
+
     private Log log = LogFactory.getLog(WaitPolicy.class);
 
     @Async
@@ -33,11 +36,11 @@ public class WaitPolicy {
         };
         Future<QuoteType> answ = tgCalcQuote.getResponse(tgbot, user, user.getHolidayType(), true);
         while (!(answ.isDone())) {
-            Thread.sleep(200); // 200-millisecond pause between each check
+            Thread.sleep(500); // 500-millisecond pause between each check
             log.trace("Wait...");
         }
-        tgbot.sendMenuON(user.getChatId(), "\ud83d\ude0a", menu);
+        String m2 = tgCalc3Quotas.getHolydayMessage(user.getHolidayType());  // забрать описание типа отдыха
+        tgbot.sendMenuON(user.getChatId(), "Страховка для "+m2, menu);
         return new AsyncResult<String>("ok");
     }
-
 }

@@ -21,8 +21,7 @@ public class S1_1 extends StageMaster implements StageInt {
         name = "s1-1";
         nextStageName="s1-2";
         descr="первичный вход";
-        msg =  "Привет! Я помогу Вам оформить " +
-                "туристическую страховку. Начнём?";
+        msg =  "Это официальный бот компании \"Тинькофф Страхование\" https://www.tinkoffinsurance.ru/, и я помогу вам оформить страховку для путешествия за рубеж.";
     }
     String[][] menu = {
             {"ДА, хочу страховку"},
@@ -35,17 +34,20 @@ public class S1_1 extends StageMaster implements StageInt {
         String txt = r.getMessage().getText().toUpperCase();
         Long chatId = user.getChatId();
 
-        if(txt.equals("/START") || txt.equals("START") || txt.equals("/СТАРТ") || txt.equals("СТАРТ") || txt.startsWith("ДА")) {
+        if(txt.startsWith("ДА")) {
             StageInt next = stageList.getStage(nextStageName);
             log.debug("next stage:"+next);
             next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
             user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
         }
-        else {
+        else if (txt.startsWith("НЕТ")){
             StageInt next = stageList.getStage("s1-0");
             log.debug("next stage:"+next);
             next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
-            user.setWait4Stage("s1=0");     // запомнить след шаг для данного ChatID
+            user.setWait4Stage("s1-0");     // запомнить след шаг для данного ChatID
+        }
+        else {
+            tgbot.sendMistake(chatId, "Не понял команду, выберите из доступных вариантов" );
         }
         db.save(user);
     }

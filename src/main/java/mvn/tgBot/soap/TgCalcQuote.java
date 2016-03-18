@@ -36,10 +36,10 @@ import java.util.concurrent.Future;
 public class TgCalcQuote {
     private Log log = LogFactory.getLog(TgCalcQuote.class);
 
-    private static String tgMessage1="Страховка для спокойного отдыха без занятий спортом за %.2f рублей";
-    private static String tgMessage2="Страховка для активного отдыха (например, с велопрогулками) за %.2f рублей";
-    private static String tgMessage3="Страховка для активного отдыха включая опасные виды спорта (например, горные лыжи или дайвинг) за %.2f рублей";
-    private static String tgMessage = "Итоговая стоимость полиса %.2f рублей";
+    private static String tgMessage1="Страховка для спокойного отдыха "+"\ud83c\udf34"+" без занятий спортом за %.0f рублей";
+    private static String tgMessage2="Страховка для активного отдыха "+"\ud83d\udeb4" +" (например, с велопрогулками) за %.0f рублей";
+    private static String tgMessage3="Страховка для активного отдыха включая опасные виды спорта "+"\ud83c\udfc2"+" (например, горные лыжи или дайвинг) за %.0f рублей";
+    private static String tgMessage = "Итоговая стоимость полиса с учетом выбранных опций %.0f рублей";
 
 
     @Autowired

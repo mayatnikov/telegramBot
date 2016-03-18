@@ -240,21 +240,18 @@ public class MessageDispatcher  implements CommandLineRunner {
     
     private void displayHelp(long chatId) {
         String txt="основные команды: " +
-                "/help - подсказка по командам\n" +
-                "/cancel - сброс процесса в начало\n" +
-                "/info - о состоянии процесса\n" +
-                "/refresh - обнвить сообшение и меню\n" +
-                "/start - начало и сброс данных\n" +
-                "/retry - в начало без сброса данных";
+                "/start - начать полис заново, с потерей данных \n" +
+                "/retry – к началу для уточнения данных \n" +
+                "/refresh - повторить последний вопрос\n" +
+                "/cancel - отменить оформление\n" +
+                "/info - данные пользователя \n" +
+                "/help - список команд бота\n";
         tgbot.sendText(chatId,txt);
     }
 
     private void displayQuest(long chatId) {
         String txt=
-                "/help " +
-                "/cancel " +
-                "/info " +
-                "/refresh /start /retry";
+                "/start /retry /refresh /cancel /info /help";
         tgbot.sendText(chatId,txt);
     }
 
@@ -263,12 +260,13 @@ public class MessageDispatcher  implements CommandLineRunner {
 /*
 команды для BOT-а:
 
-start - в начало не запоминать данные
-retry - в начало сохранить ввод данных
-refresh - обновить сообщение и меню
-cancel - сброс процесса и отключение меню
-info - отобразить состояние процесса и мои основные данные
-help - этот список команд
+start - начать полис заново, с потерей данных
+retry - к началу для уточнения данных
+refresh - повторить последний вопрос
+cancel - отменить оформление
+info - данные пользователя
+help - список команд бота
+
 
  */
 

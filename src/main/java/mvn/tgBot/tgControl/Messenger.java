@@ -135,6 +135,22 @@ public class Messenger {
         return (sendMessage(mbody));
     }
 
+    public ResponseEntity sendMenuHTML(Long id, String msg, String [][] menu) {
+        MessageBody m = new MessageBody();
+        m.setChat_id(id);
+        m.setText(msg);
+        m.setParse_mode(ParseMode.HTML);
+        {
+            ReplayMarkup rpm = new ReplayMarkup();
+            rpm.setKeyboard(menu);
+            rpm.setResize_keyboard(true);
+            rpm.setOne_time_keyboard(false);
+            m.setReply_markup(rpm);
+        }
+        String mbody = pojo2Json(m);
+        return (sendMessage(mbody));
+    }
+
 
     public String getFileLink(String fileId) {
 

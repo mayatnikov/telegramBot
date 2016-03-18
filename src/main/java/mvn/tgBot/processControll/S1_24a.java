@@ -8,7 +8,6 @@ import mvn.tgBot.utils.CheckDates;
 import mvn.tgBot.utils.Regexp;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
@@ -24,8 +23,6 @@ import java.util.HashMap;
 @Component
 public class S1_24a extends StageMaster implements StageInt {
 
-    @Autowired
-    Regexp regexp;
 
     private Log log = LogFactory.getLog(S1_24a.class);
 
@@ -48,7 +45,7 @@ public class S1_24a extends StageMaster implements StageInt {
         }
         log.debug("key=" + key);
         if (user.getEnsured() == null) user.setEnsured(new HashMap());
-        String[] men = regexp.filterUserData(txt);
+        String[] men = Regexp.filterUserData(txt);
         String birthday="";
         String passport="";
         StringBuffer msgOut = new StringBuffer();
@@ -59,8 +56,8 @@ public class S1_24a extends StageMaster implements StageInt {
             isError=true;
         }
         else {
-            birthday = (men[2] != null) ? regexp.filterDate(men[2]) : "?";
-            passport = (men[3] != null) ? regexp.filterPassport(men[3]) : "?";
+            birthday = (men[2] != null) ? Regexp.filterDate(men[2]) : "?";
+            passport = (men[3] != null) ? Regexp.filterPassport(men[3]) : "?";
 
             if (!isCorrectClient(men)) {
                 msgOut.append("Недопустимые символы в фамилии и имени:" + men[0] + "|" + men[1]);
@@ -129,7 +126,9 @@ public class S1_24a extends StageMaster implements StageInt {
     }
 
     private boolean isCorrectPassport(String passport) {
-        return(passport.length()>=9);
+        int len = passport.length();
+        boolean digOnly = Regexp.isDigital(passport);
+        return(len ==9  && digOnly);
     }
 
 

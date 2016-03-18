@@ -26,19 +26,23 @@ public class S1_16 extends StageMaster implements StageInt {
     public S1_16() {
         name = "s1-16";
         nextStageName = "s1-17";
-        msg = "Для того, чтобы оформить страховку нам требуется Ваше согласие на обработку персональных данных согласно ФЗ 152 и с правилами страхования";
+        msg = "Для того, чтобы оформить страховку нам требуется Ваше <a href=\"" +
+                "https://www.tinkoffinsurance.ru/~/media/Files/documents/personal_data_handle.ashx"+
+                "\">согласие</a> на обработку персональных данных согласно ФЗ 152 и с <a href=\"" +
+                "https://www.tinkoffinsurance.ru/~/media/Files/documents/2015/ins_rules_vzr_27-12-2015.ashx"+
+                "\"> правилами страхования</a>";
         descr="согл. на обр-ку";
-
     }
+
     String[][] menu1 = {
             {"Принимаю"},
             {"Не принимаю"}
     };
+
     String[][] menu2 = {
             {"Все верно"},
             {"Изменить"}
     };
-
 
     @Override
     public void process(User user, Result r) throws StageNotFoundException {
@@ -95,7 +99,7 @@ public class S1_16 extends StageMaster implements StageInt {
             mm = menu1;
         }
         Long chatId = user.getChatId();
-        tgbot.sendMenuON(chatId,msgOut,mm);
+        tgbot.sendMenuHTML(chatId,msgOut,mm);
     }
 }
 

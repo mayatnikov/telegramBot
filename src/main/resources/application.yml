@@ -18,7 +18,7 @@ spring:
 
 abbyy:
     applicationId: TelegramBot
-    password: HIgPzV0l0e6UJ9kLW9qayrS
+    password: HIgPzV0l0e6UJ9kLW9qayrS+
 
 
 vitaly: 113724846

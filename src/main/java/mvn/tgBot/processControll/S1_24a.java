@@ -41,7 +41,7 @@ public class S1_24a extends StageMaster implements StageInt {
 //        if (key != null) key = regexp.filterReplaseDot(key);
         if(key==null) {
             log.error("unknown key for HashMap<key,Ensured>");
-            key = "1:necktie:";
+            key = Age.get[0];
         }
         log.debug("key=" + key);
         if (user.getEnsured() == null) user.setEnsured(new HashMap());
@@ -83,8 +83,10 @@ public class S1_24a extends StageMaster implements StageInt {
         }
         else {  // все проверки пройдены
             String [] clientOut = {men[0],men[1],birthday,passport};
+            log.trace("clientOut={"+men[0]+","+men[1]+","+birthday+","+passport+"}");
             user.getEnsured().put(key, new EnsuredType(clientOut, key));
             StageInt next = stageList.getStage(nextStageName);
+            r.getMessage().setText(men[0] +" "+ men[1]+" "+birthday+" "+passport);  // подчистить текст
             next.sendMessage(user, r);     // отправить сообщение от следующей стадии обработки
             user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
             db.save(user);

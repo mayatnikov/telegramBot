@@ -63,7 +63,7 @@ public class S1_25 extends StageMaster implements StageInt {
         }
         else if(txt.contains("ОШИБ") ) {
             user.setCorrectMode(true);
-            nextStageVar="s1-2";                     // !!!!!!
+            nextStageVar="s1-4c";                     // !!!!!!
             user.setWait4Stage(nextStageVar);
         }
         else {

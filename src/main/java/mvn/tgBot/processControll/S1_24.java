@@ -10,10 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -57,24 +54,24 @@ public class S1_24 extends StageMaster implements StageInt {
                 nStage=name;  // никуда не переходим пока всех не заполнит
             }
             else {
-                String root = "0:" + Age.get[0] + ":";
 //                  if(false )  { // user.getEnsured().get(root)!=null ) {
-                if (user.getEnsured().get(root) != null) {
-                    log.debug("root user was found");
-                    user.setFirstNameEng(user.getEnsured().get(root).getFirstName());  // запомнить англ фио
-                    user.setLastNameEng(user.getEnsured().get(root).getLastName());  // запомнить англ фио
-                    user.setPassport(user.getEnsured().get(root).getPasport());  // запомнить номер паспорта
+//                if (user.getEnsured().get(root) != null) {
+//                    log.debug("root user was found");
+//                    user.setFirstNameEng(user.getEnsured().get(root).getFirstName());  // запомнить англ фио
+//                    user.setLastNameEng(user.getEnsured().get(root).getLastName());  // запомнить англ фио
+//                    user.setPassport(user.getEnsured().get(root).getPasport());  // запомнить номер паспорта
                     // сохранить всех заполенных в массиве для последующего использования
                     saveAllEnsured(user);
-                }
+//                }
                 nStage = "s1-25";
             }
         }
         else  {
             // в запросе по нажатой кнопке должен быть индекс участника вида 1:necktie: .....
             // выделим его и сформируем key = i1_[возраст]
-            String[] data = regexp.filterIndexCol(txt);
+            String[] data = Regexp.filterIndexCol(txt);
             user.setEnsuredCurrentKey(data[0] + ":" + data[1]+":");  // сохр текущий индекс в профиле клиента
+
             if(data[0].matches("[0-9]")) nStage = "s1-24a";
             else { nStage = name; tgbot.sendMistake(user.getChatId()); }
         }
@@ -100,86 +97,63 @@ public class S1_24 extends StageMaster implements StageInt {
     public void sendMessage(User user, Result r) {
 
         // @TODO поставить ограничение по максимальному количеству людей !
-        String[][] cmenu = generateMenu(user);
+        String[][] cmenu = generateMenu(user,r);
         Long chatId = user.getChatId();
         tgbot.sendMenuON(chatId, msg, cmenu);
     }
 
     // создание меню на основе накопленных данных
-    private String[][] generateMenu(User user) {
+    private String[][] generateMenu(User user, Result r) {
         log.debug("start create menu");
-        StringBuffer sb = new StringBuffer();
-        sb.append(msg2);
-        sb.append("\n");
+
         int n1 = user.getEnsuredNumber();
         int n2 = user.getOldNumber();
         int n3 = user.getChildNumber();
+        int[] nn = {n1,n2,n3};
         int maxLen = n1 + n2 + n3;
-        log.debug("number of humans in request=" + maxLen);
         String[][] cmenu = new String[maxLen + 1][1];
-        cmenu[0][0] = "Я заполнил данные на всех участников!";
+        int id=0;
+        cmenu[id++][0] = "Я заполнил данные на всех участников!";
 
-        int id = 1;
-        try {
-            HashMap<String, EnsuredType> hm = user.getEnsured();
-            List<String> l1 = new ArrayList();
-            List<String> l2 = new ArrayList();
-            List<String> l3 = new ArrayList();
-            // сформировать список заполненных строк
-            if (hm != null)
-                for (String key : hm.keySet()) {
-                    EnsuredType human = hm.get(key);
-                    if (human != null) {
-                        String age = (human.getAge() == null) ? "1:"+Age.get[0]+":" : human.getAge();
-                        String fname = (human.getFirstName() == null) ? "_____" : human.getFirstName();
-                        String lname = (human.getLastName() == null) ? "____" : human.getLastName();
-                        String bd = (human.getBirthday() == null) ? "____" : human.getBirthday();
-                        String doc = (human.getPasport() == null) ? "____" : human.getPasport();
-                        String stmp = age + " "+lname+" "+fname+" "+bd+" "+doc;
-                        log.trace("item for menu=" + stmp);
-                        boolean canAdd = false;
-                        if (age.contains(":"+Age.get[0]+":")) {
-                            l1.add(stmp);
-                        } else if (age.contains(":"+Age.get[1]+":")) {
-                            l2.add(stmp);
-                        } else if (age.contains(":"+Age.get[2]+":")) {
-                            l3.add(stmp);
-                        }
-                    }
+        HashMap<String, EnsuredType> all = user.getEnsured();  // это все уже заполненные
+        dumpEnsured(all);
+
+        String currentKey = user.getEnsuredCurrentKey();  // текущий пользователь ( id:рожа: )
+        String  currentUser;
+        if(currentKey== null) {
+            currentKey="?";
+            currentUser="? ? ? ?";
+        }
+        else {
+            currentUser = r.getMessage().getText();  // данные о текущем пользователе ( FN LN BD DOC );
+        }
+        log.trace("currentKey:{"+currentKey+"}");
+        log.trace("currentUser:{"+currentUser+"}");
+//        EnsuredType us = all.get("1:"+Age.get[0]+":");
+
+        String tail = " Не заполнено";
+//        ---- зрелые
+        for (int tuk=0;tuk<3;tuk++) {     // цикл по трем возрастным группам
+            for (int tik = 1; tik < nn[tuk]+1; tik++)  {
+                if(currentKey.contains(tik+":"+Age.get[tuk])) {  // это строка по текущему пользователю
+                    cmenu[id++][0] = "" + tik + ":"+Age.get[tuk]+": " + currentUser;
                 }
-            // -- end if
-// заполнить строки меню
-            String tail = " Не заполнено";
-            {
-                log.trace("id=" + id + " n1=" + n1);
-                Iterator<String> it = l1.iterator();
-                for (int tik = 1; tik < n1+1; tik++) {
-                    if (it.hasNext()) cmenu[id++][0] = it.next();
-                    else cmenu[id++][0] = "" + tik + ":"+Age.get[0]+": " + tail;
-                    log.trace(cmenu[id - 1][0]);
+                else if (all.get(tik+":"+Age.get[tuk]+":")!= null) {   // запись заполнена в списке страхуемых
+                    EnsuredType men = all.get(tik+":"+Age.get[tuk]+":");
+                    cmenu[id++][0] = tik+":"+Age.get[tuk]+": " + men.toString();
+                }
+                else {                                            // не заполненная строка
+                    cmenu[id++][0] = "" + tik + ":"+Age.get[tuk]+": " + tail;
                 }
             }
-            {
-                log.trace("id=" + id + " n2=" + n2);
-                Iterator<String> it = l2.iterator();
-                for (int tik = 1; tik < n2+1; tik++) {
-                    if (it.hasNext()) cmenu[id++][0] = it.next();
-                    else cmenu[id++][0] = "" + tik+ ":"+Age.get[1]+": " + tail;
-                    log.trace(cmenu[id - 1][0]);
-                }
-            }
-            {
-                log.trace("id=" + id + " n3=" + n3);
-                Iterator<String> it = l3.iterator();
-                for (int tik = 1; tik < n3+1; tik++) {
-                    if (it.hasNext()) cmenu[id++][0] = it.next();
-                    else cmenu[id++][0] = "" + tik  + ":"+Age.get[2]+": " + tail;
-                    log.trace(cmenu[id - 1][0]);
-                }
-            }
-        } catch (IndexOutOfBoundsException e) {
-            log.error(e.getMessage());
+
         }
     return cmenu;
+    }
+
+    private void dumpEnsured(HashMap<String, EnsuredType> all) {
+        for(String key : all.keySet()) {
+            log.trace("key="+" страхуемый="+ all.get(key));
+        }
     }
 }

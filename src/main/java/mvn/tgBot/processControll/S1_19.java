@@ -21,9 +21,6 @@ public class S1_19 extends StageMaster implements StageInt {
     private Log log = LogFactory.getLog(S1_18.class);
 
     @Autowired
-    Regexp regexpl;
-
-    @Autowired
     Transliterator tr;
 
     public S1_19() {
@@ -38,7 +35,7 @@ public class S1_19 extends StageMaster implements StageInt {
         log.trace(name+"-processor started");
         String txt = r.getMessage().getText();
         Long chatId = user.getChatId();
-        String[] fio = regexpl.parseWorlds(txt);
+        String[] fio = Regexp.parseWorlds(txt);
         log.trace("FIO input world count="+fio.length);
         if(fio!= null && fio.length>=2 && fio[0].length()>=2 && fio[1].length()>=2) {
             user.setLastName(fio[0]);

@@ -10,8 +10,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-
 /**
  * Created with IntelliJ IDEA.
  * User: vitaly
@@ -32,7 +30,7 @@ public class S1_11 extends StageMaster implements StageInt {
     public S1_11() {
         name = "s1-11";
         nextStageName = "s1-12";
-        msg = "Срок страхования с %s по %s. Количество дней поездки %d \n" +
+        msg = "Срок страхования с %s по %s. Количество дней поездки %s \n" +
                 "Сколько человек "+  Age.get[0] +" от 12 до 60 лет едет?";
         descr="число взрослых не Шенген";
 
@@ -57,8 +55,6 @@ public class S1_11 extends StageMaster implements StageInt {
             log.error("stage:"+name+" ошибка ввода:"+txt);
             tgbot.sendMistake(chatId, "Неверные данные");
         }
-        user.setEnsured(null);     // СБРОС
-        user.setEnsuredCurrentKey(null);
         db.save(user);
     }
 
@@ -67,15 +63,8 @@ public class S1_11 extends StageMaster implements StageInt {
     @Override
     public void sendMessage(User user, Result r) {
         Long chatId = user.getChatId();
-        Long diff = null;
         String outMessage;
-        try {
-            diff = checkDates.diffDays(user.getDateFrom(),user.getDateTo());
-        } catch (ParseException e) {
-            outMessage = String.format(msg,user.getDateFrom(),user.getDateTo(),0);
-        }
-        outMessage = String.format(msg,user.getDateFrom(),user.getDateTo(),diff);
-//        ResponseEntity rs = tg.sendMenuOff(chatId,outMessage);
+        outMessage = String.format(msg,user.getDateFrom(),user.getDateTo(),user.getDateDuration());
         tgbot.sendMenuON(chatId,outMessage,menu);
     }
 }

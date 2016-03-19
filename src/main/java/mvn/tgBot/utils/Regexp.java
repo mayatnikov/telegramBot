@@ -99,19 +99,22 @@ public class Regexp {
         return (ret);
     }
 
-    // выделение первых 4-х слов из: IVAN IVANOV 25.05.1985 745865452
+    // выделение первых 4-х слов из: IVAN IVANOV 25.05.1985 745865452 - а в паспорте еще и серия м.б. отдельно !
     public static String[] filterUserData(String in) {
         String regexp= "[,;:!?\\s]+";
         String[] r = in.trim().split(regexp);
-        if(r.length!=5)  return r;
+        String [] ret;
+        if(r.length!=5)  ret=r;
         else  {  // видимо паспорт ввели с разделителем
-           String [] ret = new String[4];
+           ret = new String[4];
             ret[0] = r[0];
             ret[1]= r[1];
             ret[2]=r[2];
             ret[3]= r[3]+r[4];
-            return ret;
         }
+        if(ret.length!=4 ) return null;
+        log.trace("User data={"+ret[0]+","+ret[1]+","+ret[2]+","+ret[3]);
+        return ret;
     }
 
     public static boolean isLatin(String in ) {
@@ -122,10 +125,10 @@ public class Regexp {
     }
 
 
-    public String[] parseWorlds(String in) {  // просто синоним
-        return filterUserData(in);
+    public static String[] parseWorlds(String in) {  // просто синоним
+        String regexp= "[,;:!?\\s]+";
+        return  in.trim().split(regexp);
     }
-
 
     public static String filterDigital(String in) {
         Pattern p = Pattern.compile("[^0-9]+");

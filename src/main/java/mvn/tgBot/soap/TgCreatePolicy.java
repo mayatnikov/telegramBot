@@ -91,6 +91,7 @@ public class TgCreatePolicy {
                 String accountNumber = resp.getAccountNumber();
                 String policyNumber = resp.getPolicyNumber();
                 BigDecimal totalPremium = resp.getTotalPremium();
+                log.debug ("Policy created > accountNumber:"+accountNumber+" policyNumber:"+policyNumber+ " totalPremium:"+totalPremium );
                 tgbot.sendText(user.getChatId(), String.format(msg, policyNumber, totalPremium));
                 Future<GetPaymentLinkResponseType> answer = tgGetPaymentLink.getResponse(tgbot, user, policyNumber, totalPremium);
             } else {

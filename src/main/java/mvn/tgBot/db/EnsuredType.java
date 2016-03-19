@@ -34,8 +34,8 @@ public class EnsuredType {
     }
 
     public  EnsuredType(String[] mm,String key) {
-        this.lastName = mm[0];
-        this.firstName = mm[1];
+        this.firstName = mm[0];
+        this.lastName = mm[1];
         this.birthday = mm[2];
         this.pasport = mm[3];
         this.age = key;
@@ -75,6 +75,9 @@ public class EnsuredType {
 
     public void setAge(String age) {
         this.age = age;
+    }
+    public String toString() {
+        return firstName+" "+lastName+" "+birthday+" "+pasport;
     }
 }
 

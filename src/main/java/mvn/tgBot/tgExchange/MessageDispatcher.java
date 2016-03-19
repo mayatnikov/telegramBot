@@ -116,8 +116,9 @@ public class MessageDispatcher  implements CommandLineRunner {
 // =========================================================
 
                 else if(msg.startsWith("RETRY") || msg.startsWith("/RETRY") ) { // в режиме коррекции ошибок
-                    String nextStage="s1-2";
+                    String nextStage="s1-4c";
                     user.setWait4Stage(nextStage);
+                    user.setEnsuredCurrentKey(null);
                     user.setCorrectMode(true);
                     db.save(user);
                     StageInt ws = stageList.getStage(nextStage);
@@ -132,6 +133,8 @@ public class MessageDispatcher  implements CommandLineRunner {
                     user.setEnsuranceOpt2(null);
                     user.setEnsuranceOpt3(null);
                     user.setEnsuranceOpt4(null);
+                    user.setEnsuredCurrentKey(null);
+                    user.setEnsured(null);
                     db.save(user);
                     StageInt ws = stageList.getStage(nextStage);
                     ws.sendMessage(user,r);
@@ -225,6 +228,8 @@ public class MessageDispatcher  implements CommandLineRunner {
         user.setEnsuranceOpt3(null);
         user.setEnsuranceOpt4(null);
         user.setCorrectMode(false);   // режим коррекции данных - нет
+        user.setEnsuredCurrentKey(null);
+        user.setEnsured(null);
 
         try {
             StageInt next = null;

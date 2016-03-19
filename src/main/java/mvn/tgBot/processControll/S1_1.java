@@ -44,10 +44,10 @@ public class S1_1 extends StageMaster implements StageInt {
             StageInt next = stageList.getStage("s1-0");
             log.debug("next stage:"+next);
             next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
-            user.setWait4Stage("s1-0");     // запомнить след шаг для данного ChatID
+            user.setWait4Stage("s1-1");     // запомнить след шаг для данного ChatID
         }
         else {
-            tgbot.sendMistake(chatId, "Не понял команду, выберите из доступных вариантов" );
+            tgbot.sendMistake(chatId, "Не понял команду, для начала работы выполните команду /start" );
         }
         db.save(user);
     }

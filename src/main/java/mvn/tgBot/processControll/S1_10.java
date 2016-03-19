@@ -53,7 +53,6 @@ public class S1_10 extends StageMaster implements StageInt {
             next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки
             //TODO сделать обработку response
             //        rs.getStatusCode().getReasonPhrase();
-            user.setEnsured(null);  // сброс списка участников
             user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
         }
         else {

@@ -38,6 +38,8 @@ public class PhotoProcessor  {
 
     @Value("${abbyy.applicationId}")
     String applicationId;
+    @Value("${abbyy.url}")
+    String abbyyURL;
     @Value("${abbyy.password}")
     String abbyPassword;
 
@@ -45,8 +47,7 @@ public class PhotoProcessor  {
 
     private Log log = LogFactory.getLog(PhotoProcessor.class);
 
-
- @Async
+    @Async
  public Future<String> process(User user, Result r) {
 
         Long chatId = user.getChatId();
@@ -66,7 +67,7 @@ public class PhotoProcessor  {
         log.debug("fileLink:"+fileLink);
 
 //     PassportProcessor passportProcessor = new PassportProcessor();
-     PassportProcessor passportProcessor = new PassportProcessor(applicationId, abbyPassword);
+     PassportProcessor passportProcessor = new PassportProcessor(abbyyURL,applicationId, abbyPassword);
      String UrlStr = httpAddress + fileLink;
         try {
             URL url = new URL(UrlStr);

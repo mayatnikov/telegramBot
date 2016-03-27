@@ -59,6 +59,7 @@ public class S1_26 extends StageMaster implements StageInt {
         user.setEnsuranceOpt3(null);
         user.setEnsuranceOpt4(null);
         user.setCorrectMode(false);
+        user.setEnsuredCurrentKey(null);
 
         user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
         db.save(user);

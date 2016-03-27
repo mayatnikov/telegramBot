@@ -58,6 +58,7 @@ public class S1_25 extends StageMaster implements StageInt {
         String txt = r.getMessage().getText().toUpperCase();
         Long chatId = user.getChatId();
 
+        user.setEnsuredCurrentKey(null);
         if(txt.contains("ПРАВ") ) {
             nextStageVar="s1-26";                     // !!!!!!
         }

@@ -7,7 +7,6 @@ import mvn.tgBot.utils.Regexp;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Component;
  * Stage: опции страхования
  */
 @Component
-@Scope("prototype")
 public class S1_15 extends StageMaster implements StageInt {
 
     @Autowired

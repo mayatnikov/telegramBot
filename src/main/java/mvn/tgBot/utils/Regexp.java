@@ -13,10 +13,26 @@ import java.util.regex.Pattern;
 public class Regexp {
     private final static Log log = LogFactory.getLog(Regexp.class);
 
-    public boolean checkEmail(String in) {
+    public static boolean checkEmail(String in) {
+    /*
+     ^[A-Z0-9._%+-]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$
+     */
+
+        String in2 = in.toUpperCase();
+        String regex = "^[A-Z0-9._%+-]{1,64}@(?:[A-Z0-9-]{1,63}\\.){1,125}[A-Z]{2,63}$";
         //@TODO написать проверку корректности email
-        return true;
+        return in2.matches(regex);
     }
+
+//    public static void main (String ... args ) {
+//        String[] in = {"79165894332","mmm@aaa.com","eeee.com","xxx@eeee.com","xxx@eeee.xxx.cc.com","xxx@e.e.e.e.su","vita@maatnikov.ru"};
+//        for(int tik=0;tik<in.length;tik++) {
+//            boolean ans = Regexp.checkEmail(in[tik]);
+//            System.out.println(in[tik]+ ">>>" + ans);
+//        }
+//    }
+//
+
 
     public double filterAmount(String in) {
         Double am;

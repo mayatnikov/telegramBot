@@ -80,10 +80,10 @@ public class S1_14 extends StageMaster implements StageInt {
         Long chatId = user.getChatId();
         String outMessage;
         try {
-            int tt = user.getEnsuredNumber()+user.getOldNumber()+user.getChildNumber();
-            log.trace("params 1 2 3 4 "+user.getRegionType()+"|"+user.getCountryName()+"|"+user.getDateFrom()+"|"+user.getDatePolicyEnd()+"|"+tt);
+            int pQuant = user.getEnsuredNumber()+user.getOldNumber()+user.getChildNumber();
+            log.trace("params 1 2 3 4 "+user.getRegionType()+"|"+user.getCountryName()+"|"+user.getDateFrom()+"|"+user.getDatePolicyEnd()+"|"+pQuant);
             String regionORcountry = (user.getRegionType() == null) ? user.getCountryName() : Regions.get(user.getRegionType());
-            outMessage = String.format(msg,regionORcountry,user.getDateFrom(),user.getDatePolicyEnd(),tt);
+            outMessage = String.format(msg,regionORcountry,user.getDateFrom(),user.getDatePolicyEnd(),pQuant);
         }  catch (java.util.IllegalFormatConversionException e) {
             outMessage = err+e.getMessage();
         }  catch (java.util.MissingFormatArgumentException e) {

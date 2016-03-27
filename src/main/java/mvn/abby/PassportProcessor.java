@@ -16,25 +16,6 @@ public class PassportProcessor {
 
     Client restClient;
 
-    public static void main(String[] args) throws Exception {
-
-        System.out.println("Process documents telegram-->AbbyOCR");
-        PassportProcessor mrz = new PassportProcessor();
-
-//        mrz.performMrzRecognition("../../INFO/MRZ/passport.jpg", "result.xml");
-
-//        mrz.performMrzRecognition("../../INFO/MRZ/passport.jpg");
-
-        int sz = 144092;
-//        String surl="https://api.telegram.org/file/bot110712323:AAFopijizY0vAkYvze-LwHLMgNWzdx_ekRg/photo/file_10.jpg";
-        String surl="https://api.telegram.org/file/bot190795679:AAGM93Ud17V7NaHY_AXMQMrgH_bteLsVD9o/photo/file_19.jpg";
-
-//        bot190795679:AAGM93Ud17V7NaHY_AXMQMrgH_bteLsVD9o
-        URL url = new URL(surl);
-        mrz.performMrzRecognition(sz,url);
-    }
-
-
     public PassportProcessor() {
         restClient = new Client();
         // replace with 'https://cloud.ocrsdk.com' to enable secure connection
@@ -43,10 +24,10 @@ public class PassportProcessor {
         restClient.password = "HIgPzV0l0e6UJ9kLW9qayrS+";
     }
 
-    public PassportProcessor(String appId,String passwd) {
+    public PassportProcessor(String surl,String appId,String passwd) {
         restClient = new Client();
         // replace with 'https://cloud.ocrsdk.com' to enable secure connection
-        restClient.serverUrl = "http://cloud.ocrsdk.com";
+        restClient.serverUrl = surl;  // "http://cloud.ocrsdk.com";
         restClient.applicationId = appId;
         restClient.password = passwd;
     }
@@ -117,3 +98,21 @@ public class PassportProcessor {
        return   connection.getInputStream();
     }
 }
+
+/*
+    public static void main(String[] args) throws Exception {
+
+        System.out.println("Process documents telegram-->AbbyOCR");
+        PassportProcessor mrz = new PassportProcessor();
+//        mrz.performMrzRecognition("../../INFO/MRZ/passport.jpg", "result.xml");
+//        mrz.performMrzRecognition("../../INFO/MRZ/passport.jpg");
+        int sz = 144092;
+//        String surl="https://api.telegram.org/file/bot110712323:AAFopijizY0vAkYvze-LwHLMgNWzdx_ekRg/photo/file_10.jpg";
+        String surl="https://api.telegram.org/file/bot190795679:AAGM93Ud17V7NaHY_AXMQMrgH_bteLsVD9o/photo/file_19.jpg";
+
+//        bot190795679:AAGM93Ud17V7NaHY_AXMQMrgH_bteLsVD9o
+        URL url = new URL(surl);
+        mrz.performMrzRecognition(sz,url);
+    }
+
+ */

@@ -51,16 +51,17 @@ public class S1_7 extends StageMaster implements StageInt {
 
                     // Определение следующего stage и дат по региону и стране
                     if (user.getRegionType() != null && user.getRegionType().equals(RegionType.SHENGEN)) {
-                        long duration = checkDates.diffDays(dateStart,dateStop)+15+1;
-                        user.setDateDuration("" + duration);
-                        user.setDatePolicyEnd(CheckDates.addDays(dateStart, (int)duration));
+                        Long tripDuration = checkDates.diffDays(dateStart,dateStop)+1;
+                        long policyDuration = tripDuration+15;
+                        user.setDateDuration("" + tripDuration);
+                        user.setDatePolicyEnd(CheckDates.addDays(dateStart, (int)policyDuration));
                         stg = "s1-10"; // на ввод число взрослых при финляндии и шенген
                     } else if (user.getCountryName() != null && user.getCountryName().toUpperCase().contains("ФИНЛЯН"))
                         stg = "s1-8"; // <----ввод даты по Финляндии
                     else {          // при НЕ финляндии и НЕ шенген
                         user.setDatePolicyEnd(dateStop);
-                        long duration = checkDates.diffDays(dateStart,dateStop)+1;
-                        user.setDateDuration("" + duration);
+                        long tripDuration = checkDates.diffDays(dateStart,dateStop)+1;
+                        user.setDateDuration("" + tripDuration);
                         stg = "s1-11";     // на ввод число взрослых
                     }
                     StageInt next = stageList.getStage(stg);

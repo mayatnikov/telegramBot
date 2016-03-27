@@ -51,6 +51,13 @@ public class S1_13 extends StageMaster implements StageInt {
             log.error("stage:"+name+" ошибка ввода:"+txt);
             tgbot.sendMistake(chatId);
         }
+        int ensArraySize = user.getEnsured().size();
+        int reqEnsQuant = user.getEnsuredNumber() +user.getOldNumber()+user.getChildNumber();
+        if(ensArraySize > reqEnsQuant) {    // клиент урезал число страхуемых !
+            log.warn("Число страхуемых было урезано! Массив сброшен");
+            user.setEnsured(null);
+        }
+
         db.save(user);
     }
 

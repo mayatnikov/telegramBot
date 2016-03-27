@@ -15,6 +15,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class LocationProcessor extends StageMaster {
 
+    public  LocationProcessor() {
+        name="LocationProcessor";
+        nextStageName="?";
+        descr="location processor";
+        msg =  "?";
+
+    }
+
+
     private Log log = LogFactory.getLog(LocationProcessor.class);
 
 //    String[][] menu = {

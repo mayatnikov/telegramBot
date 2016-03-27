@@ -10,13 +10,18 @@ buildscript {
     }
 }
 
+plugins {
+    id 'org.hidetake.ssh' version '1.5.1'
+}
+
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
     baseName = 'TelegramBot'
-    version =  '0.1.0rc'
+    version =  '0.1.0'
 }
 
 
@@ -33,8 +38,27 @@ dependencies {
     compile('com.google.code.gson:gson:2.4')
     compile('org.springframework.boot:spring-boot-starter-data-mongodb:1.3.0.RELEASE')
     compile('javax.persistence:persistence-api:1.0.2')
-    testCompile("junit:junit")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+
 }
+
+
+remotes {
+    mayatnikov {
+        host = '192.168.17.30'
+        user = 'vitaly'
+        identity = file('/Users/vitaly/.ssh/id_rsa')
+    }
+}
+
+task deploy << {
+    ssh.run {
+        session(remotes.mayatnikov) {
+            put from: "$buildDir/libs/*.jar", into: '/usr/local/telegram/tinkoff/'
+        }
+    }
+}
+
 
 repositories {
     mavenLocal()

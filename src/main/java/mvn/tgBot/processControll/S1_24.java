@@ -49,9 +49,14 @@ public class S1_24 extends StageMaster implements StageInt {
         if (txt.toUpperCase().contains("ЗАПОЛНИЛ")) {
             int ensuredQuant = user.getChildNumber()+ user.getOldNumber()+ user.getEnsuredNumber();
             int ensuredSize = user.getEnsured().size();
-            if(ensuredQuant != ensuredSize) {
+
+            if(ensuredQuant < ensuredSize) { // страхуемых больше чем было в оценке !
+            log.error("error on ensured quantity");
+            }
+
+            if(ensuredQuant > ensuredSize) { // не все заполнены
                 tgbot.sendMistake(chatId, "Не указаны данные застрахованных.");
-                nStage=name;  // никуда не переходим пока всех не заполнит
+               return;
             }
             else {
 //                  if(false )  { // user.getEnsured().get(root)!=null ) {
@@ -120,19 +125,20 @@ public class S1_24 extends StageMaster implements StageInt {
 
         String currentKey = user.getEnsuredCurrentKey();  // текущий пользователь ( id:рожа: )
         String  currentUser;
-        if(currentKey== null) {
+        String txt =r.getMessage().getText();
+        if(currentKey== null || txt.equals(cmenu[0][0]) || txt.equals("/refresh") ) { // заход не из цикла по пользователям
             currentKey="?";
-            currentUser="? ? ? ?";
+            currentUser="?";
         }
         else {
-            currentUser = r.getMessage().getText();  // данные о текущем пользователе ( FN LN BD DOC );
+            currentUser = txt;  // данные о текущем пользователе ( FN LN BD DOC );
         }
         log.trace("currentKey:{"+currentKey+"}");
         log.trace("currentUser:{"+currentUser+"}");
 //        EnsuredType us = all.get("1:"+Age.get[0]+":");
 
         String tail = " Не заполнено";
-//        ---- зрелые
+
         for (int tuk=0;tuk<3;tuk++) {     // цикл по трем возрастным группам
             for (int tik = 1; tik < nn[tuk]+1; tik++)  {
                 if(currentKey.contains(tik+":"+Age.get[tuk])) {  // это строка по текущему пользователю

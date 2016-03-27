@@ -175,8 +175,8 @@ public class MessageDispatcher  implements CommandLineRunner {
             tgbot.sendMistake(chatID,"Ошибка в сценарии робота");
             e.printStackTrace();
         }  catch (java.lang.NullPointerException e) {
-            tgbot.sendMistake(chatID,"Ошибка в данных (null pointer ex-n)");
-            log.error("Processed message with update_id=" + currentUpdateId + " ===> SKIPPED ! error:" + e.getMessage());
+            tgbot.sendMistake(chatID,"Ошибка в данных");
+            log.error("Bad data (null pointer ex-n) =" + currentUpdateId + " ===> SKIPPED ! error:" + e.getMessage());
         }  catch (org.springframework.web.client.HttpClientErrorException e) {
             log.error("Bad request to TELEGRAM update_id=" + currentUpdateId + " ===> SKIPPED ! error:" + e.getMessage());
         }  catch (java.lang.ArrayIndexOutOfBoundsException e) {

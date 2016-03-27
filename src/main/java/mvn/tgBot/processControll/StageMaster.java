@@ -6,6 +6,8 @@ import mvn.tgBot.tgControl.Messenger;
 import mvn.tgBot.tgObjects.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
+
 /**
  * Created with IntelliJ IDEA.
  * User: vitaly
@@ -24,6 +26,11 @@ public class StageMaster  implements StageInt {
     @Autowired UserRepository db;
     @Autowired StageList stageList;
     @Autowired Messenger tgbot;
+
+    @PostConstruct
+    public void init() {
+        stageList.stPut(this);
+    }
 
     public String toString() { return name; }
 

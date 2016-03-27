@@ -43,15 +43,3 @@ keytool -importcert -trustcacerts -file TOI_Test_RP.pem -alias tgbot -keystore $
 password: changeit
 
 
-/*
-команды для BOT-а:
-
-help - этот список команд
-start - вернуться в начало без сброса данных
-cancel - прервать процесс и начать опрос с начала
-info - отобразить состояние процесса и мои основные данные
-refresh - обновить сообщение и меню
-start - начало и сброс данных
-replay - в начало без сброса данных
-
- */

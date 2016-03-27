@@ -33,7 +33,7 @@ public class S1_18 extends StageMaster implements StageInt {
     public void process(User user, Result r) throws StageNotFoundException {
         String txt = r.getMessage().getText();
         Long chatId = user.getChatId();
-        if(txt.length()>=5) {
+        if(Regexp.checkEmail(txt)) {
             user.setEmail(txt);
             StageInt next = stageList.getStage(nextStageName);
             next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки

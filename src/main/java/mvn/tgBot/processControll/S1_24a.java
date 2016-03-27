@@ -45,44 +45,50 @@ public class S1_24a extends StageMaster implements StageInt {
         }
         log.debug("key=" + key);
         if (user.getEnsured() == null) user.setEnsured(new HashMap());
-        String[] men = Regexp.filterUserData(txt);
-        String birthday="";
-        String passport="";
-        StringBuffer msgOut = new StringBuffer();
-        boolean isError=false;
+        StringBuffer msgOut = new StringBuffer();;
+        String[] men = new String[4];
+        boolean isError = false;
+        String birthday = "";
+        String passport = "";
+        try {
+            men = Regexp.filterUserData(txt);
 
-        if(men.length!=4) {
-            msgOut.append("Ошибка при вводе количество слов <4" );
-            isError=true;
-        }
-        else {
-            birthday = (men[2] != null) ? Regexp.filterDate(men[2]) : "?";
-            passport = (men[3] != null) ? Regexp.filterPassport(men[3]) : "?";
-
-            if (!isCorrectClient(men)) {
-                msgOut.append("Недопустимые символы в фамилии и имени:" + men[0] + "|" + men[1]);
+            if (men.length != 4) {
+                msgOut.append("Ошибка при вводе количество слов <4");
                 isError = true;
-            }
-            try {
-                if (!isCorrectBirthday(key, birthday)) {
-                    msgOut.append("\nОшибка\n при вводе Дня рождения, учтите возрастную группу, получено:" + birthday);
+            } else {
+                birthday = (men[2] != null) ? Regexp.filterDate(men[2]) : "?";
+                passport = (men[3] != null) ? Regexp.filterPassport(men[3]) : "?";
+
+                if (!isCorrectClient(men)) {
+                    msgOut.append("Недопустимые символы в фамилии и имени:" + men[0] + "|" + men[1]);
                     isError = true;
                 }
-            } catch (ParseException e) {
-                msgOut.append("\nНе возможно сформировать дату из:" + birthday);
-                isError = true;
+                try {
+                    if (!isCorrectBirthday(key, birthday)) {
+                        msgOut.append("\nОшибка\n при вводе Дня рождения, учтите возрастную группу, получено:" + birthday);
+                        isError = true;
+                    }
+                } catch (ParseException e) {
+                    msgOut.append("\nНе возможно сформировать дату из:" + birthday);
+                    isError = true;
+                }
+                if (!isCorrectPassport(passport)) {
+                    msgOut.append("\nОшибка при вводе номера паспорта:" + passport + "\n");
+                    isError = true;
+                }
             }
-            if (!isCorrectPassport(passport)) {
-                msgOut.append("\nОшибка при вводе номера паспорта:" + passport + "\n");
-                isError = true;
-            }
+        } catch (Exception e ) {
+            isError=true;
+            msgOut.append("Ошибка в данных");
         }
+
         if (isError) {
             msgOut.append("\nВвод таком формате:\n IVAN IVANOV 25/05/1985 745865452");
             tgbot.sendMistake(user.getChatId(), msgOut.toString());
         }
         else {  // все проверки пройдены
-            String [] clientOut = {men[0],men[1],birthday,passport};
+            String [] clientOut = { men[0],men[1],birthday,passport};
             log.trace("clientOut={"+men[0]+","+men[1]+","+birthday+","+passport+"}");
             user.getEnsured().put(key, new EnsuredType(clientOut, key));
             StageInt next = stageList.getStage(nextStageName);

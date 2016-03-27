@@ -15,6 +15,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContactProcessor extends StageMaster {
 
+    public  ContactProcessor() {
+        name="ContactProcessor";
+        nextStageName="?";
+        descr="contact processor";
+        msg =  "?";
+
+    }
     private Log log = LogFactory.getLog(ContactProcessor.class);
 
 //    String[][] menu = {

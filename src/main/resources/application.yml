@@ -17,6 +17,7 @@ spring:
    uri: mongodb://localhost:27017/trip1
 
 abbyy:
+    url: http://cloud.ocrsdk.com
     applicationId: TelegramBot
     password: HIgPzV0l0e6UJ9kLW9qayrS+
 

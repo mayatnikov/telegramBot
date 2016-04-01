@@ -15,7 +15,7 @@ public  class Regions {
     public static String get(RegionType r) {
         if(reg==null) {
             reg = new HashMap();
-            reg.put(RegionType.ASIA,"Азию");
+            reg.put(RegionType.ASIA,"Азия");
             reg.put(RegionType.SHENGEN,"Шенген");
             reg.put(RegionType.WORLDWIDE,"Весь Мир");
         }

@@ -22,17 +22,20 @@ public class TgSoapService {
 
   @Value("${soap.wsdl}")
   private String wsdlFileName; // = "./config/tinkoffSoapService.wsdl";
+  @Value("${spring.config.location}")
+  private String configDir;
 
     private static final QName SERVICE_NAME = new QName("http://toi.ru/esb/services/3rdparty", "ExtPartyInterface");
     private ExtPartyInterface port;
 
     public void init() {
 
+        log.info("Spring config location:"+configDir);
         URL wsdlURL = null;
-        File wsdlFile = new File(wsdlFileName);
+        File wsdlFile = new File(configDir+"/"+wsdlFileName);
         try {
             if (wsdlFile.exists()) {
-                log.info("use wsdl file:["+wsdlFileName +"]");
+                log.info("use wsdl file:["+configDir+"/"+wsdlFileName +"]");
                 wsdlURL = wsdlFile.toURI().toURL();
             } else {
                 log.warn("wsdl file:["+wsdlFileName +"]-not found");

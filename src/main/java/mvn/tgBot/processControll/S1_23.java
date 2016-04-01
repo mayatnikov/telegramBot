@@ -63,15 +63,15 @@ public class S1_23 extends StageMaster implements StageInt {
     @Override
     public void sendMessage(User user, Result r) {
         String[][] menu = {
-                {"Совпадает с адресом регистрации"},
-                {"?"}
+                {"Совпадает с адресом регистрации"}
+//                ,{"?"}
         };
         Long chatId = user.getChatId();
-        if(user.getAddress2()!=null && user.getAddress2().length()>=10) { // отобразить кнопку с Адрес проживания если он есть в профиле
-            menu[1][0] = user.getAddress2();
-        }
-        else
-            menu[1][0]="?";
+//        if(user.getAddress2()!=null && user.getAddress2().length()>=10) { // отобразить кнопку с Адрес проживания если он есть в профиле
+//            menu[1][0] = user.getAddress2();
+//        }
+//        else
+//            menu[1][0]="?";
         tgbot.sendMenuON(chatId, msg, menu);
     }
 }

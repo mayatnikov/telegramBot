@@ -14,6 +14,6 @@
              |   :    :|   | ,'       `---`
               \   \  / `----'
                `--`-'
-Робот Тинькофф-страхование
+@TinkoffinsuranceBot
              Application:  ${application.formatted-version}
              Spring-boot:  ${spring-boot.formatted-version}

@@ -2,7 +2,7 @@
 <ns2:calcQuoteRequest xmlns:ns2="http://toi.ru/esb/model/serviceMessagesExt"
                       xmlns:ns3="http://toi.ru/model/productinfo">
     <ns2:Header>
-        <integrationID>tg-1457427252102-4</integrationID>
+        <integrationID>tg-1459512084122-11</integrationID>
         <user>telegram</user>
         <password>qIQqu873KE</password>
     </ns2:Header>
@@ -20,7 +20,7 @@
             </ns3:ValueInfo>
             <ns3:ValueInfo>
                 <ns3:Code>QuantityChildren</ns3:Code>
-                <ns3:Value>0</ns3:Value>
+                <ns3:Value>1</ns3:Value>
             </ns3:ValueInfo>
             <ns3:ValueInfo>
                 <ns3:Code>QuantityAdults</ns3:Code>
@@ -28,7 +28,7 @@
             </ns3:ValueInfo>
             <ns3:ValueInfo>
                 <ns3:Code>QuantitySeniors</ns3:Code>
-                <ns3:Value>0</ns3:Value>
+                <ns3:Value>1</ns3:Value>
             </ns3:ValueInfo>
             <ns3:ValueInfo>
                 <ns3:Code>Currency</ns3:Code>
@@ -44,24 +44,6 @@
                     </ns3:ValueInfo>
                 </ns3:Option>
                 <ns3:Option>
-                    <ns3:Code>TheftProperty</ns3:Code>
-                    <ns3:ValueInfo>
-                        <ns3:Code>PropertyLimit</ns3:Code>
-                        <ns3:Value>15000</ns3:Value>
-                    </ns3:ValueInfo>
-                    <ns3:ValueInfo>
-                        <ns3:Code>PropertyAddress</ns3:Code>
-                        <ns3:Value>Кулакова 27-5, Москва, РФ</ns3:Value>
-                    </ns3:ValueInfo>
-                </ns3:Option>
-                <ns3:Option>
-                    <ns3:Code>PersonalAccident</ns3:Code>
-                    <ns3:ValueInfo>
-                        <ns3:Code>PersonalAccidentLimit</ns3:Code>
-                        <ns3:Value>17000</ns3:Value>
-                    </ns3:ValueInfo>
-                </ns3:Option>
-                <ns3:Option>
                     <ns3:Code>Luggage</ns3:Code>
                 </ns3:Option>
                 <ns3:Option>
@@ -70,13 +52,6 @@
             </ns3:Option>
             <ns3:Option>
                 <ns3:Code>LeisureType</ns3:Code>
-                <ns3:Option>
-                    <ns3:Code>ActiveLeisure</ns3:Code>
-                    <ns3:ValueInfo>
-                        <ns3:Code>IsExtremeSport</ns3:Code>
-                        <ns3:Value>true</ns3:Value>
-                    </ns3:ValueInfo>
-                </ns3:Option>
             </ns3:Option>
             <ns3:Option>
                 <ns3:Code>TripDuration</ns3:Code>
@@ -84,11 +59,11 @@
                     <ns3:Code>SingleTrip</ns3:Code>
                     <ns3:ValueInfo>
                         <ns3:Code>TripStartDate</ns3:Code>
-                        <ns3:Value>2016-05-11T00:00:00+03:00</ns3:Value>
+                        <ns3:Value>2016-04-11T00:00:00+03:00</ns3:Value>
                     </ns3:ValueInfo>
                     <ns3:ValueInfo>
                         <ns3:Code>TripEndDate</ns3:Code>
-                        <ns3:Value>2016-05-25T00:00:00+03:00</ns3:Value>
+                        <ns3:Value>2016-04-22T00:00:00+03:00</ns3:Value>
                     </ns3:ValueInfo>
                 </ns3:Option>
             </ns3:Option>

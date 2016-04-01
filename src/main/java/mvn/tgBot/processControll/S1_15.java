@@ -2,6 +2,7 @@ package mvn.tgBot.processControll;
 
 import mvn.tgBot.db.EnsuranceOptType;
 import mvn.tgBot.db.User;
+import mvn.tgBot.soap.WaitPolicy;
 import mvn.tgBot.tgObjects.Result;
 import mvn.tgBot.utils.Regexp;
 import org.apache.commons.logging.Log;
@@ -21,6 +22,8 @@ public class S1_15 extends StageMaster implements StageInt {
 
     @Autowired
     Regexp regexp;
+    @Autowired
+    WaitPolicy waitPolicy;
 
     private Log log = LogFactory.getLog(S1_15.class);
 
@@ -56,6 +59,14 @@ public class S1_15 extends StageMaster implements StageInt {
             else user.setEnsuranceOpt4(EnsuranceOptType.TRIPCANCEL);                       // !!!!!!
         }
         else if(txt.contains("OK")) {
+//            try {
+//                Future<String> res =  waitPolicy.getAnsw(tgbot,user);
+//            } catch (InterruptedException e) {
+//                log.error(e.getMessage());
+//                tgbot.sendMistake(chatId,"Ошибки в обработке запросов вычисления стоимости полиса, наберите команду /refresh");
+//            }
+//
+
             nextStageVar="s1-16";
         }
         else {

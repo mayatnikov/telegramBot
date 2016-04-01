@@ -151,7 +151,7 @@ public class S1_24a extends StageMaster implements StageInt {
         else if(user.getEnsuredCurrentKey().contains(Age.get[2])) note =" возраст до 12";
 
         String[][] usersMenu =  getAllUserMenu(user);
-        String mmm =   msg + "участник=" + user.getEnsuredCurrentKey()+note;
+        String mmm =  "Участник=" + user.getEnsuredCurrentKey()+note +"\n"+ msg;
         if(usersMenu==null)   tgbot.sendMenuOff(chatId,mmm);
         else tgbot.sendMenuON(chatId, mmm,usersMenu );
     }

@@ -34,7 +34,7 @@ public class S1_14 extends StageMaster implements StageInt {
     public S1_14() {
         name = "s1-14";
         nextStageName = "s1-14a";
-        msg = "И так, Вы собираетесь поехать в %s с %s по %s в составе %s человек\n" +
+        msg = "Итак, Вы собираетесь поехать в %s с %s по %s в составе %s человек\n" +
                 "Подождите, идет расчет 3-х вариантов отдыха...";
         descr="вид отдыха";
 /*
@@ -90,7 +90,7 @@ public class S1_14 extends StageMaster implements StageInt {
             outMessage = err+e.getMessage();
         }
         tgbot.sendMenuOff(chatId,outMessage);
-        // Async call расчет вариантов стоимости
+        // Async call расчет стоимости вариантов полисов
         try {
             Future<String> res =  tgCalc3Quotas.waitResponse(user);
         } catch (InterruptedException e) {

@@ -44,7 +44,7 @@ public class S1_21 extends StageMaster implements StageInt {
             }
             else {
                 log.error("stage:"+name+" ошибка ввода:"+txt);
-                tgbot.sendText(chatId, "Ошибка ввода Дня Рождения: ваш возраст должен быть от 18 до 60 лет");
+                tgbot.sendText(chatId, "Ошибка ввода Дня Рождения: Возраст страхователя не может быть меньше 18 лет");
             }
         } catch (ParseException e) {
             log.error("Error birthday input:"+txt);
@@ -75,7 +75,7 @@ public class S1_21 extends StageMaster implements StageInt {
     private boolean isCorrectBirthday( String birthday) throws ParseException {
         boolean ok=false;
         int age = CheckDates.getAge(Regexp.filterDate(birthday));
-            ok = (age>18 && age < 61);
+            ok = (age>18);
         return ok;
     }
 

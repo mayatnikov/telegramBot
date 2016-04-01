@@ -46,16 +46,8 @@ public class S1_15a extends StageMaster implements StageInt {
         if(txt.startsWith("ОК")) {
             nextStageVar="s1-16";
         }
-        else if(txt.contains("ДОБАВ")) {
+        else if(txt.contains("ИЗМ")) {
             nextStageVar="s1-15";
-        }
-        else if(txt.contains("УБРАТ")) {
-            user.setEnsuranceOptEnable(false);                       // !!!!!!
-            user.setEnsuranceOpt1(null);                       // !!!!!!
-            user.setEnsuranceOpt2(null);                       // !!!!!!
-            user.setEnsuranceOpt3(null);                       // !!!!!!
-            user.setEnsuranceOpt4(null);                       // !!!!!!
-            nextStageVar="s1-16";
         }
         else {
             err=true;
@@ -77,15 +69,7 @@ public class S1_15a extends StageMaster implements StageInt {
     @Override
     public void sendMessage(User user, Result r) {
         Long chatId = user.getChatId();
-        StringBuffer ol= new StringBuffer();
-        Long amount = 0L;
-
-        if(user.getEnsuranceOpt1() != null )   ol.append("квартиры,");
-        if(user.getEnsuranceOpt2() != null )   ol.append("несчастный случай,");
-        if(user.getEnsuranceOpt3() != null )   ol.append("утеря багажа,");
-        if(user.getEnsuranceOpt4() != null )   ol.append("отмена поездки,");
-        String outMessage = String.format(msg,user.getHolidayType(),ol, amount);
-        tgbot.sendMenuON(chatId,outMessage,menu);
+        tgbot.sendMenuOff(chatId,"Расчет стоимости пакета с доп опциями");
     }
 }
 

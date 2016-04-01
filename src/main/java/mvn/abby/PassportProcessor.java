@@ -98,21 +98,3 @@ public class PassportProcessor {
        return   connection.getInputStream();
     }
 }
-
-/*
-    public static void main(String[] args) throws Exception {
-
-        System.out.println("Process documents telegram-->AbbyOCR");
-        PassportProcessor mrz = new PassportProcessor();
-//        mrz.performMrzRecognition("../../INFO/MRZ/passport.jpg", "result.xml");
-//        mrz.performMrzRecognition("../../INFO/MRZ/passport.jpg");
-        int sz = 144092;
-//        String surl="https://api.telegram.org/file/bot110712323:AAFopijizY0vAkYvze-LwHLMgNWzdx_ekRg/photo/file_10.jpg";
-        String surl="https://api.telegram.org/file/bot190795679:AAGM93Ud17V7NaHY_AXMQMrgH_bteLsVD9o/photo/file_19.jpg";
-
-//        bot190795679:AAGM93Ud17V7NaHY_AXMQMrgH_bteLsVD9o
-        URL url = new URL(surl);
-        mrz.performMrzRecognition(sz,url);
-    }
-
- */

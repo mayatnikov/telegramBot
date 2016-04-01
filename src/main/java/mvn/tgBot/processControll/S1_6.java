@@ -49,9 +49,12 @@ public class S1_6 extends StageMaster implements StageInt {
                 user.setWait4Stage(nextStageName);     // запомнить след шаг для данного ChatID
                 break;
             case 1:  // format error
-            case 3:  // < dateNow()
                 log.error("stage:"+name+" date format error:"+txt);
                 tgbot.sendMistake(chatId, "Некорректная дата");
+                break;
+            case 3:  // < dateNow()
+                log.error("stage:"+name+" date format error:"+txt);
+                tgbot.sendMistake(chatId, "Дата начала поездки не должна быть в прошлом");
                 break;
             case 2:  // > 365
                 log.error("stage:"+name+" date > 365 error:"+txt);

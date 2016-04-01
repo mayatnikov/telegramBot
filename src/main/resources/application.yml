@@ -9,7 +9,7 @@ db:
 soap:
     user: telegram
     password: qIQqu873KE
-    wsdl: ./conf/tinkoffSoap-test.wsdl
+    wsdl: tinkoffSoap-test.wsdl
     prodName: PartnerTravelV2Box
 spring:
  data:

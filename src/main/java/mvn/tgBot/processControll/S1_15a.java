@@ -1,12 +1,15 @@
 package mvn.tgBot.processControll;
 
 import mvn.tgBot.db.User;
+import mvn.tgBot.soap.WaitPolicy;
 import mvn.tgBot.tgObjects.Result;
 import mvn.tgBot.utils.Regexp;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.Future;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,21 +23,18 @@ public class S1_15a extends StageMaster implements StageInt {
 
     @Autowired
     Regexp regexp;
+    @Autowired
+    WaitPolicy waitPolicy;
 
     private Log log = LogFactory.getLog(S1_15a.class);
 
     public S1_15a() {
         name = "s1-15a";
         nextStageName = "s1-16";
-        msg = "Стоимость страховки, пакет «%s», дополнительные опции: %s составит %d рублей.";
+        msg = "Расчет стоимости страховки с дополнительными опциями";
         descr="корректировка опций и оценка стоимости";
 
     }
-    String[][] menu = {
-            {"OK, оформляем"},
-            {"Добавить еще"},
-            {"Убрать дополнительные опции"}
-    };
 
     @Override
     public void process(User user, Result r) throws StageNotFoundException {
@@ -43,16 +43,16 @@ public class S1_15a extends StageMaster implements StageInt {
         String txt = r.getMessage().getText().toUpperCase();
         Long chatId = user.getChatId();
 
-        if(txt.startsWith("ОК")) {
+        if(txt.contains("ПРАВИЛЬНО")) {
             nextStageVar="s1-16";
         }
-        else if(txt.contains("ИЗМ")) {
+        else if(txt.contains("ОШИБКИ")) {
             nextStageVar="s1-15";
         }
         else {
             err=true;
             log.error("stage:"+name+" ошибка ввода:"+txt);
-            tgbot.sendText(chatId, "stage:"+descr+" cmd:"+txt+" - неправильная команда!");
+            tgbot.sendMistake(chatId);
         }
         if(!err) {
             StageInt next = stageList.getStage(nextStageVar);
@@ -70,6 +70,13 @@ public class S1_15a extends StageMaster implements StageInt {
     public void sendMessage(User user, Result r) {
         Long chatId = user.getChatId();
         tgbot.sendMenuOff(chatId,"Расчет стоимости пакета с доп опциями");
+        try {
+            Future<String> res =  waitPolicy.getAnsw(tgbot,user);
+        } catch (InterruptedException e) {
+            log.error(e.getMessage());
+            tgbot.sendMistake(chatId,"Ошибки в обработке запросов вычисления стоимости полисов, наберите команду /refresh");
+        }
+
     }
 }
 

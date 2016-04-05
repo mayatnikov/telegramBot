@@ -59,15 +59,7 @@ public class S1_15 extends StageMaster implements StageInt {
             else user.setEnsuranceOpt4(EnsuranceOptType.TRIPCANCEL);                       // !!!!!!
         }
         else if(txt.contains("OK")) {
-//            try {
-//                Future<String> res =  waitPolicy.getAnsw(tgbot,user);
-//            } catch (InterruptedException e) {
-//                log.error(e.getMessage());
-//                tgbot.sendMistake(chatId,"Ошибки в обработке запросов вычисления стоимости полиса, наберите команду /refresh");
-//            }
-//
-
-            nextStageVar="s1-16";
+            nextStageVar="s1-15a";
         }
         else {
             err=true;

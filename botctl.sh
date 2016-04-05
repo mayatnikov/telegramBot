@@ -2,7 +2,7 @@
 ARGV="$@"
 JAVA_HOME=/usr/local/jdk1.8.0_45
 BOT_HOME=/usr/local/telegram/tinkoff
-JAR_FILE=TelegramBot-0.1.0.jar
+JAR_FILE=TelegramBot-0.1.1.jar
 
 # ===
 JAVAEXE=$JAVA_HOME/bin/java

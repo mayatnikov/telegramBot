@@ -2,7 +2,7 @@
 <ns2:calcQuoteRequest xmlns:ns2="http://toi.ru/esb/model/serviceMessagesExt"
                       xmlns:ns3="http://toi.ru/model/productinfo">
     <ns2:Header>
-        <integrationID>tg-1459512084122-11</integrationID>
+        <integrationID>tg-1460363116271-44</integrationID>
         <user>telegram</user>
         <password>qIQqu873KE</password>
     </ns2:Header>
@@ -15,12 +15,14 @@
                 <ns3:Value>Basic</ns3:Value>
             </ns3:ValueInfo>
             <ns3:ValueInfo>
-                <ns3:Code>Area</ns3:Code>
+                <ns3:Code
+                >Area
+                </ns3:Code>
                 <ns3:Value>asia</ns3:Value>
             </ns3:ValueInfo>
             <ns3:ValueInfo>
                 <ns3:Code>QuantityChildren</ns3:Code>
-                <ns3:Value>1</ns3:Value>
+                <ns3:Value>0</ns3:Value>
             </ns3:ValueInfo>
             <ns3:ValueInfo>
                 <ns3:Code>QuantityAdults</ns3:Code>
@@ -28,7 +30,7 @@
             </ns3:ValueInfo>
             <ns3:ValueInfo>
                 <ns3:Code>QuantitySeniors</ns3:Code>
-                <ns3:Value>1</ns3:Value>
+                <ns3:Value>0</ns3:Value>
             </ns3:ValueInfo>
             <ns3:ValueInfo>
                 <ns3:Code>Currency</ns3:Code>
@@ -46,12 +48,16 @@
                 <ns3:Option>
                     <ns3:Code>Luggage</ns3:Code>
                 </ns3:Option>
-                <ns3:Option>
-                    <ns3:Code>TripOptions</ns3:Code>
-                </ns3:Option>
             </ns3:Option>
             <ns3:Option>
                 <ns3:Code>LeisureType</ns3:Code>
+                <ns3:Option>
+                    <ns3:Code>ActiveLeisure</ns3:Code>
+                    <ns3:ValueInfo>
+                        <ns3:Code>isActiveLeasure</ns3:Code>
+                        <ns3:Value>true</ns3:Value>
+                    </ns3:ValueInfo>
+                </ns3:Option>
             </ns3:Option>
             <ns3:Option>
                 <ns3:Code>TripDuration</ns3:Code>
@@ -59,11 +65,11 @@
                     <ns3:Code>SingleTrip</ns3:Code>
                     <ns3:ValueInfo>
                         <ns3:Code>TripStartDate</ns3:Code>
-                        <ns3:Value>2016-04-11T00:00:00+03:00</ns3:Value>
+                        <ns3:Value>2016-05-11T00:00:00+03:00</ns3:Value>
                     </ns3:ValueInfo>
                     <ns3:ValueInfo>
                         <ns3:Code>TripEndDate</ns3:Code>
-                        <ns3:Value>2016-04-22T00:00:00+03:00</ns3:Value>
+                        <ns3:Value>2016-05-22T00:00:00+03:00</ns3:Value>
                     </ns3:ValueInfo>
                 </ns3:Option>
             </ns3:Option>

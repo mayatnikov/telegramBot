@@ -3,6 +3,7 @@ package mvn.tgBot.soap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.toi.esb.model.servicemessagesext.CalcQuoteRequestType;
 import ru.toi.model.productinfo.ProductOptionType;
@@ -24,6 +25,10 @@ public class CreateQuoteReq {
 @Autowired
 TgMessageHeader hdr;
 
+    @Value("${soap.prodName}")
+    String prodName;
+
+
     public CreateQuoteReq() {
         log.debug("created");
     }
@@ -34,7 +39,7 @@ TgMessageHeader hdr;
 
         if(hdr==null) log.error("hdr is NULL!");
         req.setHeader(hdr.getHeader());
-        req.setProductName("PartnerTravelV2Box");
+        req.setProductName(prodName);
         req.setProductOptions(new ProductOptionsType());
 
         List <ProductOptionType> optionList = req.getProductOptions().getOption();

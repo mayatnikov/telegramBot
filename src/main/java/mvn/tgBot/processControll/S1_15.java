@@ -81,32 +81,37 @@ public class S1_15 extends StageMaster implements StageInt {
     @Override
     public void sendMessage(User user, Result r) {
         String[][] menu = {
-                {"?"},        // 2                  [1][0]
-                {"?"},        // 3                   [2][0]
-                {"?"},        // 4 [3][0]
+//                {"?"},        // 1        [0][0]  Opt1
+                {"?"},          // 2        [1][0]  Opt2
+                {"?"},          // 3        [2][0]  Opt3
+//                {"?"},        // 4        [3][0]  Opt4
                 {"OK, оформляем"}
         };
 
         String[][] menuUnMarket = {
-//                {"Страхование квартиры на время поездки"},   // 1
-                {"Страхование от несчастного случая"},       // 2
-                {"Багаж"},                                   // 3
-                {"Отмена поездки"},                          // 4
+//                {"Страхование квартиры на время поездки"},  // 1
+                {"Страхование от несчастного случая"},        // 2
+                {"Багаж"},                                    // 3
+//                {"Отмена поездки"},                         // 4
                 {"OK, оформляем"}
         };
         String[][] menuMarket = {
 //                {"√ Страхование квартиры на время поездки"},   // 1
-                {"√ Страхование от несчастного случая"},       // 2
-                {"√ Багаж"},                                   // 3
-                {"√ Отмена поездки"},                          // 4
+                {"√ Страхование от несчастного случая"},         // 2
+                {"√ Багаж"},                                     // 3
+//                {"√ Отмена поездки"},                          // 4
                 {"OK, оформляем"}
         };
+
+//        if(user.getEnsuranceOpt1() != null) menu[0][0]=menuMarket[0][0];
+//        else   menu[0][0]=menuUnMarket[0][0];
+
         if(user.getEnsuranceOpt2() != null) menu[0][0]=menuMarket[0][0];
             else   menu[0][0]=menuUnMarket[0][0];
         if(user.getEnsuranceOpt3() != null) menu[1][0]=menuMarket[1][0];
             else   menu[1][0]=menuUnMarket[1][0];
-        if(user.getEnsuranceOpt4() != null) menu[2][0]=menuMarket[2][0];
-            else   menu[2][0]=menuUnMarket[2][0];
+//        if(user.getEnsuranceOpt4() != null) menu[2][0]=menuMarket[2][0];
+//            else   menu[2][0]=menuUnMarket[2][0];
         Long chatId = user.getChatId();
         tgbot.sendMenuON(chatId,msg,menu);
         //TODO сделать обработку response

@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.example.paymentcommon.PaymentMethodType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,10 @@ public class TgCreatePolicy {
 
     @Autowired
     TgSoapService ss;
+
+    @Value("${soap.prodName}")
+    String prodName;
+
 
     String msg = "Полис No%s готов.\n" +
             "Стоимость: %.2f\n" +
@@ -125,7 +130,7 @@ public class TgCreatePolicy {
 
         if (hdr == null) log.error("hdr is NULL!");
         req.setHeader(hdr.getHeader());
-        req.setProductName("PartnerTravelV2Box");
+        req.setProductName(prodName);
 
         TgProductOptions po = new TgProductOptions();
         req.setProductOptions(po.getProductOptions(user, holidayType));

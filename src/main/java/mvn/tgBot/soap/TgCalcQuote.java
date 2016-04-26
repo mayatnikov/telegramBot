@@ -8,6 +8,7 @@ import mvn.tgBot.utils.CheckDates;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,10 @@ public class TgCalcQuote {
     TgMessageHeader hdr;
     @Autowired
     TgSoapService ss;
+
+    @Value("${soap.prodName}")
+    String prodName;
+
 
     public TgCalcQuote() {
 //        ss = new TgSoapService();
@@ -143,7 +148,7 @@ public class TgCalcQuote {
 
         if (hdr == null) log.error("hdr is NULL!");
         req.setHeader(hdr.getHeader());
-        req.setProductName("PartnerTravelV2Box");
+        req.setProductName(prodName);
 
         TgProductOptions po = new TgProductOptions();
         req.setProductOptions(po.getProductOptions(user,holidayType));

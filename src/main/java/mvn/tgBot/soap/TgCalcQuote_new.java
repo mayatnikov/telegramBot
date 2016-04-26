@@ -10,6 +10,7 @@ import mvn.tgBot.utils.Regexp;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import ru.toi.esb.model.servicemessagesext.CalcQuoteRequestType;
@@ -51,6 +52,10 @@ public class TgCalcQuote_new {
 
     @Autowired
     TgSoapService ss;
+
+    @Value("${soap.prodName}")
+    String prodName;
+
 
     public TgCalcQuote_new() {
         ss = new TgSoapService();
@@ -120,7 +125,7 @@ public class TgCalcQuote_new {
 
         if (hdr == null) log.error("hdr is NULL!");
         req.setHeader(hdr.getHeader());
-        req.setProductName("PartnerTravelV2Box");
+        req.setProductName(prodName);
         ProductOptionsType p1 = new ProductOptionsType();
         req.setProductOptions(p1);
 

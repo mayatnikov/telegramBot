@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
-import ru.toi.esb.model.servicemessagesext.GetPaymentLinkRequestType;
-import ru.toi.esb.model.servicemessagesext.GetPaymentLinkResponseType;
+import ru.xxx.esb.model.servicemessagesext.GetPaymentLinkRequestType;
+import ru.xxx.esb.model.servicemessagesext.GetPaymentLinkResponseType;
 
 import java.math.BigDecimal;
 import java.util.concurrent.Future;

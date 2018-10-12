@@ -14,99 +14,99 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  * 
  */
  
-@WebService(targetNamespace = "http://toi.ru/esb/services/3rdparty", name = "ExtPartyInterface")
-@XmlSeeAlso({ru.toi.model.common.ObjectFactory.class,ru.toi.model.gw.quote.property.ObjectFactory.class,ru.toi.model.productinfo.servicemessage.ObjectFactory.class,ru.toi.esb.model.gw.policy.ObjectFactory.class,ru.toi.model.gw.quote.ObjectFactory.class,ru.toi.model.productinfo.ObjectFactory.class,ru.toi.model.gw.client.ObjectFactory.class,org.example.paymentcommon.ObjectFactory.class,ru.toi.esb.model.servicemessagesext.ObjectFactory.class})
+@WebService(targetNamespace = "http://xxxx.ru/esb/services/3rdparty", name = "ExtPartyInterface")
+@XmlSeeAlso({ru.xxx.model.common.ObjectFactory.class,ru.xxx.model.gw.quote.property.ObjectFactory.class,ru.xxx.model.productinfo.servicemessage.ObjectFactory.class,ru.xxx.esb.model.gw.policy.ObjectFactory.class,ru.xxx.model.gw.quote.ObjectFactory.class,ru.xxx.model.productinfo.ObjectFactory.class,ru.xxx.model.gw.client.ObjectFactory.class,org.example.paymentcommon.ObjectFactory.class,ru.xxx.esb.model.servicemessagesext.ObjectFactory.class})
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 public interface ExtPartyInterface {
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/getPaymentLink")
-    @WebResult(name = "getPaymentLinkResponse", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt", partName = "parameters")
-    public ru.toi.esb.model.servicemessagesext.GetPaymentLinkResponseType getPaymentLink(
-        @WebParam(partName = "parameters", name = "getPaymentLinkRequest", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt")
-        ru.toi.esb.model.servicemessagesext.GetPaymentLinkRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/getPaymentLink")
+    @WebResult(name = "getPaymentLinkResponse", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt", partName = "parameters")
+    public ru.xxx.esb.model.servicemessagesext.GetPaymentLinkResponseType getPaymentLink(
+        @WebParam(partName = "parameters", name = "getPaymentLinkRequest", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt")
+        ru.xxx.esb.model.servicemessagesext.GetPaymentLinkRequestType parameters
     );
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/getProductInfo")
-    @WebResult(name = "getProductInfoResponse", targetNamespace = "http://toi.ru/model/productinfo/servicemessage", partName = "parameters")
-    public ru.toi.model.productinfo.servicemessage.GetProductInfoResponseType getProductInfo(
-        @WebParam(partName = "parameters", name = "getProductInfoRequest", targetNamespace = "http://toi.ru/model/productinfo/servicemessage")
-        ru.toi.model.productinfo.servicemessage.GetProductInfoRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/getProductInfo")
+    @WebResult(name = "getProductInfoResponse", targetNamespace = "http://xxx.ru/model/productinfo/servicemessage", partName = "parameters")
+    public ru.xxx.model.productinfo.servicemessage.GetProductInfoResponseType getProductInfo(
+        @WebParam(partName = "parameters", name = "getProductInfoRequest", targetNamespace = "http://xxx.ru/model/productinfo/servicemessage")
+        ru.xxx.model.productinfo.servicemessage.GetProductInfoRequestType parameters
     );
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/policyPaymentConfirm")
-    @WebResult(name = "policyPaymentConfirmResponse", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt", partName = "parameters")
-    public ru.toi.esb.model.servicemessagesext.PolicyPaymentConfirmResponseType policyPaymentConfirm(
-        @WebParam(partName = "parameters", name = "policyPaymentConfirmRequest", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt")
-        ru.toi.esb.model.servicemessagesext.PolicyPaymentConfirmRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/policyPaymentConfirm")
+    @WebResult(name = "policyPaymentConfirmResponse", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt", partName = "parameters")
+    public ru.xxx.esb.model.servicemessagesext.PolicyPaymentConfirmResponseType policyPaymentConfirm(
+        @WebParam(partName = "parameters", name = "policyPaymentConfirmRequest", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt")
+        ru.xxx.esb.model.servicemessagesext.PolicyPaymentConfirmRequestType parameters
     );
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/createMotorSubmission")
-    @WebResult(name = "createMotorSubmissionResponse", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt", partName = "parameters")
-    public ru.toi.esb.model.servicemessagesext.CreateMotorSubmissionResponseType createMotorSubmission(
-        @WebParam(partName = "parameters", name = "createMotorSubmissionRequest", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt")
-        ru.toi.esb.model.servicemessagesext.CreateMotorSubmissionRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/createMotorSubmission")
+    @WebResult(name = "createMotorSubmissionResponse", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt", partName = "parameters")
+    public ru.xxx.esb.model.servicemessagesext.CreateMotorSubmissionResponseType createMotorSubmission(
+        @WebParam(partName = "parameters", name = "createMotorSubmissionRequest", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt")
+        ru.xxx.esb.model.servicemessagesext.CreateMotorSubmissionRequestType parameters
     );
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/getContact")
-    @WebResult(name = "getContactResponse", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt", partName = "parameters")
-    public ru.toi.esb.model.servicemessagesext.GetContactResponseType getContact(
-        @WebParam(partName = "parameters", name = "getContactRequest", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt")
-        ru.toi.esb.model.servicemessagesext.GetContactRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/getContact")
+    @WebResult(name = "getContactResponse", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt", partName = "parameters")
+    public ru.xxx.esb.model.servicemessagesext.GetContactResponseType getContact(
+        @WebParam(partName = "parameters", name = "getContactRequest", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt")
+        ru.xxx.esb.model.servicemessagesext.GetContactRequestType parameters
     );
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/createPolicy")
-    @WebResult(name = "createPolicyResponse", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt", partName = "parameters")
-    public ru.toi.esb.model.servicemessagesext.CreatePolicyResponseType createPolicy(
-        @WebParam(partName = "parameters", name = "createPolicyRequest", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt")
-        ru.toi.esb.model.servicemessagesext.CreatePolicyRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/createPolicy")
+    @WebResult(name = "createPolicyResponse", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt", partName = "parameters")
+    public ru.xxx.esb.model.servicemessagesext.CreatePolicyResponseType createPolicy(
+        @WebParam(partName = "parameters", name = "createPolicyRequest", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt")
+        ru.xxx.esb.model.servicemessagesext.CreatePolicyRequestType parameters
     );
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/calcQuote")
-    @WebResult(name = "calcQuoteResponse", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt", partName = "parameters")
-    public ru.toi.esb.model.servicemessagesext.CalcQuoteResponseType calcQuote(
-        @WebParam(partName = "parameters", name = "calcQuoteRequest", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt")
-        ru.toi.esb.model.servicemessagesext.CalcQuoteRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/calcQuote")
+    @WebResult(name = "calcQuoteResponse", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt", partName = "parameters")
+    public ru.xxx.esb.model.servicemessagesext.CalcQuoteResponseType calcQuote(
+        @WebParam(partName = "parameters", name = "calcQuoteRequest", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt")
+        ru.xxx.esb.model.servicemessagesext.CalcQuoteRequestType parameters
     );
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/getPolicyInfo")
-    @WebResult(name = "getPolicyInfoResponse", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt", partName = "parameters")
-    public ru.toi.esb.model.servicemessagesext.GetPolicyInfoResponseType getPolicyInfo(
-        @WebParam(partName = "parameters", name = "getPolicyInfoRequest", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt")
-        ru.toi.esb.model.servicemessagesext.GetPolicyInfoRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/getPolicyInfo")
+    @WebResult(name = "getPolicyInfoResponse", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt", partName = "parameters")
+    public ru.xxx.esb.model.servicemessagesext.GetPolicyInfoResponseType getPolicyInfo(
+        @WebParam(partName = "parameters", name = "getPolicyInfoRequest", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt")
+        ru.xxx.esb.model.servicemessagesext.GetPolicyInfoRequestType parameters
     );
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/calcMotorQuickQuote")
-    @WebResult(name = "calcQuoteQuickResponse", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt", partName = "parameters")
-    public ru.toi.esb.model.servicemessagesext.CalcMotorQuoteResponseType calcMotorQuickQuote(
-        @WebParam(partName = "parameters", name = "calcMotorQuickQuoteRequest", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt")
-        ru.toi.esb.model.servicemessagesext.CalcMotorQuickQuoteRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/calcMotorQuickQuote")
+    @WebResult(name = "calcQuoteQuickResponse", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt", partName = "parameters")
+    public ru.xxx.esb.model.servicemessagesext.CalcMotorQuoteResponseType calcMotorQuickQuote(
+        @WebParam(partName = "parameters", name = "calcMotorQuickQuoteRequest", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt")
+        ru.xxx.esb.model.servicemessagesext.CalcMotorQuickQuoteRequestType parameters
     );
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/createContact")
-    @WebResult(name = "createContactResponse", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt", partName = "parameters")
-    public ru.toi.esb.model.servicemessagesext.CreateContactResponseType createContact(
-        @WebParam(partName = "parameters", name = "createContactRequest", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt")
-        ru.toi.esb.model.servicemessagesext.CreateContactRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/createContact")
+    @WebResult(name = "createContactResponse", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt", partName = "parameters")
+    public ru.xxx.esb.model.servicemessagesext.CreateContactResponseType createContact(
+        @WebParam(partName = "parameters", name = "createContactRequest", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt")
+        ru.xxx.esb.model.servicemessagesext.CreateContactRequestType parameters
     );
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/getPolicyList")
-    @WebResult(name = "getPolicyListResponse", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt", partName = "parameters")
-    public ru.toi.esb.model.servicemessagesext.GetPolicyListResponseType getPolicyList(
-        @WebParam(partName = "parameters", name = "getPolicyListRequest", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt")
-        ru.toi.esb.model.servicemessagesext.GetPolicyListRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/getPolicyList")
+    @WebResult(name = "getPolicyListResponse", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt", partName = "parameters")
+    public ru.xxx.esb.model.servicemessagesext.GetPolicyListResponseType getPolicyList(
+        @WebParam(partName = "parameters", name = "getPolicyListRequest", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt")
+        ru.xxx.esb.model.servicemessagesext.GetPolicyListRequestType parameters
     );
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/getProductList")
-    @WebResult(name = "getProductListResponse", targetNamespace = "http://toi.ru/model/productinfo/servicemessage", partName = "parameters")
-    public ru.toi.model.productinfo.servicemessage.GetProductListResponseType getProductList(
-        @WebParam(partName = "parameters", name = "getProductListRequest", targetNamespace = "http://toi.ru/model/productinfo/servicemessage")
-        ru.toi.model.productinfo.servicemessage.GetProductListRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/getProductList")
+    @WebResult(name = "getProductListResponse", targetNamespace = "http://xxx.ru/model/productinfo/servicemessage", partName = "parameters")
+    public ru.xxx.model.productinfo.servicemessage.GetProductListResponseType getProductList(
+        @WebParam(partName = "parameters", name = "getProductListRequest", targetNamespace = "http://xxx.ru/model/productinfo/servicemessage")
+        ru.xxx.model.productinfo.servicemessage.GetProductListRequestType parameters
     );
 
-    @WebMethod(action = "http://toi.ru/esb/services/3rdparty/calcMotorQuote")
-    @WebResult(name = "calcQuoteFullResponse", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt", partName = "parameters")
-    public ru.toi.esb.model.servicemessagesext.CalcMotorQuoteResponseType calcMotorQuote(
-        @WebParam(partName = "parameters", name = "calcMotorQuoteRequest", targetNamespace = "http://toi.ru/esb/model/serviceMessagesExt")
-        ru.toi.esb.model.servicemessagesext.CalcMotorQuoteRequestType parameters
+    @WebMethod(action = "http://xxxx.ru/esb/services/3rdparty/calcMotorQuote")
+    @WebResult(name = "calcQuoteFullResponse", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt", partName = "parameters")
+    public ru.xxx.esb.model.servicemessagesext.CalcMotorQuoteResponseType calcMotorQuote(
+        @WebParam(partName = "parameters", name = "calcMotorQuoteRequest", targetNamespace = "http://xxx.ru/esb/model/serviceMessagesExt")
+        ru.xxx.esb.model.servicemessagesext.CalcMotorQuoteRequestType parameters
     );
 }

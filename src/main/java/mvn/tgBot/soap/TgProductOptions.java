@@ -6,9 +6,9 @@ import mvn.tgBot.utils.CheckDates;
 import mvn.tgBot.utils.Regexp;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import ru.toi.model.productinfo.ProductOptionType;
-import ru.toi.model.productinfo.ProductOptionsType;
-import ru.toi.model.productinfo.ValueInfoType;
+import ru.xxx.model.productinfo.ProductOptionType;
+import ru.xxx.model.productinfo.ProductOptionsType;
+import ru.xxx.model.productinfo.ValueInfoType;
 
 import java.text.ParseException;
 

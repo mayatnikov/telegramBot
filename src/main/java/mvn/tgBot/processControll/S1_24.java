@@ -59,15 +59,7 @@ public class S1_24 extends StageMaster implements StageInt {
                return;
             }
             else {
-//                  if(false )  { // user.getEnsured().get(root)!=null ) {
-//                if (user.getEnsured().get(root) != null) {
-//                    log.debug("root user was found");
-//                    user.setFirstNameEng(user.getEnsured().get(root).getFirstName());  // запомнить англ фио
-//                    user.setLastNameEng(user.getEnsured().get(root).getLastName());  // запомнить англ фио
-//                    user.setPassport(user.getEnsured().get(root).getPasport());  // запомнить номер паспорта
-                    // сохранить всех заполенных в массиве для последующего использования
                     saveAllEnsured(user);
-//                }
                 nStage = "s1-25";
             }
         }

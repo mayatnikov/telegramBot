@@ -5,9 +5,9 @@ import mvn.tgBot.db.SexType;
 import mvn.tgBot.db.User;
 import mvn.tgBot.utils.CheckDates;
 import mvn.tgBot.utils.Regexp;
-import ru.toi.model.common.DocumentTypeType;
-import ru.toi.model.common.GenderType;
-import ru.toi.model.gw.client.*;
+import ru.xxx.model.common.DocumentTypeType;
+import ru.xxx.model.common.GenderType;
+import ru.xxx.model.gw.client.*;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;

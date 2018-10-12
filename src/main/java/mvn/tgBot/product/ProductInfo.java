@@ -1,7 +1,7 @@
 package mvn.tgBot.product;
 
 import org.springframework.data.annotation.Id;
-import ru.toi.model.productinfo.ProductInfoType;
+import ru.xxx.model.productinfo.ProductInfoType;
 
 public class ProductInfo {
      @Id

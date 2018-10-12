@@ -86,10 +86,11 @@ public class S1_25 extends StageMaster implements StageInt {
 // ------ формирование документа
         Long diff = null;
         try {
-            diff = checkDates.diffDays(user.getDateFrom(),user.getDateTo());
+            diff = checkDates.diffDays(user.getDateFrom(),user.getDateTo())+1;
         } catch (ParseException e) {
             diff =0L;
         }
+
         StringBuffer userList = new StringBuffer();
         HashMap<String,EnsuredType> es = user.getEnsured();
         for(String key : es.keySet()) {

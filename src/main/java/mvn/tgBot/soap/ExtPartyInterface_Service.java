@@ -22,19 +22,19 @@ import java.net.URL;
 
 
 @WebServiceClient(name = "ExtPartyInterface", 
-                  wsdlLocation = "https://tstrp.tinkoffinsurance.ru:23001/toi/partners/quotesub/v1.0?wsdl",
-                  targetNamespace = "http://toi.ru/esb/services/3rdparty") 
+                  wsdlLocation = "xxxxxxxxxxxxxxxxxxxxxv1.0?wsdl",
+                  targetNamespace = "xxxxxxxxxxxxxxxxxxxx")
 public class ExtPartyInterface_Service extends Service {
 
     public final static URL WSDL_LOCATION;
-    public final static QName SERVICE = new QName("http://toi.ru/esb/services/3rdparty", "ExtPartyInterface");
-    public final static QName ExtPartyInterfaceSOAP = new QName("http://toi.ru/esb/services/3rdparty", "ExtPartyInterfaceSOAP");
+    public final static QName SERVICE = new QName("http://xxxxxxxxx/3rdparty", "ExtPartyInterface");
+    public final static QName ExtPartyInterfaceSOAP = new QName("http://xxxxxxxxx/xxxx/services/3rdparty", "ExtPartyInterfaceSOAP");
     static {
         URL url = null;
         try {
-            url = new URL("https://tstrp.tinkoffinsurance.ru:23001/toi/partners/quotesub/v1.0?wsdl");
+            url = new URL("https://xxxxxxxxxxxxx/v1.0?wsdl");
         } catch (MalformedURLException e) {
-            System.err.println("Can not initialize the default wsdl from https://tstrp.tinkoffinsurance.ru:23001/toi/partners/quotesub/v1.0?wsdl");
+            System.err.println("Can not initialize the default wsdl from https://xxxxxxxx:888888/xxx/partners/quotesub/v1.0?wsdl");
             // e.printStackTrace();
         }
         WSDL_LOCATION = url;

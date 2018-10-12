@@ -5,10 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import ru.toi.model.productinfo.ProductInfoType;
-import ru.toi.model.productinfo.servicemessage.GetProductInfoRequestType;
 
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.

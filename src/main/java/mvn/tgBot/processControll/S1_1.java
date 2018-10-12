@@ -21,7 +21,7 @@ public class S1_1 extends StageMaster implements StageInt {
         name = "s1-1";
         nextStageName="s1-2";
         descr="первичный вход";
-        msg =  "Это официальный бот компании \"Тинькофф Страхование\" https://www.tinkoffinsurance.ru/, и я помогу вам оформить страховку для путешествия за рубеж.";
+        msg =  "Это официальный бот компании \"Xxxxxx Xxxxxxx\" https://www.xxxxxxxxx.ru/, и я помогу вам оформить страховку для путешествия за рубеж.";
     }
     String[][] menu = {
             {"ДА, хочу страховку"},

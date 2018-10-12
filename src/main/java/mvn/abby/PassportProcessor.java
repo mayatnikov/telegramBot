@@ -21,7 +21,7 @@ public class PassportProcessor {
         // replace with 'https://cloud.ocrsdk.com' to enable secure connection
         restClient.serverUrl = "http://cloud.ocrsdk.com";
         restClient.applicationId = "TelegramBot";
-        restClient.password = "HIgPzV0l0e6UJ9kLW9qayrS+";
+        restClient.password = "xxxxxxxgxxxxxxxxxxxxxxxxx";
     }
 
     public PassportProcessor(String surl,String appId,String passwd) {

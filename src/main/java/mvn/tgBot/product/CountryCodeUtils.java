@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import ru.toi.model.productinfo.DisplaibleValueType;
+import ru.xxx.model.productinfo.DisplaibleValueType;
 
 import java.util.ArrayList;
 import java.util.List;

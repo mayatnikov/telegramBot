@@ -27,9 +27,9 @@ public class S1_16 extends StageMaster implements StageInt {
         name = "s1-16";
         nextStageName = "s1-17";
         msg = "Для того, чтобы оформить страховку нам требуется Ваше <a href=\"" +
-                "https://www.tinkoffinsurance.ru/~/media/Files/documents/personal_data_handle.ashx"+
+                "https://www.xxxxxxxxxxxx.ru/~/xxxxxxxx.asp"+
                 "\">согласие</a> на обработку персональных данных согласно ФЗ 152 и с <a href=\"" +
-                "https://www.tinkoffinsurance.ru/~/media/Files/documents/2015/ins_rules_vzr_27-12-2015.ashx"+
+                "https://www.xxxxxxxxx.ru/~/xxxxx.asp"+
                 "\"> правилами страхования</a>";
         descr="согл. на обр-ку";
     }
@@ -71,7 +71,7 @@ public class S1_16 extends StageMaster implements StageInt {
         else {
             log.trace("ОТКАЗ");
             user.setWait4Stage("s1-1");
-            tgbot.sendMenuOff(chatId, "Вы всегда можете оформить страховку на сайте http://www.tinkoffinsurance.ru");
+            tgbot.sendMenuOff(chatId, "Вы всегда можете оформить страховку на сайте http://www.xxxxxxxxxxx.ru");
         }
         db.save(user);
     }

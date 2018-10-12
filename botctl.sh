@@ -1,7 +1,7 @@
 #!/bin/sh
 ARGV="$@"
 JAVA_HOME=/usr/local/jdk1.8.0_45
-BOT_HOME=/usr/local/telegram/tinkoff
+BOT_HOME=/usr/local/telegram/mybot
 JAR_FILE=TelegramBot-0.1.1.jar
 
 # ===

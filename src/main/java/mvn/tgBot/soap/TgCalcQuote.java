@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
-import ru.toi.esb.model.servicemessagesext.CalcQuoteRequestType;
-import ru.toi.esb.model.servicemessagesext.CalcQuoteResponseType;
-import ru.toi.model.gw.quote.QuoteType;
+import ru.xxx.esb.model.servicemessagesext.CalcQuoteRequestType;
+import ru.xxx.esb.model.servicemessagesext.CalcQuoteResponseType;
+import ru.xxx.model.gw.quote.QuoteType;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -157,10 +157,10 @@ public class TgCalcQuote {
 
 private void dumpRequest(CalcQuoteRequestType req) {
     try {
-        JAXBContext context = JAXBContext.newInstance(ru.toi.esb.model.servicemessagesext.CalcQuoteRequestType.class);
+        JAXBContext context = JAXBContext.newInstance(ru.xxx.esb.model.servicemessagesext.CalcQuoteRequestType.class);
         Marshaller marshaller = context.createMarshaller();
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        marshaller.marshal(new JAXBElement<CalcQuoteRequestType>(new QName("http://toi.ru/esb/model/serviceMessagesExt","calcQuoteRequest"), CalcQuoteRequestType.class, req), os);
+        marshaller.marshal(new JAXBElement<CalcQuoteRequestType>(new QName("http://xxx.ru/esb/model/serviceMessagesExt","calcQuoteRequest"), CalcQuoteRequestType.class, req), os);
         log.trace(">>>\n"+os.toString("UTF8")+"\n<<<<");
     } catch (JAXBException e) {
         e.printStackTrace();
@@ -171,10 +171,10 @@ private void dumpRequest(CalcQuoteRequestType req) {
 }
 private void dumpResponse(CalcQuoteResponseType resp) {
     try {
-        JAXBContext context = JAXBContext.newInstance(ru.toi.esb.model.servicemessagesext.CalcQuoteResponseType.class);
+        JAXBContext context = JAXBContext.newInstance(ru.xxx.esb.model.servicemessagesext.CalcQuoteResponseType.class);
         Marshaller marshaller = context.createMarshaller();
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        marshaller.marshal(new JAXBElement<CalcQuoteResponseType>(new QName("http://toi.ru/esb/model/serviceMessagesExt","calcQuoteResponse"), CalcQuoteResponseType.class, resp), os);
+        marshaller.marshal(new JAXBElement<CalcQuoteResponseType>(new QName("http://xxx.ru/esb/model/serviceMessagesExt","calcQuoteResponse"), CalcQuoteResponseType.class, resp), os);
         log.trace(">>>\n"+os.toString("UTF8")+"\n<<<<");
     } catch (JAXBException e) {
         e.printStackTrace();

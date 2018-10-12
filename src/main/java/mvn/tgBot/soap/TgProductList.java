@@ -4,9 +4,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.toi.model.productinfo.ProductInfoType;
-import ru.toi.model.productinfo.servicemessage.GetProductListRequestType;
-import ru.toi.model.productinfo.servicemessage.GetProductListResponseType;
+import ru.xxx.model.productinfo.ProductInfoType;
+import ru.xxx.model.productinfo.servicemessage.GetProductListRequestType;
+import ru.xxx.model.productinfo.servicemessage.GetProductListResponseType;
 
 import java.util.List;
 

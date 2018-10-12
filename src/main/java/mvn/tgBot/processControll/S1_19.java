@@ -41,8 +41,6 @@ public class S1_19 extends StageMaster implements StageInt {
             user.setLastName(fio[0]);
             user.setFirstName(fio[1]);
             user.setSecondName((fio.length>2) ? fio[2] : "");
-//            user.setLastNameEng(tr.transliterate(fio[0]).toUpperCase());
-//            user.setFirstNameEng(tr.transliterate(fio[1]).toUpperCase());
             user.setUserName(txt);
             StageInt next = stageList.getStage(nextStageName);
             next.sendMessage(user,r);     // отправить сообщение от следующей стадии обработки

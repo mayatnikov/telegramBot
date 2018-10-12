@@ -21,11 +21,11 @@ public class TgSoapService {
     private Log log = LogFactory.getLog(TgSoapService.class);
 
   @Value("${soap.wsdl}")
-  private String wsdlFileName; // = "./config/tinkoffSoapService.wsdl";
+  private String wsdlFileName; // = "./config/xxxxxxxxxx.wsdl";
   @Value("${spring.config.location}")
   private String configDir;
 
-    private static final QName SERVICE_NAME = new QName("http://toi.ru/esb/services/3rdparty", "ExtPartyInterface");
+    private static final QName SERVICE_NAME = new QName("http://xxxx.ru/esb/services/3rdparty", "ExtPartyInterface");
     private ExtPartyInterface port;
 
     public void init() {

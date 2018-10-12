@@ -57,9 +57,6 @@ public class MessageDispatcher  implements CommandLineRunner {
 
     @Override
     public void run(String ... args) throws Exception {
-//        checkDB.run(args);
-//        checkTelegram.run(args);
-// checkTinkoff();
         String current = new java.io.File( "." ).getCanonicalPath();
         log.info(">>> PWD:"+current+" CRON:"+tgCron+" <<<<");
         log.info(">>>>>>>>>>>>>CONFIG NAME>>>>>>>>>>>>>"+configName+"<<<<<<<<<<<<<<<<<<<<<<<<<<<<");

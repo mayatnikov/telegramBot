@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
-import ru.toi.esb.model.servicemessagesext.CreatePolicyRequestType;
-import ru.toi.esb.model.servicemessagesext.CreatePolicyResponseType;
-import ru.toi.esb.model.servicemessagesext.GetPaymentLinkResponseType;
-import ru.toi.model.common.DeliveryMethodType;
-import ru.toi.model.gw.client.ClientInfoType;
+import ru.xxx.esb.model.servicemessagesext.CreatePolicyRequestType;
+import ru.xxx.esb.model.servicemessagesext.CreatePolicyResponseType;
+import ru.xxx.esb.model.servicemessagesext.GetPaymentLinkResponseType;
+import ru.xxx.model.common.DeliveryMethodType;
+import ru.xxx.model.gw.client.ClientInfoType;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -159,10 +159,10 @@ public class TgCreatePolicy {
 
      private void dumpRequest(CreatePolicyRequestType req) {
         try {
-            JAXBContext context = JAXBContext.newInstance(ru.toi.esb.model.servicemessagesext.CreatePolicyRequestType.class);
+            JAXBContext context = JAXBContext.newInstance(ru.xxx.esb.model.servicemessagesext.CreatePolicyRequestType.class);
             Marshaller marshaller = context.createMarshaller();
             ByteArrayOutputStream os = new ByteArrayOutputStream();
-            marshaller.marshal(new JAXBElement<CreatePolicyRequestType>(new QName("http://toi.ru/esb/model/serviceMessagesExt", "createPolicyRequest"), CreatePolicyRequestType.class, req), os);
+            marshaller.marshal(new JAXBElement<CreatePolicyRequestType>(new QName("http://xxx.ru/esb/model/serviceMessagesExt", "createPolicyRequest"), CreatePolicyRequestType.class, req), os);
             log.trace(">>>\n" + os.toString("UTF8") + "\n<<<<");
         }
           catch (JAXBException e) {
@@ -174,10 +174,10 @@ public class TgCreatePolicy {
 
     private void dumpResponse(CreatePolicyResponseType resp) {
         try {
-            JAXBContext context = JAXBContext.newInstance(ru.toi.esb.model.servicemessagesext.CreatePolicyResponseType.class);
+            JAXBContext context = JAXBContext.newInstance(ru.xxx.esb.model.servicemessagesext.CreatePolicyResponseType.class);
             Marshaller marshaller = context.createMarshaller();
             ByteArrayOutputStream os = new ByteArrayOutputStream();
-            marshaller.marshal(new JAXBElement<CreatePolicyResponseType>(new QName("http://toi.ru/esb/model/serviceMessagesExt", "createPolicyResponse"), CreatePolicyResponseType.class, resp), os);
+            marshaller.marshal(new JAXBElement<CreatePolicyResponseType>(new QName("http://xxx.ru/esb/model/serviceMessagesExt", "createPolicyResponse"), CreatePolicyResponseType.class, resp), os);
             log.trace(">>>\n" + os.toString("UTF8") + "\n<<<<");
         } catch (JAXBException e) {
             e.printStackTrace();

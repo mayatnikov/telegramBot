@@ -9,7 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.toi.esb.model.servicemessagesext.CreatePolicyResponseType;
+import ru.xxx.esb.model.servicemessagesext.CreatePolicyResponseType;
 import java.util.concurrent.Future;
 
 
@@ -37,7 +37,7 @@ public class S1_26 extends StageMaster implements StageInt {
     public S1_26() {
         name = "s1-26";
         nextStageName = "s1-1";
-   //     msg = "Супер! Полис мы уже подготовили, для оплаты перейдите по ссылке или оплатить полис можно из Личного кабинета на tinkoffinsurance.ru (вход по смс-коду на указанный вами телефон)";
+   //     msg = "Супер! Полис мы уже подготовили, для оплаты перейдите по ссылке или оплатить полис можно из Личного кабинета на xxxxxxxxxxx.ru (вход по смс-коду на указанный вами телефон)";
         msg = "Отправлен запрос на создание полиса.\n" +
                 "Пожалуйста ожидайте сообщения о создании полиса и ссылки на оплату.\n" +
                 "Если что то пойдет не так введите /refresh";

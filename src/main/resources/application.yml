@@ -1,16 +1,16 @@
 ﻿tg:
     url: https://api.telegram.org
-    bot: bot190795679
-    token: AAGM93Ud17V7NaHY_AXMQMrgH_bteLsVD9o
+    bot: bot1xxxxxxxx9
+    token: AAGxxxxxxxxxxxxxxxxxxxc9o
     cron: '*/3 * * * * *'
 db:
     create: false
     name: trip1
 soap:
     user: telegram
-    password: qIQqu873KE
-    wsdl: tinkoffSoap-test.wsdl
-    prodName: PartnerTravelV2Box
+    password: qxxxxxxxxE
+    wsdl: xxxxxxxxSoap-test.wsdl
+    prodName: xxxxxxxxxxxxxx
 spring:
  data:
   mongodb:
@@ -19,8 +19,8 @@ spring:
 abbyy:
     url: http://cloud.ocrsdk.com
     applicationId: TelegramBot
-    password: HIgPzV0l0e6UJ9kLW9qayrS+
+    password: HxxxxxxxxxxxxxxxS+
 
 
-vitaly: 113724846
+vitaly: 1xxxxxxxx6
 configName: InternalConfig                       f

@@ -46,7 +46,7 @@ public class S1_2 extends StageMaster implements StageInt {
         else if(txt.contains("ГОДОВ")) {
             user.setWait4Stage("s1-0");     // запомнить след шаг для данного ChatID
             StageInt next = stageList.getStage("s1-0");
-            tgbot.sendMenuOff(chatId,"Годовую страховку Вы можете оформить сейчас на сайте http://www.tinkoffinsurance.ru/calculator/newvzr");
+            tgbot.sendMenuOff(chatId,"Годовую страховку Вы можете оформить сейчас на сайте http://www.xxxxxxxxxxru/calculator/newvzr");
             next.sendMessage(user, r);     // отправить сообщение от следующей стадии обработки
         }
         else {
